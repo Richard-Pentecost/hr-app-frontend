@@ -3,9 +3,9 @@ import '../style/Login.scss';
 
 const Login = () => {
     return (
-        <>
-            <h1>Login Page</h1>
-            <h1>Another Login</h1>
+        <div className='loginPage'>
+            <h1 className='text'>Login Page</h1>
+            <h1 className='text'>Another Login</h1>
             <div className='loginContainer'>
                 <form className='loginForm'>
                     <label>Username</label>
@@ -15,7 +15,7 @@ const Login = () => {
                     <button>Login</button>
                 </form>
             </div>
-        </>
+        </div>
     )
 }
 
