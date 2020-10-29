@@ -9,9 +9,9 @@ const Login = () => {
             <div className='loginContainer'>
                 <form className='loginForm'>
                     <label>Username</label>
-                    <input />
+                    <input type='text' />
                     <label>Password</label>
-                    <input />
+                    <input type='password' />
                     <button>Login</button>
                 </form>
             </div>
