@@ -5,7 +5,7 @@ import '../style/App.scss';
 function App() {
   return (
     <div className="app">
-      <Login />
+			<Login />
     </div>
   );
 }
