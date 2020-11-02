@@ -1,4 +1,21 @@
+@import './variables.scss';
+
+.loginPage {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  margin: 50px;
+  // border: 5px solid green;
+}
+
+.text {
+  // border: 1px solid red;
+  color: $color-blue-1;
+}
+
 .loginContainer {
+  // border: 1px solid blue;
   margin: 10px, auto;
   width: 30%;
   padding: 10px
