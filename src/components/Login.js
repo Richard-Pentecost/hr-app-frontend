@@ -1,4 +1,5 @@
 import React, { useReducer, useState } from 'react'
+import { users } from '../data.json';
 import '../style/Login.scss';
 
 // const initialState = {
@@ -23,9 +24,6 @@ const Login = props => {
     const [loginSuccess, setLoginSuccess] = useState(false);
     const [loginFail, setLoginFail] = useState(false);
 
-
-    // console.log(props);
-
     const inputChangeHandler = event => {
         const { name, value } = event.target;
         if (name === 'username') {
@@ -33,15 +31,16 @@ const Login = props => {
         } else {
             setPassword(value);
         }
-        // console.log('username', username);
-        // console.log('password', password)
     };
 
 
     const submitHandler = event => {
         event.preventDefault();
-        if (username === 'Richard' && password === 'aaaa') {
-            setLoginFail(false)
+        // const isUser = users.some(item => item.username === username);
+        const user = users.find(item => item.username === username)
+    
+        if (user && user.password === password) {
+            setLoginFail(false);
             setLoginSuccess(true);
             props.setIsLoggedIn(true);
         } else {
