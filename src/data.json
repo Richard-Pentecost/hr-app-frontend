@@ -1,12 +1,22 @@
 {
   "users" : [
     {
-      "username": "Richard",
-      "password": "aaaa"
+      "id": 1,
+      "username": "rpentecost",
+      "password": "aaaa",
+      "firstName": "Richard",
+      "surname": "Pentecost",
+      "role": "Academy Engineer",
+      "permissionLevel": "employee"
     },
     {
-      "username": "Joanna",
-      "password": "aaaa"
+      "id": 2,
+      "username": "jfawl",
+      "password": "1234",
+      "firstName": "Joanna",
+      "surname": "Fawl",
+      "role": "Academy Engineer",
+      "permissionLevel": "employee"
     }
   ]
 }

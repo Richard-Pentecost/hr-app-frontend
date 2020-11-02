@@ -6,13 +6,16 @@ import '../style/App.scss';
 
 function App() {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [id, setId] = useState('');
 
   return (
     <div className="app">
       <Switch>
-        <Route path='/home' component={Home} />
+        <Route path='/home'>
+          <Home id={id} />
+        </Route>
         <Route path='/'>
-          { isLoggedIn ? <Redirect to='/home' /> : <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} /> }
+          { isLoggedIn ? <Redirect to='/home' /> : <Login isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setId={setId}/> }
         </Route>
       </Switch>
     </div>

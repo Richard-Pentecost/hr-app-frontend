@@ -36,12 +36,11 @@ const Login = props => {
 
     const submitHandler = event => {
         event.preventDefault();
-        // const isUser = users.some(item => item.username === username);
         const user = users.find(item => item.username === username)
-    
         if (user && user.password === password) {
             setLoginFail(false);
             setLoginSuccess(true);
+            props.setId(user.id);
             props.setIsLoggedIn(true);
         } else {
             setLoginSuccess(false);
