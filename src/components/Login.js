@@ -17,11 +17,14 @@ import '../style/Login.scss';
 //     };
 // };
 
-const Login = () => {
+const Login = props => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [loginSuccess, setLoginSuccess] = useState(false)
-    const [loginFail, setLoginFail] = useState(false)
+    const [loginSuccess, setLoginSuccess] = useState(false);
+    const [loginFail, setLoginFail] = useState(false);
+
+
+    // console.log(props);
 
     const inputChangeHandler = event => {
         const { name, value } = event.target;
@@ -30,8 +33,8 @@ const Login = () => {
         } else {
             setPassword(value);
         }
-        console.log('username', username);
-        console.log('password', password)
+        // console.log('username', username);
+        // console.log('password', password)
     };
 
 
@@ -40,9 +43,11 @@ const Login = () => {
         if (username === 'Richard' && password === 'aaaa') {
             setLoginFail(false)
             setLoginSuccess(true);
+            props.setIsLoggedIn(true);
         } else {
             setLoginSuccess(false);
             setLoginFail(true);
+            props.setIsLoggedIn(false)
         }
     }
     return (

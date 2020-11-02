@@ -5,7 +5,6 @@ import App from '../components/App';
 
 describe('App', () => {
   it('renders a div with the className = "app"', () => {
-    console.log('testing')
     const wrapper = Enzyme.shallow((
       <App />
     ));
