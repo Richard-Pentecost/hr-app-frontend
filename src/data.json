@@ -6,8 +6,20 @@
       "password": "aaaa",
       "firstName": "Richard",
       "surname": "Pentecost",
-      "role": "Academy Engineer",
-      "permissionLevel": "employee"
+      "role": "Engineer 1",
+      "permissionLevel": "manager",
+      "telephone": "01231245789",
+      "email": "richard@example.com",
+      "location": "Manchester",
+      "nextOfKin": "Mother",
+      "address": "31 Street Name, Manchester, M1 5SS",
+      "salary": "£45000",
+      "dob": "23/05/1987",
+      "employees": [
+        {
+          "id": 2
+        }
+      ]
     },
     {
       "id": 2,
@@ -16,7 +28,14 @@
       "firstName": "Joanna",
       "surname": "Fawl",
       "role": "Academy Engineer",
-      "permissionLevel": "employee"
+      "permissionLevel": "employee",
+      "telephone": "07712345678",
+      "email": "joanna@example.com",
+      "location": "Manchester",
+      "nextOfKin": "Partner",
+      "address": "1 Main Street, Manchester, M1 1AA",
+      "salary": "£20000",
+      "dob": "30/01/1999"
     }
   ]
 }
