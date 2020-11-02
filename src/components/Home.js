@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { users } from '../data.json';
+import "../style/Home.scss";
 
 const Home = props => {
     const [firstName, setFirstName] = useState('');
@@ -22,17 +23,17 @@ const Home = props => {
     let userInfo = null;
     if (firstName && role && email && telephone) {
       userInfo = ( 
-        <>
-          <h1>Welcome {firstName}!</h1>
-          <h1>{role}</h1>
-          <h1>{email}</h1>
-          <h1>{telephone}</h1>
-        </>
+        <div className='userInfo__header'>
+            <h1 className='userInfo__headerText'>Welcome {firstName}!</h1>
+            <h2 className='userInfo__text'>{role}</h2>
+            <h2 className='userInfo__text'>{email}</h2>
+            <h2 className='userInfo__text'>{telephone}</h2>
+        </div>
       );
     }
 
     return (
-      <div>
+      <div className='userInfo'>
         {userInfo}
       </div>
     )

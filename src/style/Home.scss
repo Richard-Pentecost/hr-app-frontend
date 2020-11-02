@@ -1,0 +1,20 @@
+@import './variables.scss';
+
+.userInfo {
+  &__header {
+    // border: 3px solid blue;
+    background: $color-blue-1;
+    color: $color-white;
+    text-align: center;
+  }
+
+  &__headerText {
+    font-size: 2rem;
+    font-weight: 600;
+  }
+
+  &__text {
+    font-size: 1.5rem;
+    font-weight: 300;
+  }
+}
