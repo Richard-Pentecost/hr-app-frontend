@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App renders correctly 1`] = `
+<div
+  className="app"
+>
+  <Switch>
+    <Route
+      path="/home"
+    >
+      <Home
+        id=""
+      />
+    </Route>
+    <Route
+      path="/"
+    >
+      <Login
+        isLoggedIn={false}
+        setId={[Function]}
+        setIsLoggedIn={[Function]}
+      />
+    </Route>
+  </Switch>
+</div>
+`;
