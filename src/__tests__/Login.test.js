@@ -12,12 +12,26 @@ describe('Login', () => {
     it('should have proper props for username field', () => {
         const wrapper = Enzyme.shallow((<Login />));
         expect(wrapper.find('input[name="username"]').props()).toEqual({
-          className: 'loginForm__input',
-          type: 'text',
-          value: '',
-          name:'username',
-          onChange: expect.any(Function)
+            className: 'loginForm__input',
+            type: 'text',
+            value: '',
+            name:'username',
+            onChange: expect.any(Function)
         });
+    });
+
+    it('username state is updated on string input', () => {
+      const wrapper = Enzyme.shallow((
+          <Login />
+      ));
+      wrapper.find('input[name="username"]').simulate('change', {
+          target: {
+              name: 'username',
+              value: 'Richard',
+          },
+      });
+      // console.log('Wrapper: ', wrapper.find('input[name="username"]').prop('value'));
+      expect(wrapper.find('input[name="username"]').prop('value')).toEqual('Richard')
     });
 
 });
@@ -25,20 +39,6 @@ describe('Login', () => {
 // const setState = jest.fn();
 // const useStateSpy = jest.spyOn(React, 'useState');
 // useStateSpy.mockImplementation((init) => [init, setState]);
-
-it('username state is updated on string input', () => {
-  const wrapper = Enzyme.shallow((
-    <Login />
-  ));
-  wrapper.find('input[name="username"]').simulate('change', {
-    target: {
-      name: 'username',
-      value: 'Richard',
-    },
-  });
-  // console.log('Wrapper: ', wrapper.find('input[name="username"]').prop('value'));
-  expect(wrapper.find('input[name="username"]').prop('value')).toEqual('Richard')
-});
 
 // ****** Mocks and spies ******
 
