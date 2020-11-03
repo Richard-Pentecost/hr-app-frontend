@@ -14,13 +14,8 @@ exports[`App renders correctly 1`] = `
     </Route>
     <Route
       path="/"
-    >
-      <Login
-        isLoggedIn={false}
-        setId={[Function]}
-        setIsLoggedIn={[Function]}
-      />
-    </Route>
+      render={[Function]}
+    />
   </Switch>
 </div>
 `;

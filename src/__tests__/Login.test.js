@@ -1,16 +1,21 @@
+// import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Enzyme from 'enzyme';
 import Login from '../components/Login';
 
 describe('Login', () => {
-    it("renders Login Page heading", () => {
-        const wrapper = Enzyme.shallow((<Login />));
+	let wrapper;
+	
+    beforeEach(() => {
+        wrapper = Enzyme.shallow((<Login />));
+    })
+
+    it("renders Login Page heading", () => { 
         const header = <h1 className='text'>Login Page</h1>;
         expect(wrapper.contains(header)).toEqual(true);
     });
 
     it('should have proper props for username field', () => {
-        const wrapper = Enzyme.shallow((<Login />));
         expect(wrapper.find('input[name="username"]').props()).toEqual({
             className: 'loginForm__input',
             type: 'text',
@@ -18,22 +23,60 @@ describe('Login', () => {
             name:'username',
             onChange: expect.any(Function)
         });
-    });
+    });	
 
     it('username state is updated on string input', () => {
-      const wrapper = Enzyme.shallow((
-          <Login />
-      ));
-      wrapper.find('input[name="username"]').simulate('change', {
-          target: {
-              name: 'username',
-              value: 'Richard',
-          },
-      });
-      // console.log('Wrapper: ', wrapper.find('input[name="username"]').prop('value'));
-      expect(wrapper.find('input[name="username"]').prop('value')).toEqual('Richard')
+		wrapper.find('input[name="username"]').simulate('change', {
+			target: {
+				name: 'username',
+				value: 'Richard',
+			},
+        });
+        // console.log('Wrapper: ', wrapper.find('input[name="username"]').prop('value'));
+        expect(wrapper.find('input[name="username"]').prop('value')).toEqual('Richard')
+	});
+	
+	it('error shown when login fails', () => {
+        wrapper = Enzyme.shallow((<Login setIsLoggedIn={jest.fn()} />));
+        wrapper.find('input[name="username"]').simulate('change', {
+			target: {
+				name: 'username',
+				value: 'rpentecost',
+			},
+        });
+        wrapper.find('input[name="password"]').simulate('change', {
+			target: {
+				name: 'password',
+				value: 'wrongpass',
+			},
+        });
+        wrapper.find('form').simulate('submit', { 
+			preventDefault: jest.fn()
+		});
+		const errorMessage = <div className='errorMessage'>There was an error logging in</div>;
+		expect(wrapper.contains(errorMessage)).toEqual(true);
     });
 
+    it('message shown when login is success', () => {
+        wrapper = Enzyme.shallow((<Login setIsLoggedIn={jest.fn()} setId={jest.fn()} />));
+        wrapper.find('input[name="username"]').simulate('change', {
+			target: {
+				name: 'username',
+				value: 'rpentecost',
+			},
+        });
+        wrapper.find('input[name="password"]').simulate('change', {
+			target: {
+				name: 'password',
+				value: 'aaaa',
+			},
+        });
+        wrapper.find('form').simulate('submit', { 
+			preventDefault: jest.fn()
+        });
+		const successMessage = <div className='successMessage'>You have successfully logged in as rpentecost</div>
+		expect(wrapper.contains(successMessage)).toEqual(true);
+    });
 });
 
 // const setState = jest.fn();

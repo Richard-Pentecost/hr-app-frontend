@@ -71,8 +71,8 @@ const Login = props => {
                     />
                     <button type='submit'>Login</button>
                 </form>
-                {loginSuccess && <div>You have successfully logged in as {username}</div>}
-                {loginFail && <div>There was an error logging in</div>}
+                {loginSuccess && <div className='successMessage'>You have successfully logged in as {username}</div>}
+                {loginFail && <div className='errorMessage'>There was an error logging in</div>}
             </div>
         </div>
     )
