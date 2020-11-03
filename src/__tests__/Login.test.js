@@ -7,7 +7,7 @@ describe('Login', () => {
 	let wrapper;
 	
     beforeEach(() => {
-        wrapper = Enzyme.shallow((<Login />));
+        wrapper = Enzyme.shallow(<Login />);
     });
 
     it("renders Login Page heading", () => { 

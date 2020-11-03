@@ -8,7 +8,7 @@ describe('App', () => {
 	let wrapper;
 	
     beforeEach(() => {
-        wrapper = Enzyme.shallow((<App />));
+        wrapper = Enzyme.shallow(<App />);
 	});
 	
 	it("renders without crashing", () => {
