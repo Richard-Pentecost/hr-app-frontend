@@ -35,7 +35,6 @@ const Login = props => {
 
     const submitHandler = event => {
         event.preventDefault();
-        console.log(username + ': ' + password);
         const user = users.find(item => item.username === username)
         if (user && user.password === password) {
             setLoginFail(false);

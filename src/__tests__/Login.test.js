@@ -8,7 +8,7 @@ describe('Login', () => {
 	
     beforeEach(() => {
         wrapper = Enzyme.shallow((<Login />));
-    })
+    });
 
     it("renders Login Page heading", () => { 
         const header = <h1 className='text'>Login Page</h1>;

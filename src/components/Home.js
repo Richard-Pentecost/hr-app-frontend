@@ -10,33 +10,33 @@ const Home = props => {
     const [telephone, setTelephone] = useState('');
 
     useEffect(() => {
-      const user = users.find(item => item.id === props.id);
-      if (user) {
-        setFirstName(user.firstName);
-        setSurname(user.surname);
-        setRole(user.role);
-        setEmail(user.email);
-        setTelephone(user.telephone);
-      }
+		const user = users.find(item => item.id === props.id);
+		if (user) {
+			setFirstName(user.firstName);
+			setSurname(user.surname);
+			setRole(user.role);
+			setEmail(user.email);
+			setTelephone(user.telephone);
+		}
     }, [props.id]);
 
     let userInfo = null;
     if (firstName && role && email && telephone) {
-      userInfo = ( 
-        <div className='userInfo__header'>
-            <h1 className='userInfo__headerText'>Welcome {firstName}!</h1>
-            <h2 className='userInfo__text'>{role}</h2>
-            <h2 className='userInfo__text'>{email}</h2>
-            <h2 className='userInfo__text'>{telephone}</h2>
-        </div>
-      );
+		userInfo = ( 
+			<div className='userInfo__header'>
+				<h1 className='userInfo__headerText'>Welcome {firstName}!</h1>
+				<h2 className='userInfo__text'>{role}</h2>
+				<h2 className='userInfo__text'>{email}</h2>
+				<h2 className='userInfo__text'>{telephone}</h2>
+			</div>
+		);
     }
 
     return (
-      <div className='userInfo'>
-        {userInfo}
-      </div>
-    )
+		<div className='userInfo'>
+			{userInfo}
+		</div>
+	)
 }
 
 export default Home

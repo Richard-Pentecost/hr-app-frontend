@@ -4,10 +4,9 @@ import Login from './Login';
 import Home from './Home';
 import '../style/App.scss';
 
-function App() {
+const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [id, setId] = useState('');
-
 	return (
 		<div className="app">
 			<Switch>
