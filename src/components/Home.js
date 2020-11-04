@@ -8,8 +8,10 @@ const Home = props => {
     const [role, setRole] = useState('');
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
-
-    useEffect(() => {
+		
+		console.log(props);
+		
+		useEffect(() => {
 		const user = users.find(item => item.id === props.id);
 		if (user) {
 			setFirstName(user.firstName);
