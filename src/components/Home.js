@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { users } from '../data.json';
+import Card from './Card';
 import "../style/Home.scss";
 
 const Home = props => {
@@ -8,7 +9,8 @@ const Home = props => {
     const [surname, setSurname] = useState('');
     const [role, setRole] = useState('');
     const [email, setEmail] = useState('');
-    const [telephone, setTelephone] = useState('');
+	const [telephone, setTelephone] = useState('');
+	const [dob, setDob] = useState('');
 		
 	useEffect(() => {
 		const user = users.find(item => item.id === props.id);
@@ -18,6 +20,7 @@ const Home = props => {
 			setRole(user.role);
 			setEmail(user.email);
 			setTelephone(user.telephone);
+			setDob(user.dob);
 		}
 	}, [props.id]);
 		
@@ -33,15 +36,26 @@ const Home = props => {
 		);
 	}
 
-	const handleClick = () => {
-		props.history.push('/settings');
-	}
+	// const handleClick = () => {
+	// 	props.history.push('/settings');
+	// }
 		
+
+	const navigation = (
+		<Link to='/settings'>Go to settings page</Link>
+	);
+
     return (
 		<div className='userInfo'>
 			{userInfo}
-			<Link to='/settings'>Go to settings page</Link>
-			<button onClick={handleClick}>Settings</button>
+			<Card firstName={firstName} surname={surname} dob={dob}/>
+			{/* <Card 
+				heading='Basic Information' 
+				data=[
+					{'First Name': firstname},
+					'Surname': surname,
+					'Date of Birth': dob
+				]/> */}
 		</div>
 	)
 }

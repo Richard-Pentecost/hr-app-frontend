@@ -2,6 +2,7 @@
 
 .navbar {
 	border-bottom: 3px solid $color-blue-1;
+	background: $color-white;
 }
 
 .menuBar {
@@ -9,9 +10,9 @@
     color: $color-white;
     font-size: 14px;
     display: flex;
-	justify-content: flex-end;
-	padding: 0px 100px;
-	height: 41px;
+		justify-content: flex-end;
+		padding: 0px 100px;
+		height: 41px;
 	
 	&__menu {
 		padding: 10px 20px;

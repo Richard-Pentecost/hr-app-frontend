@@ -68,7 +68,7 @@ const Login = props => {
                         name='password'
                         onChange={inputChangeHandler}
                     />
-                    <button type='submit'>Login</button>
+                    <button type='submit'className='loginForm__button'>Login</button>
                 </form>
                 {loginSuccess && <div className='successMessage'>You have successfully logged in as {username}</div>}
                 {loginFail && <div className='errorMessage'>There was an error logging in</div>}

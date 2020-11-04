@@ -8,7 +8,7 @@ import AuthRoute from './AuthRoute';
 import '../style/App.scss';
 
 const App = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(true);
+	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [id, setId] = useState('');
 	
 	return (
@@ -29,8 +29,8 @@ const App = () => {
 						exact
 						path="/home"
 						component={Home}
-						isLoggedIn={true}
-						id={2}
+						isLoggedIn={isLoggedIn}
+						id={id}
 					/>
 
 					<Route 

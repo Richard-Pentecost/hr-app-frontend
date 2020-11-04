@@ -1,11 +1,12 @@
 @import './variables.scss';
 
 .userInfo {
+  padding: 0px 100px;
+  
   &__header {
-    // border: 3px solid blue;
+    padding: 10px 50px;
     background: $color-blue-1;
     color: $color-white;
-    text-align: center;
   }
 
   &__headerText {
