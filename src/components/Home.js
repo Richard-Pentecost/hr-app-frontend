@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
 import { users } from '../data.json';
 import "../style/Home.scss";
 
@@ -31,10 +32,16 @@ const Home = props => {
 			</div>
 		);
 	}
+
+	const handleClick = () => {
+		props.history.push('/settings');
+	}
 		
     return (
 		<div className='userInfo'>
 			{userInfo}
+			<Link to='/settings'>Go to settings page</Link>
+			<button onClick={handleClick}>Settings</button>
 		</div>
 	)
 }

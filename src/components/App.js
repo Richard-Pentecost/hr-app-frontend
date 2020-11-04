@@ -2,12 +2,14 @@ import React, { useState } from 'react';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
+import Settings from './Settings';
 import AuthRoute from './AuthRoute';
 import '../style/App.scss';
 
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [id, setId] = useState('');
+	
 	return (
 		<BrowserRouter>
 			<div className="app">
@@ -26,10 +28,19 @@ const App = () => {
 							<Login {...props} isLoggedIn={isLoggedIn} setIsLoggedIn={setIsLoggedIn} setId={setId} />
 						)}
 					/>
+
 					<AuthRoute 
 						exact
 						path="/home"
 						component={Home}
+						isLoggedIn={isLoggedIn}
+						id={id}
+					/>
+
+					<Route 
+						exact
+						path='/settings'
+						component={Settings}
 						isLoggedIn={isLoggedIn}
 						id={id}
 					/>
