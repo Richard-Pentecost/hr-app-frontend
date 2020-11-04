@@ -22,14 +22,21 @@ const Navbar = props => {
 		setShowDropdown(!showDropdown);
 	}
 
+	const handleLogout = () => {
+		props.setIsLoggedIn(false);
+	};
+
 	return (
 		<div className='navbar'>
             <div className='menuBar'>
-				<div ref={container} className='menuBar__menu' onClick={handleShowDropdown}>
-                    <span>Menu</span>
-                </div>
+				{props.isLoggedIn ? (
+					<div ref={container} className='menuBar__menu' onClick={handleShowDropdown}>
+						<span>Menu</span>
+						{showDropdown && <Dropdown onLogout={handleLogout} />}
+					</div>
+				) : null }
 			</div>
-			{showDropdown && <Dropdown />}
+			
             <div className='logoContainer'>
 				<Link to='/home'>
 					<img src={logo} alt='Skills for Care Logo' className='logoContainer__logo' />

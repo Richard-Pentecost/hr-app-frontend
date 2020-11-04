@@ -8,13 +8,13 @@ import AuthRoute from './AuthRoute';
 import '../style/App.scss';
 
 const App = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [isLoggedIn, setIsLoggedIn] = useState(true);
 	const [id, setId] = useState('');
 	
 	return (
 		<BrowserRouter>
 			<div className="app">
-				<Navbar />
+				<Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
 				<Switch>
 					<Route
 						exact 

@@ -11,10 +11,15 @@
     display: flex;
 	justify-content: flex-end;
 	padding: 0px 100px;
+	height: 41px;
 	
 	&__menu {
 		padding: 10px 20px;
 		cursor: pointer;
+
+		&:hover {
+			text-decoration: underline;
+		}
 	}
 }
 

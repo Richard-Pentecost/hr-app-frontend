@@ -1,14 +1,26 @@
-import React, { useState } from 'react';
+import React from 'react';
+import { Link } from 'react-router-dom';
 import '../style/Dropdown.scss';
 
-const Dropdown = () => {
+const Dropdown = (props) => {
+	
 	return (
-		<div className='dropdown'>
-			<ul className='dropdownList'>
-				<li className='dropdownList__item'>Profile</li>
-				<li className='dropdownList__item'>Settings</li>
-				<li className='dropdownList__item'>Logout</li>
-			</ul>
+		<div className='dropdownList'>
+			<div className='dropdownList__item'>
+				<Link to='/home' className='dropdownList__link'>
+					Profile
+				</Link>
+			</div>
+            <div className='dropdownList__item'>
+                <Link to='/settings' className='dropdownList__link'>
+					Settings
+				</Link>
+			</div>
+			<div className='dropdownList__item'>
+                <Link to='/' className='dropdownList__link' onClick={props.onLogout}>
+					Logout
+				</Link>
+			</div>
 		</div>
 	);
 };
