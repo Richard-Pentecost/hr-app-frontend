@@ -3,6 +3,7 @@ import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import Settings from './Settings';
+import Navbar from './Navbar';
 import AuthRoute from './AuthRoute';
 import '../style/App.scss';
 
@@ -13,13 +14,8 @@ const App = () => {
 	return (
 		<BrowserRouter>
 			<div className="app">
+				<Navbar />
 				<Switch>
-					{/* <Route 
-						exact
-						path='/home'
-					>
-						<Home id={id} />
-					</Route> */}
 					<Route
 						exact 
 						path='/' 
@@ -33,8 +29,8 @@ const App = () => {
 						exact
 						path="/home"
 						component={Home}
-						isLoggedIn={isLoggedIn}
-						id={id}
+						isLoggedIn={true}
+						id={2}
 					/>
 
 					<Route 

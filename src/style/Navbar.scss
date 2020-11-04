@@ -1,0 +1,28 @@
+@import './variables.scss';
+
+.navbar {
+	border-bottom: 3px solid $color-blue-1;
+	
+}
+
+.menuBar {
+    background-color: $color-blue-1;
+    color: $color-white;
+    font-size: 14px;
+    display: flex;
+	justify-content: flex-end;
+	padding: 0px 100px;
+	
+	&__menu {
+		padding: 10px 20px;
+		cursor: pointer;
+	}
+}
+
+.logoContainer {
+	padding: 10px 100px;
+
+    &__logo {
+        width: 180px
+    }
+}
