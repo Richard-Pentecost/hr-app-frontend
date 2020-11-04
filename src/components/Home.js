@@ -9,9 +9,7 @@ const Home = props => {
     const [email, setEmail] = useState('');
     const [telephone, setTelephone] = useState('');
 		
-		console.log(props);
-		
-		useEffect(() => {
+	useEffect(() => {
 		const user = users.find(item => item.id === props.id);
 		if (user) {
 			setFirstName(user.firstName);
@@ -20,10 +18,11 @@ const Home = props => {
 			setEmail(user.email);
 			setTelephone(user.telephone);
 		}
-    }, [props.id]);
-
+	}, [props.id]);
+		
     let userInfo = null;
     if (firstName && role && email && telephone) {
+		console.log('**************************')
 		userInfo = ( 
 			<div className='userInfo__header'>
 				<h1 className='userInfo__headerText'>Welcome {firstName}!</h1>
@@ -32,8 +31,8 @@ const Home = props => {
 				<h2 className='userInfo__text'>{telephone}</h2>
 			</div>
 		);
-    }
-
+	}
+		
     return (
 		<div className='userInfo'>
 			{userInfo}

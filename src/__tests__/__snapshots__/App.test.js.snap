@@ -7,15 +7,16 @@ exports[`App renders correctly 1`] = `
   >
     <Switch>
       <Route
-        path="/home"
-      >
-        <Home
-          id=""
-        />
-      </Route>
-      <Route
+        exact={true}
         path="/"
         render={[Function]}
+      />
+      <AuthRoute
+        component={[Function]}
+        exact={true}
+        id=""
+        isLoggedIn={false}
+        path="/home"
       />
     </Switch>
   </div>
