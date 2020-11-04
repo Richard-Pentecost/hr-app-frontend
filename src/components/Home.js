@@ -22,7 +22,6 @@ const Home = props => {
 		
     let userInfo = null;
     if (firstName && role && email && telephone) {
-		console.log('**************************')
 		userInfo = ( 
 			<div className='userInfo__header'>
 				<h1 className='userInfo__headerText'>Welcome {firstName}!</h1>
