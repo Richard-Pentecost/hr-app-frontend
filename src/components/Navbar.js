@@ -28,7 +28,7 @@ const Navbar = props => {
 
 	return (
 		<div className='navbar'>
-            <div className='menuBar'>
+			<div className='menuBar'>
 				{props.isLoggedIn ? (
 					<div ref={container} className='menuBar__menu' onClick={handleShowDropdown}>
 						<span>Menu</span>
@@ -37,7 +37,7 @@ const Navbar = props => {
 				) : null }
 			</div>
 			
-            <div className='logoContainer'>
+			<div className='logoContainer'>
 				<Link to='/home'>
 					<img src={logo} alt='Skills for Care Logo' className='logoContainer__logo' />
 				</Link>

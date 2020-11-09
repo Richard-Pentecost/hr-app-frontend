@@ -1,6 +1,6 @@
 import React from 'react';
 import { shallow, mount }from 'enzyme';
-import Settings from '../components/Settings';
+import Settings from '../pages/Settings';
 
 describe('Settings', () => {
     it('renders a div with className of "settingsPage"', () => {

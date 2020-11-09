@@ -1,6 +1,6 @@
 import React from 'react';
 import Enzyme from 'enzyme';
-import App from '../components/App';
+import App from '../App';
 import toJson from "enzyme-to-json";
 
 describe('App', () => {

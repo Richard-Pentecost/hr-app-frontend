@@ -1,4 +1,5 @@
-import React, { useReducer, useState } from 'react'
+import React, { useReducer, useState } from 'react';
+import axios from 'axios';
 import { users } from '../data.json';
 import '../style/Login.scss';
 
@@ -17,15 +18,17 @@ import '../style/Login.scss';
 //             return currentState;
 //     };
 // };
+// const URL = 'https://hr-app-backend-api.herokuapp.com/api/login'
+const URL = 'https://hr-app-backend-api.herokuapp.com/api/login';
 
-const Login = props => {
+const Login = ({ setIsLoggedIn, setId }) => {
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const [loginSuccess, setLoginSuccess] = useState(false);
-    const [loginFail, setLoginFail] = useState(false);
+    const [errorMessage, setErrorMessage] = useState('');
 
     const inputChangeHandler = event => {
         const { name, value } = event.target;
+        if (errorMessage) {setErrorMessage('')}
         if (name === 'username') {
             setUsername(value);
         } else {
@@ -33,19 +36,32 @@ const Login = props => {
         }
     };
 
-    const submitHandler = event => {
+    const submitHandler = async (event) => {
         event.preventDefault();
-        const user = users.find(item => item.username === username)
-        if (user && user.password === password) {
-            setLoginFail(false);
-            setLoginSuccess(true);
-            props.setId(user.id);
-            props.setIsLoggedIn(true);
-        } else {
-            setLoginSuccess(false);
-            setLoginFail(true);
-            props.setIsLoggedIn(false)
+        const loginData = {
+            username,
+            password,
         }
+
+        try {
+            const response = await axios.post(`${URL}`, loginData);
+            setId(response.data.id);
+            setIsLoggedIn(true);
+        } catch (error) {
+            setErrorMessage(error.response.data.message);
+        }
+
+        // const user = users.find(item => item.username === username)
+        // if (user && user.password === password) {
+        //     setLoginFail(false);
+        //     setLoginSuccess(true);
+        //     props.setId(user.id);
+        //     props.setIsLoggedIn(true);
+        // } else {
+        //     setLoginSuccess(false);
+        //     setLoginFail(true);
+        //     props.setIsLoggedIn(false)
+        // }
     }
     return (
         <div className='loginPage'>
@@ -70,8 +86,7 @@ const Login = props => {
                     />
                     <button type='submit'className='loginForm__button'>Login</button>
                 </form>
-                {loginSuccess && <div className='successMessage'>You have successfully logged in as {username}</div>}
-                {loginFail && <div className='errorMessage'>There was an error logging in</div>}
+                {errorMessage && <div className='errorMessage'>{errorMessage}</div>}
             </div>
         </div>
     )

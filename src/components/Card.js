@@ -2,6 +2,7 @@ import React from 'react';
 import '../style/Card.scss';
 
 const Card = props => {
+    // console.log(props);
     return (
         <div className='card'>
             <h2 className='cardHeader'>Basic Information</h2>
