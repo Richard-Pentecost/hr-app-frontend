@@ -2,6 +2,7 @@ import React, { useReducer, useState } from 'react';
 import axios from 'axios';
 import { users } from '../data.json';
 import '../style/Login.scss';
+import { URL } from '../utils/Constants';
 
 // const initialState = {
 //     username: '',
@@ -19,7 +20,7 @@ import '../style/Login.scss';
 //     };
 // };
 // const URL = 'https://hr-app-backend-api.herokuapp.com/api/login'
-const URL = 'https://hr-app-backend-api.herokuapp.com/api/login';
+
 
 const Login = ({ setIsLoggedIn, setId }) => {
     const [username, setUsername] = useState('');
@@ -44,7 +45,7 @@ const Login = ({ setIsLoggedIn, setId }) => {
         }
 
         try {
-            const response = await axios.post(`${URL}`, loginData);
+            const response = await axios.post(`${URL}/login`, loginData);
             setId(response.data.id);
             setIsLoggedIn(true);
         } catch (error) {

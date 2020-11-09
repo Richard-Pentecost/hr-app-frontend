@@ -10,7 +10,8 @@ import './style/App.scss';
 const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [id, setId] = useState('');
-	
+	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', permissionsLevel:'', location:''})
+
 	return (
 		<BrowserRouter>
 			<div className="app">
@@ -31,14 +32,18 @@ const App = () => {
 						component={Home}
 						isLoggedIn={isLoggedIn}
 						id={id}
+						user={user} 
+						setUser={setUser}
 					/>
 
-					<Route 
+					<AuthRoute 
 						exact
 						path='/edit-information'
 						component={EditInformation}
 						isLoggedIn={isLoggedIn}
 						id={id}
+						user={user} 
+						setUser={setUser}
 					/>
 				</Switch>
 			</div>

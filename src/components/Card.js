@@ -8,7 +8,14 @@ const Card = props => {
     return (
         <div className='card'>
             <div className='cardHeader'>
-                <h2 className='cardHeader__header'>Basic Information<Link to='edit-information'><span className='cardHeader__icon'><CreateIcon /></span></Link></h2>
+                <h2 className='cardHeader__header'>
+                    Basic Information
+                    <Link 
+                        to='/edit-information'
+                    >
+                        <span className='cardHeader__icon'><CreateIcon /></span>
+                    </Link>
+                </h2>
             </div>
             <div className='cardInformation'>
                 <label className='cardInformation__label'>First Name</label>
@@ -22,7 +29,6 @@ const Card = props => {
                 <label className='cardInformation__label'>Date of Birth</label>
                 <span className='cardInformation__info'>{props.doB}</span>
             </div>
-
         </div>
     );
 };

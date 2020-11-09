@@ -5,56 +5,49 @@ import Card from '../components/Card';
 import axios from 'axios';
 import moment from 'moment';
 import "../style/Home.scss";
+import { URL } from '../utils/Constants';
 
-const URL = 'https://hr-app-backend-api.herokuapp.com/api/user';
-
-const Home = ({isLoggedin, id}) => {
-	const [firstName, setFirstName] = useState('');
-	const [surname, setSurname] = useState('');
-	const [role, setRole] = useState('');
-	const [email, setEmail] = useState('');
-	const [telephone, setTelephone] = useState('');
-	const [dob, setDob] = useState('');
+const Home = ({isLoggedin, id, user, setUser}) => {
 
 	useEffect(() => {
 		const fetchUser = async () => {
 			console.log(id);
 			try {
-				const response = await axios.get(`${URL}/${id}`);
-				const { firstName, surname, role, email, telephone, doB } = response.data;
-				setFirstName(firstName);
-				setSurname(surname);
-				setRole(role);
-				setEmail(email);
-				setTelephone(telephone);
-				setDob(moment(doB).format('Do MMM YYYY'));
+				const response = await axios.get(`${URL}/user/${id}`);
+				const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
+				console.log(response.data)
+				setUser({
+					firstName,
+					surname,
+					role,
+					email,
+					telephone,
+					doB: moment(doB).format('Do MMM YYYY'),
+					permissionLevel,
+					nextOfKin,
+					salary,
+					location,
+					address,
+				})
+	
 			} catch (error) {
 				console.log(error);
 			}
 		}
 
 		fetchUser();
-		// const user = users.find(item => item.id === props.id);
-		
-		// if (user) {
-		// 	setFirstName(user.firstName);
-		// 	setSurname(user.surname);
-		// 	setRole(user.role);
-		// 	setEmail(user.email);
-		// 	setTelephone(user.telephone);
-		// 	setDob(user.dob);
-		// }
-	}, [id]);
+
+	}, [setUser, id]);
 
 		
 	let userInfo = null;
-	if (firstName && role && email && telephone) {
+	if (user.firstName && user.role && user.email && user.telephone) {
 		userInfo = ( 
 			<div className='userInfo__header'>
-				<h1 className='userInfo__headerText'>Welcome {firstName}!</h1>
-				<h2 className='userInfo__text'>{role}</h2>
-				<h2 className='userInfo__text'>{email}</h2>
-				<h2 className='userInfo__text'>{telephone}</h2>
+				<h1 className='userInfo__headerText'>Welcome {user.firstName}!</h1>
+				<h2 className='userInfo__text'>{user.role}</h2>
+				<h2 className='userInfo__text'>{user.email}</h2>
+				<h2 className='userInfo__text'>{user.telephone}</h2>
 			</div>
 		);
 	}
@@ -70,15 +63,10 @@ const Home = ({isLoggedin, id}) => {
 		<Link to='/settings'>Go to settings page</Link>
 	);
 
-	// const data = [
-	// 	{ label: 'First Name', value: {firstName} },
-	// 	{ label: 'Surname', value: {surname} },
-	// 	{ label: 'Date of Birth', value: {dob} }
-	// ]
 	return (
 		<div className='userInfo'>
 			{userInfo}
-			<Card firstName={firstName} surname={surname} dob={dob} />
+			<Card firstName={user.firstName} surname={user.surname} doB={user.doB} />
 			{/* <Card 
 				heading='Basic Information' 
 				data={data}
