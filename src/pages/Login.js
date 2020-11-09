@@ -50,18 +50,6 @@ const Login = ({ setIsLoggedIn, setId }) => {
         } catch (error) {
             setErrorMessage(error.response.data.message);
         }
-
-        // const user = users.find(item => item.username === username)
-        // if (user && user.password === password) {
-        //     setLoginFail(false);
-        //     setLoginSuccess(true);
-        //     props.setId(user.id);
-        //     props.setIsLoggedIn(true);
-        // } else {
-        //     setLoginSuccess(false);
-        //     setLoginFail(true);
-        //     props.setIsLoggedIn(false)
-        // }
     }
     return (
         <div className='loginPage'>

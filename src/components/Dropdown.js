@@ -11,13 +11,13 @@ const Dropdown = (props) => {
 					Profile
 				</Link>
 			</div>
-            <div className='dropdownList__item'>
-                <Link to='/settings' className='dropdownList__link'>
-					Settings
+			<div className='dropdownList__item'>
+				<Link to='/edit-information' className='dropdownList__link'>
+					Edit Information
 				</Link>
 			</div>
 			<div className='dropdownList__item'>
-                <Link to='/' className='dropdownList__link' onClick={props.onLogout}>
+				<Link to='/' className='dropdownList__link' onClick={props.onLogout}>
 					Logout
 				</Link>
 			</div>

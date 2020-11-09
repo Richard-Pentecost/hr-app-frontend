@@ -9,9 +9,18 @@
 }
 
 .cardHeader {
+  display: flex;
   padding: 5px;
-  font-size: 20px;
-  font-weight: 400;
+
+  &__header {
+    font-size: 20px;
+    font-weight: 400;
+  }
+
+  &__icon {
+    padding-left: 10px;
+    color: black;
+  }
 }
 .cardInformation {
   display: flex;

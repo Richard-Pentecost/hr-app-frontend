@@ -1,7 +1,19 @@
-// import { render, screen } from '@testing-library/react';
+import { render, screen } from '@testing-library/react';
 import React from 'react';
 import Enzyme from 'enzyme';
 import Login from '../pages/Login';
+
+describe('Login - testing-library/react', () => {
+    test('should render a username Input field', () => {
+        render(<Login />);
+        screen.getByRole('textbox');
+    });
+    // test('should render and username Input field', () => {
+    //     render(<Login />);
+    //     screen.getByRole('textbox');
+    // })
+});
+
 
 describe('Login', () => {
 	let wrapper;

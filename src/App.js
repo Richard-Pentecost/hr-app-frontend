@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
-import Settings from './pages/Settings';
+import EditInformation from './pages/EditInformation';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import './style/App.scss';
@@ -35,8 +35,8 @@ const App = () => {
 
 					<Route 
 						exact
-						path='/settings'
-						component={Settings}
+						path='/edit-information'
+						component={EditInformation}
 						isLoggedIn={isLoggedIn}
 						id={id}
 					/>
