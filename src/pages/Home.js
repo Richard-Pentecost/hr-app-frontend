@@ -11,30 +11,26 @@ const Home = ({isLoggedin, id, user, setUser}) => {
 
 	useEffect(() => {
 		const fetchUser = async () => {
-			console.log(id);
 			try {
 				const response = await axios.get(`${URL}/user/${id}`);
 				const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
-				console.log(response.data)
 				setUser({
 					firstName,
 					surname,
 					role,
 					email,
 					telephone,
-					doB: moment(doB).format('Do MMM YYYY'),
+					doB,
 					permissionLevel,
 					nextOfKin,
 					salary,
 					location,
 					address,
-				})
-	
+				});
 			} catch (error) {
 				console.log(error);
 			}
 		}
-
 		fetchUser();
 
 	}, [setUser, id]);

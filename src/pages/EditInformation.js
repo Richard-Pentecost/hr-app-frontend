@@ -15,14 +15,14 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
 			try {
                 const response = await axios.get(`${URL}/user/${id}`);
 				const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
-				console.log(response.data)
+				// console.log(response.data)
 				setUser({
 					firstName,
 					surname,
 					role,
 					email,
 					telephone,
-					doB: moment(doB).format('Do MMM YYYY'),
+					doB,
 					permissionLevel,
 					nextOfKin,
 					salary,
@@ -38,14 +38,48 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
     
 
     const handleInputChange = event => {
-        setUser({[event.target.name]: event.target.value});
+        setUser({
+            ...user,
+            [event.target.name]: event.target.value}
+        );
     }
     
-    const handleSubmit = event => {
-        // event.preventDefault();
+    const handleSubmit = async (event) => {
+        event.preventDefault();
+        console.log(user.doB)
+        console.log(new Date(user.doB));
+        try {
+            const response = await axios.put(`${URL}/user/${id}`, user );
+            console.log(response.data);
+            const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
 
+            setUser({
+                firstName,
+                surname,
+                role,
+                email,
+                telephone,
+                doB,
+                permissionLevel,
+                nextOfKin,
+                salary,
+                location,
+                address,
+            })
+            
+        } catch (error) {
+            console.log(error.response);
+        }
     }
-
+    
+    const formElementsArray = [];
+        for (let key in user) {
+        formElementsArray.push({
+            name: key,
+            value: user[key],
+        });
+    };
+ 
     return (
         <Grid 
             container
@@ -60,24 +94,17 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
             </Box>
             <Box border={1} width="50%">
                 <FormGroup>
-                    <TextField 
-                        error={false}
-                        value={user.firstName}
-                        name='firstName'
-                        type='text'
-                        label='First Name'
-                        placeholder='First Name'
-                        onChange={handleInputChange}
-                    />
-                    <TextField 
-                        error={false}
-                        value={user.surname}
-                        name='surname'
-                        type='text'
-                        label='Surname'
-                        placeholder='Surname'
-                        onChange={handleInputChange}
-                    />
+                    {formElementsArray.map(formElement => (
+                        <TextField 
+                            error={false}
+                            value={formElement.value}
+                            name={formElement.name}
+                            type='text'
+                            label={formElement.name}
+                            placeholder={formElement.name}
+                            onChange={handleInputChange}
+                        />
+                    ))}
                     <Button
                         variant="contained"
                         color="primary"
