@@ -1,0 +1,18 @@
+@import './variables.scss';
+
+.employeeList {
+  margin: 10px 20px
+}
+
+.breadcrumbs {
+  &:active {
+    background-color: blue;
+  }
+}
+
+.tableRow {
+  &:hover {
+    background-color: $color-white;
+    cursor: pointer;
+  }
+}

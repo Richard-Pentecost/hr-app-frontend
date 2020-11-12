@@ -3,8 +3,11 @@ import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import EditInformation from './pages/EditInformation';
+import EmployeesList from './pages/EmployeesList';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
+import { ThemeProvider } from '@material-ui/core/styles';
+import theme from "./resources/theme";
 import './style/App.scss';
 
 const App = () => {
@@ -13,41 +16,53 @@ const App = () => {
 	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', permissionsLevel:'', location:''})
 
 	return (
-		<BrowserRouter>
-			<div className="app">
-				<Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
-				<Switch>
-					<Route
-						exact 
-						path='/' 
-						render={props => (isLoggedIn ?
-							<Redirect to='/home' /> : 
-							<Login {...props} setIsLoggedIn={setIsLoggedIn} setId={setId} />
-						)}
-					/>
+		<ThemeProvider theme={theme}>
+			<BrowserRouter>
+				<div className="app">
+					<Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+					<Switch>
+						<Route
+							exact 
+							path='/' 
+							render={props => (isLoggedIn ?
+								<Redirect to='/home' /> : 
+								<Login {...props} setIsLoggedIn={setIsLoggedIn} setId={setId} />
+							)}
+						/>
 
-					<AuthRoute 
-						exact
-						path="/home"
-						component={Home}
-						isLoggedIn={isLoggedIn}
-						id={id}
-						user={user} 
-						setUser={setUser}
-					/>
+						<AuthRoute 
+							exact
+							path="/home"
+							component={Home}
+							isLoggedIn={isLoggedIn}
+							id={id}
+							user={user} 
+							setUser={setUser}
+						/>
 
-					<AuthRoute 
-						exact
-						path='/edit-information'
-						component={EditInformation}
-						isLoggedIn={isLoggedIn}
-						id={id}
-						user={user} 
-						setUser={setUser}
-					/>
-				</Switch>
-			</div>
-		</BrowserRouter>
+						<AuthRoute 
+							exact
+							path='/edit-information'
+							component={EditInformation}
+							isLoggedIn={isLoggedIn}
+							id={id}
+							user={user} 
+							setUser={setUser}
+						/>
+
+						<AuthRoute 
+							exact
+							path='/employees-list'
+							component={EmployeesList}
+							isLoggedIn={isLoggedIn}
+							id={id}
+							user={user}
+							setUser={setUser}
+						/>
+					</Switch>
+				</div>
+			</BrowserRouter>
+		</ThemeProvider>
 	);
 }
 

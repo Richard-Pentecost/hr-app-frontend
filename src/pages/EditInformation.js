@@ -1,8 +1,9 @@
 import React, { useEffect, } from 'react';
-import { Grid, Box, FormGroup, TextField, Button } from '@material-ui/core'
+import { Grid, Box, FormGroup, TextField, Typography } from '@material-ui/core'
 import { URL } from '../utils/Constants';
 import axios from 'axios';
 import moment from  'moment';
+import Button from "../components/Button";
 import '../style/EditInformation.scss';
 
 const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
@@ -11,11 +12,9 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
     }
 	useEffect(() => {
 		const fetchUser = async () => {
-			console.log(id);
 			try {
                 const response = await axios.get(`${URL}/user/${id}`);
 				const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
-				// console.log(response.data)
 				setUser({
 					firstName,
 					surname,
@@ -28,7 +27,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
 					salary,
 					location,
 					address,
-				})
+				});
 			} catch (error) {
 				console.log(error);
 			}
@@ -63,7 +62,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                 salary,
                 location,
                 address,
-            })
+            });
             
         } catch (error) {
             console.log(error.response);
@@ -91,16 +90,16 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
             direction="row"
             justify="center"
             alignItems="center"
-            border={1}
         >
-            <Box border={1} width='90%' textAlign='center'>
-                <h1>Edit Information Page</h1>
-                <button onClick={clickHandler}>Go back</button>
+            <Box width='90%' textAlign='center'>
+                <Typography variant="h1">Edit Your Information</Typography>
+                
             </Box>
-            <Box border={1} width="50%">
+            <Box width="50%">
                 <FormGroup>
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.firstName}
                         name={'firstName'}
                         type='text'
@@ -110,6 +109,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.surname}
                         name={'surname'}
                         type='text'
@@ -119,6 +119,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.role}
                         name={'role'}
                         type='text'
@@ -128,6 +129,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.email}
                         name={'email'}
                         type='text'
@@ -137,6 +139,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.telephone}
                         name={'telephone'}
                         type='text'
@@ -146,6 +149,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={moment(user.doB).format('d/MM/YYYY')}
                         name={'doB'}
                         type='text'
@@ -155,6 +159,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.permissionLevel}
                         name={'permissionLevel'}
                         type='text'
@@ -164,6 +169,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.nextOfKin}
                         name='nextOfKin'
                         type='text'
@@ -173,6 +179,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                     />
                     <TextField 
                         error={false}
+                        variant="outlined"
                         value={user.salary}
                         name='salary'
                         type='text'
@@ -181,6 +188,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                         onChange={handleInputChange}
                     />
                     <TextField 
+                        variant="outlined"
                         error={false}
                         value={user.location}
                         name='location'
@@ -189,7 +197,8 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                         placeholder='Location'
                         onChange={handleInputChange}
                     />
-                    <TextField 
+                    <TextField
+                        variant="outlined"
                         error={false}
                         value={user.address}
                         name='address'
@@ -199,14 +208,24 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                         onChange={handleInputChange}
                     />
 
-                
-                    <Button
-                        variant="contained"
-                        color="primary"
-                        type="submit"
-                        onClick={handleSubmit}
-                        margin="normal"
-                    >Save</Button>
+                    <Box
+                        width="50%"
+                        textAlign='right'
+                        border={1}
+                    >
+                        <Button
+                            variant="contained"
+                            color="primary"
+                            type="submit"
+                            onClick={handleSubmit}
+                            margin={5}
+                        >Save</Button>
+                        <Button 
+                            variant="contained" 
+                            color="primary"
+                            onClick={clickHandler}
+                        >Go back</Button>
+                    </Box>
                 </FormGroup>
             </Box>
         </Grid>

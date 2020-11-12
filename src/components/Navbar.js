@@ -15,7 +15,10 @@ const Navbar = props => {
 	}, [container]);
 	
 	useEffect(() => {
-		document.addEventListener('mousedown', handleClickOutside)
+		document.addEventListener('mousedown', handleClickOutside);
+		return () => {
+			document.removeEventListener('mousedown', handleClickOutside);
+		}
 	}, [handleClickOutside]);
 
 	const handleShowDropdown = () => {

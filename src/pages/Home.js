@@ -56,17 +56,14 @@ const Home = ({isLoggedin, id, user, setUser}) => {
 		
 
 	const navigation = (
-		<Link to='/settings'>Go to settings page</Link>
+		<Link to='/employees-list'>Go to employee list</Link>
 	);
 
 	return (
 		<div className='userInfo'>
 			{userInfo}
 			<Card firstName={user.firstName} surname={user.surname} doB={user.doB} />
-			{/* <Card 
-				heading='Basic Information' 
-				data={data}
-			/> */}
+			{navigation}
 		</div>
 	)
 }
