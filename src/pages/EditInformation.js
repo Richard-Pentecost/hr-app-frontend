@@ -46,8 +46,6 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
     
     const handleSubmit = async (event) => {
         event.preventDefault();
-        console.log(user.doB)
-        console.log(new Date(user.doB));
         try {
             const response = await axios.put(`${URL}/user/${id}`, user );
             console.log(response.data);
@@ -72,14 +70,21 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
         }
     }
     
-    const formElementsArray = [];
-        for (let key in user) {
-        formElementsArray.push({
-            name: key,
-            value: user[key],
-        });
-    };
- 
+    // const formElementsArray = [];
+
+    // for (let key in user) {
+    //     if (key.match(/[A-Z]/)) {
+    //         console.log(key)
+    //     }
+    //     const label = key[0].toUpperCase() + key.substring(1);
+
+    //     formElementsArray.push({
+    //         name: key,
+    //         label: label,
+    //         value: user[key],
+    //     });
+    // };
+
     return (
         <Grid 
             container
@@ -94,17 +99,107 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
             </Box>
             <Box border={1} width="50%">
                 <FormGroup>
-                    {formElementsArray.map(formElement => (
-                        <TextField 
-                            error={false}
-                            value={formElement.value}
-                            name={formElement.name}
-                            type='text'
-                            label={formElement.name}
-                            placeholder={formElement.name}
-                            onChange={handleInputChange}
-                        />
-                    ))}
+                    <TextField 
+                        error={false}
+                        value={user.firstName}
+                        name={'firstName'}
+                        type='text'
+                        label={'First Name'}
+                        placeholder={'First Name'}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.surname}
+                        name={'surname'}
+                        type='text'
+                        label={'Surname'}
+                        placeholder={'Surname'}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.role}
+                        name={'role'}
+                        type='text'
+                        label={'Role'}
+                        placeholder={'Role'}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.email}
+                        name={'email'}
+                        type='text'
+                        label={'Email'}
+                        placeholder={'Email'}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.telephone}
+                        name={'telephone'}
+                        type='text'
+                        label={'Telephone'}
+                        placeholder={'Telephone'}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={moment(user.doB).format('d/MM/YYYY')}
+                        name={'doB'}
+                        type='text'
+                        label={'Date of Birth'}
+                        placeholder={'Date of Birth'}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.permissionLevel}
+                        name={'permissionLevel'}
+                        type='text'
+                        label={'Permission Level'}
+                        placeholder={'Permission Level'}
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.nextOfKin}
+                        name='nextOfKin'
+                        type='text'
+                        label='Next of Kin'
+                        placeholder='Next of Kin'
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.salary}
+                        name='salary'
+                        type='text'
+                        label='Salary'
+                        placeholder='Salary'
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.location}
+                        name='location'
+                        type='text'
+                        label='Location'
+                        placeholder='Location'
+                        onChange={handleInputChange}
+                    />
+                    <TextField 
+                        error={false}
+                        value={user.address}
+                        name='address'
+                        type='text'
+                        label='Address'
+                        placeholder='Address'
+                        onChange={handleInputChange}
+                    />
+
+                
                     <Button
                         variant="contained"
                         color="primary"
