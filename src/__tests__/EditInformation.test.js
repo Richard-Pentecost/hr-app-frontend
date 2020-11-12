@@ -1,10 +1,10 @@
 import React from 'react';
-import { shallow, mount }from 'enzyme';
+import { render } from '@testing-library/react';
 import EditInformation from '../pages/EditInformation';
 
-describe('Settings', () => {
-    it('renders a div with className of "settingsPage"', () => {
-        // const wrapper = shallow(<EditInformation />);
-        expect(true).toBe(true);
+describe('EditInformation', () => {
+
+    test('renders the EditInformation page', () => {
+    render(<EditInformation />);
     });
 });

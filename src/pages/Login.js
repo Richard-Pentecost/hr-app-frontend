@@ -54,23 +54,27 @@ const Login = ({ setIsLoggedIn, setId }) => {
     }
     return (
         <div className='loginPage'>
-            <h1 className='text'>Login Page</h1>
+            <h1 className='text'>Login</h1>
             <div className='loginContainer'>
                 <form className='loginForm' onSubmit={submitHandler}>
-                    <label>Username</label>
+                    <label id="label-username">Username</label>
                     <input 
                         className='loginForm__input'
                         type='text' 
+                        id="usernameInput"
                         value={username}
                         name='username'
+                        placeholder='Username'
                         onChange={inputChangeHandler}
                     />
                     <label>Password</label>
                     <input 
                         className='loginForm__input'
+                        id='passwordInput'
                         type='password' 
                         value={password}
                         name='password'
+                        placeholder='Password'
                         onChange={inputChangeHandler}
                     />
                     <button type='submit'className='loginForm__button'>Login</button>
