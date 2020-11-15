@@ -18,7 +18,7 @@ describe('Input - Enzyme', () => {
 
   it('value changes when typing in input', () => {
     const onChange = jest.fn()
-    const wrapper = shallow(<Input name='name' value='hello' inputChangeHandler={onChange}/>);
+    const wrapper = shallow(<Input name='name' value='' inputChangeHandler={onChange}/>);
     const input = wrapper.find('input[name="name"]');
     input.simulate('change', {
       target: { value: 'input string'}

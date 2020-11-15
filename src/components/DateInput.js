@@ -15,6 +15,7 @@ const DateInput = ({ value, name, label, inputChangeHandler}) => {
       </div>
       <div className='inputContainer'>
         <DatePicker 
+          data-testid='datePicker'
           className='inputContainer__input'
           selected={moment(value).toDate()}
           dateFormat='dd/MM/yyyy'

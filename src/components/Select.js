@@ -11,7 +11,7 @@ const Select = ({ value, name, label, inputChangeHandler }) => {
         </label>
       </div>
       <div className='inputContainer'>
-        <select name={name} value={value} onChange={inputChangeHandler} className='inputContainer__input'>
+        <select data-testid='select' name={name} value={value} onChange={inputChangeHandler} className='inputContainer__input'>
           <option value=''></option>
           <option value='Employee'>Employee</option>
           <option value='Manager'>Manager</option>
