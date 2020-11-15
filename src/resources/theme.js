@@ -97,7 +97,7 @@ let theme = createMuiTheme({
         color: 'grey'
       },
     },
-    MuiButton: {
+    MuiButton1: {
       root: {
         width: 100,
       }

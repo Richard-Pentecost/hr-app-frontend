@@ -1,0 +1,36 @@
+@import './variables.scss';
+
+.input {
+  margin: 10px;
+  font-size: 14px;
+  font-weight: 400;
+  display: flex;
+}
+
+.labelContainer {
+  display: inline-flex;
+  width: 35%;
+  padding: 0px 10px;
+  justify-content: flex-end;
+  align-items: center;
+  
+  &__label {
+    padding-right: 10px;
+  }
+}
+.inputContainer { 
+  flex: 1;
+
+  &__input {
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    width: 320px;
+    padding: 6px 12px;
+    outline: none;
+
+    &:focus {
+      box-shadow: 0 0 5px $color-blue-6;
+      border: 1px solid $color-blue-6;
+    }
+  }
+}

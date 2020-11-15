@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import EditInformation from './pages/EditInformation';
 import EmployeesList from './pages/EmployeesList';
+import CreateEmployee from './pages/CreateEmployee';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -57,6 +58,16 @@ const App = () => {
 							isLoggedIn={isLoggedIn}
 							id={id}
 							user={user}
+							setUser={setUser}
+						/>
+
+						<AuthRoute 
+							exact
+							path='/create-employee'
+							component={CreateEmployee}
+							isLoggedIn={isLoggedIn}
+							id={id}
+							user={user} 
 							setUser={setUser}
 						/>
 					</Switch>
