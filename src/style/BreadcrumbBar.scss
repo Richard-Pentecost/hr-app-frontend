@@ -1,0 +1,21 @@
+@import './variables.scss';
+
+.breadcrumbBar {
+  padding-left: 100px;
+  border-bottom: 1px solid #dde2e0;
+  box-shadow: 0 3px 5px #dde2e0;
+}
+
+.breadcrumbs {
+  color: $color-blue-1 !important;
+  text-decoration: none !important;
+
+  &:focus {
+    background-color: $color-white !important;
+    outline: none !important;
+  }
+
+  &:hover {
+    text-decoration: underline !important;
+  }
+}

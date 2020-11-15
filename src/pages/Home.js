@@ -56,7 +56,10 @@ const Home = ({isLoggedin, id, user, setUser}) => {
 		
 
 	const navigation = (
-		<Link to='/employees-list'>Go to employee list</Link>
+		<>
+			<Link to='/employees-list'>Go to employee list</Link>
+			<Link to='/create-employee'>Create Employee</Link>
+		</>
 	);
 
 	return (

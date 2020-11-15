@@ -1,10 +1,7 @@
 import { fireEvent, render, screen } from '@testing-library/react';
-import { userEvent } from '@testing-library/user-event';
-import ReactDOM from "react-dom";
 import React from 'react';
 import Enzyme from 'enzyme';
 import Login from '../pages/Login';
-import "@testing-library/jest-dom";
 
 describe('Login - testing-library/react', () => {
 
@@ -19,12 +16,12 @@ describe('Login - testing-library/react', () => {
     //     expect(page.getElementById("label-username").textContent).toBe("Username")
     // })
     
-    test('renders a username input on the Login page', () => {
+    xtest('renders a username input on the Login page', () => {
         const { getByPlaceholderText } = render(<Login />);
         getByPlaceholderText('Username')
     });
 
-    test('renders password input on the Login page', () => {
+    xtest('renders password input on the Login page', () => {
         const { getByPlaceholderText } = render(<Login />);
         getByPlaceholderText('Password')
     });

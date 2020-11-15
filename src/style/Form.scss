@@ -1,0 +1,17 @@
+@import './variables.scss';
+
+.form {
+  // border: 1px solid black;
+
+  &__inputs {
+    // border: 1px solid black;
+  }
+
+  &__button {
+    // border: 1px solid black;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 0 10px;
+  }
+}

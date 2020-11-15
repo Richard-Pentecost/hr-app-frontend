@@ -1,0 +1,11 @@
+@import './variables.scss';
+
+.button {
+  color: $color-white;
+  background-color: $color-blue-4;
+  border-radius: 4px; 
+  border: 2px solid $color-blue-5;
+  padding: 8px;
+  width: 74px;
+  cursor: pointer;
+}
