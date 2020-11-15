@@ -11,18 +11,18 @@ describe('Logging in', () => {
         wrapper = Enzyme.mount(<App />)
     });
     it('user sees a welcome message on the Home Page after logging in', () => {
-        wrapper.find('input[name="username"]').simulate('change', {
-			target: {
-				name: 'username',
-				value: 'jfawl',
-			},
-        });
-        wrapper.find('input[name="password"]').simulate('change', {
-			target: {
-				name: 'password',
-				value: '1234',
-			},
-        });
+        // wrapper.find('input[name="username"]').simulate('change', {
+		// 	target: {
+		// 		name: 'username',
+		// 		value: 'jfawl',
+		// 	},
+        // });
+        // wrapper.find('input[name="password"]').simulate('change', {
+		// 	target: {
+		// 		name: 'password',
+		// 		value: '1234',
+		// 	},
+        // });
         wrapper.find('form').simulate('submit', { 
 			preventDefault: jest.fn()
         });

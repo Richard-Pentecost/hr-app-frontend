@@ -53,32 +53,6 @@ const Login = ({ setIsLoggedIn, setId }) => {
                     handleSubmit={submitHandler}
                     btnText='Login'
                 />
-
-                {/* <form className='loginForm' onSubmit={submitHandler}>
-                    <div className='loginForm__inputContainer'>
-                        <label id="label-username" className='loginForm__label'>Email</label>
-                        <input 
-                            className='loginForm__input'
-                            type='text' 
-                            id="emailInput"
-                            value={email}
-                            name='email'
-                            onChange={inputChangeHandler}
-                        />
-                    </div>
-                    <div className='loginForm__inputContainer'>
-                        <label className='loginForm__label'>Password</label>
-                        <input 
-                            className='loginForm__input'
-                            id='passwordInput'
-                            type='password' 
-                            value={password}
-                            name='password'
-                            onChange={inputChangeHandler}
-                        />
-                    </div>
-                    <button type='submit'className='loginForm__button'>Login</button>
-                </form> */}
                 {errorMessage && <div className='errorMessage'>{errorMessage}</div>}
             </div>
         </div>

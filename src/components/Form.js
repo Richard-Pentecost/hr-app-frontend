@@ -45,7 +45,7 @@ const Form = ({ formArr, handleInputChange, handleSubmit, btnText }) => {
 
   return (
     <div className='form'>
-      <form onSubmit={handleSubmit}>      
+      <form onSubmit={handleSubmit} data-testid='form'>      
         <div className='form__inputs'>
           {form}
         </div>
