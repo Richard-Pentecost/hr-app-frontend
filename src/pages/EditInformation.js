@@ -4,10 +4,12 @@ import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import Form from '../components/Form';
+import { withRouter } from 'react-router';
 
 import '../style/CreateEmployee.scss';
 
 const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
+
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
@@ -56,7 +58,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
             const response = await axios.put(`${URL}/user/${id}`, user );
             console.log(response.data);
             const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
-
+            
             setUser({
                 firstName,
                 surname,
@@ -69,7 +71,9 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                 salary,
                 location,
                 address,
-            })
+            });
+
+            history.push('/home');
             
         } catch (error) {
             console.log(error.response);
@@ -110,4 +114,4 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
     );
 }
 
-export default EditInformation
+export default withRouter(EditInformation);
