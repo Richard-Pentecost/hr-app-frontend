@@ -49,7 +49,7 @@ describe('Input - Enzyme', () => {
     expect(wrapper.find(Button).length).toEqual(1);
   });
 
-  it('should call the onSubmit callback when the form is submitted', () => {
+  it('calls the onSubmit callback when the form is submitted', () => {
     wrapper.find('form').simulate('submit', onSubmit);
     expect(onSubmit).toBeCalledTimes(1);
   }); 

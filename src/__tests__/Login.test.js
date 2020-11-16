@@ -2,12 +2,20 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import React from 'react';
 import Enzyme from 'enzyme';
 import Login from '../pages/Login';
+import Heading from '../components/Heading';
+import Form from '../components/Form';
 
 describe('Login - testing-library/react', () => {
 
-    test("renders Login Page heading", () => { 
+    xtest("should render a Login Page heading", () => { 
         render(<Login/>)
         screen.getByRole('heading', {name: 'Login'});
+    });
+
+    xtest("should render a Login form", () => { 
+        const { getByTestId } = render(<Login />);
+        const form = getByTestId('form');
+        expect(form).toHaveLength(1);
     });
 
     // test('renders a username label', ()=>{
@@ -49,9 +57,13 @@ describe('Login', () => {
         wrapper = Enzyme.shallow(<Login />);
     });
 
-    xit("renders Login Page heading", () => { 
-        const header = <h1 className='text'>Login Page</h1>;
+    it("renders Login Page heading", () => { 
+        const header = <Heading>Login</Heading>;
         expect(wrapper.contains(header)).toEqual(true);
+    });
+
+    it("renders Login form", () => { 
+        expect(wrapper.find(Form).length).toEqual(1);
     });
 
     xit('should have proper props for username field', () => {
