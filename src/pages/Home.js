@@ -51,26 +51,11 @@ const Home = ({isLoggedin, id, user, setUser}) => {
 	}
 
 
-
-	// const handleClick = () => {
-	// 	props.history.push('/settings');
-	// }
-		
-
-	const navigation = (
-		<>
-			<Link to='/employees-list'>Go to employee list</Link>
-			<Link to='/create-employee'>Create Employee</Link>
-		</>
-	);
-
 	return (
 		<>
-		<BreadcrumbBar page='Home' />
 		<div className='userInfo'>
 			{userInfo}
 			<Card user={user} />
-			{navigation}
 		</div>
 		</>
 	)

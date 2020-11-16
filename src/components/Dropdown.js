@@ -17,6 +17,16 @@ const Dropdown = (props) => {
 				</Link>
 			</div>
 			<div className='dropdownList__item'>
+				<Link to='/create-employee' className='dropdownList__link'>
+					Create Employee
+				</Link>
+			</div>
+			<div className='dropdownList__item'>
+				<Link to='/employees-list' className='dropdownList__link'>
+					List employees
+				</Link>
+			</div>
+			<div className='dropdownList__item'>
 				<Link to='/' className='dropdownList__link' onClick={props.onLogout}>
 					Logout
 				</Link>
