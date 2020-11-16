@@ -6,6 +6,8 @@ import axios from 'axios';
 import moment from 'moment';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
+import BreadcrumbBar from '../components/BreadcrumbBar';
+import Heading from '../components/Heading';
 
 const Home = ({isLoggedin, id, user, setUser}) => {
 
@@ -63,11 +65,14 @@ const Home = ({isLoggedin, id, user, setUser}) => {
 	);
 
 	return (
+		<>
+		<BreadcrumbBar page='Home' />
 		<div className='userInfo'>
 			{userInfo}
-			<Card firstName={user.firstName} surname={user.surname} doB={user.doB} />
+			<Card user={user} />
 			{navigation}
 		</div>
+		</>
 	)
 }
 

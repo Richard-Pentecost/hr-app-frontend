@@ -24,14 +24,14 @@
 }
 .cardInformation {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   font-size: 16px;
   padding: 5px;
 
   &__label {
     font-weight: 400;
     color: $color-grey-2;
-    font-size: 14px;
+    padding-right: 5px;
   }
 
   &__info {
