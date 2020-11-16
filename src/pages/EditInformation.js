@@ -76,17 +76,20 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
         }
     }
     
-    const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone } = user;
+    const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, permissionLevel, salary } = user;
     const formArr = [
         { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
         { type: 'text', value: surname, name: 'surname', label: 'Surname' },
-        { type: 'email', value: email, name: 'email', label: 'Email' },
         { type: 'text', value: role, name: 'role', label: 'Role' },
+        { type: 'email', value: email, name: 'email', label: 'Email' },
+        { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
+        { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
+        { type: 'select', value: permissionLevel, name: 'permissionLevel', label: 'Permission Level' },  
+        { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
+        { type: 'text', value: salary, name: 'salary', label: 'Salary' },
         { type: 'text', value: location, name: 'location', label: 'Location' },
         { type: 'text', value: address, name: 'address', label: 'Address' },
-        { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
-        { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
-        { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
+
     ];
 
     return (
