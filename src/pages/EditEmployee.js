@@ -72,7 +72,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
 
     return (
         <>
-            <BreadcrumbBar page='Edit Employee' prevPage='Employee Information' prevLink='/view-employee'/>
+            <BreadcrumbBar page='Edit Employee' prevPages={[ {name:'Employee Information', link: '/view-employee'} ]}/>
             <div className='headingContainer'>
                 <Heading>Edit Employee</Heading>
             </div>

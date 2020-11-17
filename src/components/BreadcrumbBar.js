@@ -3,13 +3,16 @@ import { Link } from 'react-router-dom';
 import Breadcrumbs from '@govuk-react/breadcrumbs';
 import '../style/BreadcrumbBar.scss';
 
-const BreadcrumbBar = ({page, prevPage, prevLink}) => {
+const BreadcrumbBar = ({page, prevPages}) => {
 
+  
   return (
     <div className='breadcrumbBar'>
       <Breadcrumbs>
         <Breadcrumbs.Link as={Link} to='/home' className='breadcrumbs'>Home</Breadcrumbs.Link>
-        {prevPage && <Breadcrumbs.Link as={Link} to={prevLink} className='breadcrumbs'>{prevPage}</Breadcrumbs.Link>}
+        {prevPages && prevPages.map(({name, link}) => (
+          <Breadcrumbs.Link as={Link} to={link} className='breadcrumbs'>{name} </Breadcrumbs.Link>
+        ))}
         {page}
       </Breadcrumbs>
     </div>

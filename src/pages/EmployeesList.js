@@ -58,7 +58,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
           <Table.CellHeader></Table.CellHeader>
         </Table.Row>
           {users.map((user, index)=>(
-          <Table.Row onClick={(id)=>handleClick(idArray[index])} className='tableRow' id={idArray[index]}>
+          <Table.Row onClick={(id)=>handleClick(idArray[index])} className='tableRow' id={idArray[index]} key={index}>
             <Table.Cell>{user.firstName}</Table.Cell>
             <Table.Cell>{user.surname}</Table.Cell>
             <Table.Cell>{user.email}</Table.Cell>
