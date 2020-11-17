@@ -1,15 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
-import { users } from '../data.json';
+import React, { useEffect } from 'react';
 import Card from '../components/Card';
 import axios from 'axios';
-import moment from 'moment';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
-import BreadcrumbBar from '../components/BreadcrumbBar';
-import Heading from '../components/Heading';
 
-const Home = ({isLoggedin, id, user, setUser}) => {
+const Home = ({id, user, setUser}) => {
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -42,7 +37,7 @@ const Home = ({isLoggedin, id, user, setUser}) => {
 		<>
 		<div className='userInfo'>
 			{userInfo}
-			<Card user={user} />
+			<Card user={user} link='/edit-information' />
 		</div>
 		</>
 	)

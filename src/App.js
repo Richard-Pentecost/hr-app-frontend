@@ -4,6 +4,7 @@ import Login from './pages/Login';
 import Home from './pages/Home';
 import EditInformation from './pages/EditInformation';
 import ViewEmployee from './pages/ViewEmployee';
+import EditEmployee from './pages/EditEmployee';
 import EmployeesList from './pages/EmployeesList';
 import CreateEmployee from './pages/CreateEmployee';
 import Navbar from './components/Navbar';
@@ -75,6 +76,14 @@ const App = () => {
 							exact
 							path='/view-employee'
 							component={ViewEmployee}
+							isLoggedIn={isLoggedIn}
+							currentEmployeeId = {currentEmployeeId}
+						/>
+
+						<AuthRoute 
+							exact
+							path='/edit-employee'
+							component={EditEmployee}
 							isLoggedIn={isLoggedIn}
 							currentEmployeeId = {currentEmployeeId}
 						/>

@@ -4,7 +4,7 @@ import '../style/Card.scss';
 import moment from 'moment';
 import CreateIcon from '@material-ui/icons/Create';
 
-const Card = ({user}) => {
+const Card = ({user, link}) => {
     //console.log(user.firstName);
     return (
         <div className='card'>
@@ -12,7 +12,7 @@ const Card = ({user}) => {
                 <h2 className='cardHeader__header'>
                     Basic Information
                     <Link 
-                        to='/edit-information'
+                        to= {link}
                     >
                         <span className='cardHeader__icon'><CreateIcon /></span>
                     </Link>

@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 import axios from 'axios';
-import moment from 'moment';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
 import BreadcrumbBar from '../components/BreadcrumbBar';
@@ -30,7 +29,7 @@ const ViewEmployee = ({currentEmployeeId}) => {
                 <Heading>Employee Information</Heading>
             </div>
             <div className='userInfo'>
-                <Card user={currentEmployee} />
+                <Card user={currentEmployee} link='/edit-employee' />
             </div>
 		</>
 	)

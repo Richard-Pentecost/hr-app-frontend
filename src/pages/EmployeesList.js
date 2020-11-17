@@ -21,12 +21,12 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 
     try {
       const response = await axios.delete(`${URL}/user/${id}`);
+      console.log(response);
       setCurrentEmployeeId(id);
     } catch (error) {
       console.log(error);
     }
   };
-
   useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
