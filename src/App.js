@@ -70,6 +70,7 @@ const App = () => {
 							id={id}
 							user={user} 
 							setUser={setUser}
+							setCurrentEmployeeId = {setCurrentEmployeeId}
 						/>
 
 						<AuthRoute 

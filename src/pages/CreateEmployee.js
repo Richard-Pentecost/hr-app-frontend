@@ -3,46 +3,69 @@ import Heading from '../components/Heading';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Form from '../components/Form';
 import '../style/CreateEmployee.scss';
+import { URL } from '../utils/Constants';
+import axios from 'axios';
+import { withRouter } from 'react-router';
 
 const initialState = {
   firstName: '',
   surname: '',
   email: '',
   role: '',
+  address: '',
+  telephone:'',
+  doB:new Date(),
+  nextOfKin:'',
+  salary:'',
   location: '',
   manager: '',
   permissionLevel: '',
-  password: '',
-  checkPassword:'',
 };
 
-const CreateEmployee = () => {
+const CreateEmployee = ({history, setCurrentEmployeeId}) => {
   const [newUser, setNewUser] = useState(initialState)
   
   const handleInputChange = event => {
-    setNewUser({
-      ...newUser,
-      [event.target.name]: event.target.value,
-    });
+    if (event.target === undefined) {
+      setNewUser({
+          ...newUser,
+          'doB': event
+      })
+    } else {
+      setNewUser({
+          ...newUser,
+          [event.target.name]: event.target.value}
+      );
+    }
+
   };
 
-  const handleSubmit = event => {
+  const handleSubmit = async event => {
     event.preventDefault();
-    console.log('An http request will go here');
-    setNewUser(initialState);
+    try {
+      const response = await axios.post(`${URL}/user`, newUser);
+      setCurrentEmployeeId(response.data.user.id);
+      setNewUser({initialState});
+      history.push('/view-employee');
+    } catch (error) {
+
+    }
+    
   }
 
-  const { firstName, surname, email , role, location, manager, permissionLevel, password, checkPassword } = newUser;
+  const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, permissionLevel, salary } = newUser;
   const formArr = [
     { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
     { type: 'text', value: surname, name: 'surname', label: 'Surname' },
-    { type: 'email', value: email, name: 'email', label: 'Email' },
     { type: 'text', value: role, name: 'role', label: 'Role' },
+    { type: 'email', value: email, name: 'email', label: 'Email' },
+    { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
+    { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
+    { type: 'select', value: permissionLevel, name: 'permissionLevel', label: 'Access Level' },  
+    { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
+    { type: 'text', value: salary, name: 'salary', label: 'Salary' },
     { type: 'text', value: location, name: 'location', label: 'Location' },
-    { type: 'text', value: manager, name: 'manager', label: 'Manager' },
-    { type: 'select', value: permissionLevel, name: 'permissionLevel', label: 'Permission Level' },
-    { type: 'password', value: password, name: 'password', label: 'Password' },
-    { type: 'password', value: checkPassword, name: 'checkPassword', label: 'Confirm Password' },
+    { type: 'text', value: address, name: 'address', label: 'Address' },
   ];
 
   return (
@@ -63,4 +86,4 @@ const CreateEmployee = () => {
   )
 }
 
-export default CreateEmployee;
+export default withRouter(CreateEmployee);

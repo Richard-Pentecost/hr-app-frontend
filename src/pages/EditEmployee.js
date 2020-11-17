@@ -62,7 +62,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
         { type: 'email', value: email, name: 'email', label: 'Email' },
         { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
         { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
-        { type: 'select', value: permissionLevel, name: 'permissionLevel', label: 'Permission Level' },  
+        { type: 'select', value: permissionLevel, name: 'permissionLevel', label: 'Access Level' },  
         { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
         { type: 'text', value: salary, name: 'salary', label: 'Salary' },
         { type: 'text', value: location, name: 'location', label: 'Location' },
