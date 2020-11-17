@@ -15,20 +15,7 @@ const Home = ({isLoggedin, id, user, setUser}) => {
 		const fetchUser = async () => {
 			try {
 				const response = await axios.get(`${URL}/user/${id}`);
-				const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
-				setUser({
-					firstName,
-					surname,
-					role,
-					email,
-					telephone,
-					doB,
-					permissionLevel,
-					nextOfKin,
-					salary,
-					location,
-					address,
-				});
+				setUser(response.data.user);
 			} catch (error) {
 				console.log(error);
 			}
