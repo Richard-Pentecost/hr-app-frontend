@@ -3,7 +3,6 @@ import { render, fireEvent } from '@testing-library/react';
 import { shallow } from 'enzyme';
 import DateInput from '../components/DateInput';
 import DatePicker from 'react-datepicker';
-import moment from 'moment'
 
 // Testing using Enzyme
 describe('DateInput - Enzyme', () => {

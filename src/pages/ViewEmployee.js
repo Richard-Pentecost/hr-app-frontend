@@ -25,7 +25,7 @@ const ViewEmployee = ({currentEmployeeId}) => {
 	return (
         
 		<>
-            <BreadcrumbBar page='Employee Information' />
+            <BreadcrumbBar page = 'Employee Information' prevPage = 'Employees List' prevLink = '/employees-list' />
             <div className='headingContainer'>
                 <Heading>Employee Information</Heading>
             </div>
