@@ -57,21 +57,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
         try {
             const response = await axios.put(`${URL}/user/${id}`, user );
             console.log(response.data);
-            const { firstName, surname, role, email, telephone, doB, permissionLevel, address, nextOfKin, salary, location } = response.data;
-            
-            setUser({
-                firstName,
-                surname,
-                role,
-                email,
-                telephone,
-                doB,
-                permissionLevel,
-                nextOfKin,
-                salary,
-                location,
-                address,
-            });
+            setUser(response.data.user);
 
             history.push('/home');
             
@@ -79,7 +65,6 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
             console.log(error.response);
         }
     }
-    
     const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, permissionLevel, salary } = user;
     const formArr = [
         { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
