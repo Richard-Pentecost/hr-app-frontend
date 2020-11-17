@@ -58,6 +58,7 @@ const App = () => {
 							component={EmployeesList}
 							isLoggedIn={isLoggedIn}
 							setCurrentEmployeeId = {setCurrentEmployeeId}
+							currentEmployeeId = {currentEmployeeId}
 						/>
 
 						<AuthRoute 
