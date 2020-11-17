@@ -1,15 +1,18 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Table from '@govuk-react/table';
 import Breadcrumbs from '@govuk-react/breadcrumbs';
 import { URL } from '../utils/Constants';
 import '../style/EmployeesList.scss';
 
-const EmployeesList = () => {
+const EmployeesList = ({history, setCurrentEmployeeId}) => {
   const [users, setUsers] = useState([]);
-  const handleClick = () => {
-    console.log('clicked')
+  const [idArray, setIdArray] = useState(["c0a68046-617e-4927-bd9b-c14ce8f497e1", "18712a4f-744e-4e7c-a191-395fa832518b", "6d56e5bd-bba7-4026-9e3d-383f2c2f8d4d"]);
+  
+  const handleClick = (id) => {
+    setCurrentEmployeeId(id);
+    history.push('./view-employee');
   };
 
   const deleteHandler = event => {
@@ -48,7 +51,7 @@ const EmployeesList = () => {
           <Table.CellHeader></Table.CellHeader>
         </Table.Row>
           {users.map((user, index)=>(
-          <Table.Row onClick={handleClick} className='tableRow' id={index}>
+          <Table.Row onClick={(id)=>handleClick(idArray[index])} className='tableRow' id={index}>
             <Table.Cell>{user.firstName}</Table.Cell>
             <Table.Cell>{user.surname}</Table.Cell>
             <Table.Cell>{user.email}</Table.Cell>
@@ -61,4 +64,4 @@ const EmployeesList = () => {
   );
 };
 
-export default EmployeesList;
+export default withRouter(EmployeesList);

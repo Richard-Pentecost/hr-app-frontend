@@ -3,6 +3,7 @@ import { Route, Switch, Redirect, BrowserRouter } from 'react-router-dom';
 import Login from './pages/Login';
 import Home from './pages/Home';
 import EditInformation from './pages/EditInformation';
+import ViewEmployee from './pages/ViewEmployee';
 import EmployeesList from './pages/EmployeesList';
 import CreateEmployee from './pages/CreateEmployee';
 import Navbar from './components/Navbar';
@@ -15,7 +16,7 @@ const App = () => {
 	const [isLoggedIn, setIsLoggedIn] = useState(false);
 	const [id, setId] = useState('');
 	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', permissionsLevel:'', location:''})
-
+	const [currentEmployeeId, setCurrentEmployeeId] = useState('');
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
@@ -56,9 +57,7 @@ const App = () => {
 							path='/employees-list'
 							component={EmployeesList}
 							isLoggedIn={isLoggedIn}
-							id={id}
-							user={user}
-							setUser={setUser}
+							setCurrentEmployeeId = {setCurrentEmployeeId}
 						/>
 
 						<AuthRoute 
@@ -69,6 +68,14 @@ const App = () => {
 							id={id}
 							user={user} 
 							setUser={setUser}
+						/>
+
+						<AuthRoute 
+							exact
+							path='/view-employee'
+							component={ViewEmployee}
+							isLoggedIn={isLoggedIn}
+							currentEmployeeId = {currentEmployeeId}
 						/>
 					</Switch>
 				</div>
