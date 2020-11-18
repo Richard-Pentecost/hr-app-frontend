@@ -9,7 +9,7 @@ const Home = ({id, user, setUser}) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const response = await axios.get(`${URL}/user/${id}`);
+				const response = await axios.get(`${URL}/userdb/${id}`);
 				setUser(response.data.user);
 			} catch (error) {
 				console.log(error);

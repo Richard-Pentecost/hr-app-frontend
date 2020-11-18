@@ -11,7 +11,7 @@ const ViewEmployee = ({currentEmployeeId}) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-				const response = await axios.get(`${URL}/user/${currentEmployeeId}`);
+				const response = await axios.get(`${URL}/userdb/${currentEmployeeId}`);
 				setCurrentEmployee(response.data.user);
 			} catch (error) {
 				console.log(error);
@@ -22,7 +22,6 @@ const ViewEmployee = ({currentEmployeeId}) => {
 	}, [setCurrentEmployee, currentEmployeeId]);
 
 	return (
-        
 		<>
             <BreadcrumbBar page = 'Employee Information' prevPages = {[{name:'Employees List', link: '/employees-list'}]} />
             <div className='headingContainer'>

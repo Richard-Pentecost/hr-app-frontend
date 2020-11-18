@@ -19,7 +19,7 @@ const initialState = {
   salary:'',
   location: '',
   manager: '',
-  permissionLevel: '',
+  adminLevel: '',
 };
 
 const CreateEmployee = ({history, setCurrentEmployeeId}) => {
@@ -43,8 +43,8 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${URL}/user`, newUser);
-      setCurrentEmployeeId(response.data.user.id);
+      const response = await axios.post(`${URL}/userdb`, newUser);
+      setCurrentEmployeeId(response.data.user.userId);
       setNewUser({initialState});
       history.push('/view-employee');
     } catch (error) {
@@ -53,7 +53,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
     
   }
 
-  const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, permissionLevel, salary } = newUser;
+  const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, adminLevel, salary } = newUser;
   const formArr = [
     { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
     { type: 'text', value: surname, name: 'surname', label: 'Surname' },
@@ -61,7 +61,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
     { type: 'email', value: email, name: 'email', label: 'Email' },
     { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
     { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
-    { type: 'select', value: permissionLevel, name: 'permissionLevel', label: 'Access Level' },  
+    { type: 'select', value: adminLevel, name: 'adminLevel', label: 'Admin Level' },  
     { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
     { type: 'text', value: salary, name: 'salary', label: 'Salary' },
     { type: 'text', value: location, name: 'location', label: 'Location' },

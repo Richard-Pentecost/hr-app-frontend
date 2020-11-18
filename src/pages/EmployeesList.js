@@ -8,8 +8,6 @@ import '../style/EmployeesList.scss';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   const [users, setUsers] = useState([]);
-  //hardcoded id below until database is up
-  const [idArray, setIdArray] = useState(["c0a68046-617e-4927-bd9b-c14ce8f497e1", "18712a4f-744e-4e7c-a191-395fa832518b", "6d56e5bd-bba7-4026-9e3d-383f2c2f8d4d"]);
   
   const handleClick = (id) => {
     setCurrentEmployeeId(id);
@@ -20,7 +18,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     e.stopPropagation();
 
     try {
-      const response = await axios.delete(`${URL}/user/${id}`);
+      const response = await axios.delete(`${URL}/userdb/${id}`);
       console.log(response);
       setCurrentEmployeeId(id);
     } catch (error) {
@@ -30,7 +28,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
-        const response = await axios.get(`${URL}/user/all`);
+        const response = await axios.get(`${URL}/userdb`);
 	
         setUsers(response.data.users);
         console.log(users)
@@ -58,13 +56,13 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
           <Table.CellHeader></Table.CellHeader>
         </Table.Row>
           {users.map((user, index)=>(
-          <Table.Row onClick={(id)=>handleClick(idArray[index])} className='tableRow' id={idArray[index]} key={index}>
+          <Table.Row onClick={()=>handleClick(user.userId)} className='tableRow' key={index}>
             <Table.Cell>{user.firstName}</Table.Cell>
             <Table.Cell>{user.surname}</Table.Cell>
             <Table.Cell>{user.email}</Table.Cell>
             <Table.Cell>{user.role}</Table.Cell>
             <Table.Cell>{user.location}</Table.Cell>
-            <Table.Cell><button onClick={(e)=>deleteHandler(e, idArray[index])} id={idArray[index]}>Delete</button></Table.Cell>
+            <Table.Cell><button onClick={(e)=>deleteHandler(e, user.userId)}>Delete</button></Table.Cell>
           </Table.Row>))}
       </Table>
     </div>

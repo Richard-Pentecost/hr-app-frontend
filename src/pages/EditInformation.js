@@ -13,7 +13,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-                const response = await axios.get(`${URL}/user/${id}`);
+                const response = await axios.get(`${URL}/userdb/${id}`);
                 setUser(response.data.user);
                 console.log(user)
 			} catch (error) {
@@ -43,7 +43,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.put(`${URL}/user/${id}`, user );
+            const response = await axios.put(`${URL}/userdb/${id}`, user );
             console.log(response.data);
             setUser(response.data.user);
 
@@ -53,7 +53,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
             console.log(error.response);
         }
     }
-    const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, permissionLevel, salary } = user;
+    const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, adminLevel, salary } = user;
     const formArr = [
         { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
         { type: 'text', value: surname, name: 'surname', label: 'Surname' },
@@ -61,7 +61,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
         { type: 'email', value: email, name: 'email', label: 'Email' },
         { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
         { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
-        { type: 'select', value: permissionLevel, name: 'permissionLevel', label: 'Permission Level' },  
+        { type: 'select', value: adminLevel, name: 'adminLevel', label: 'Admin Level' },  
         { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
         { type: 'text', value: salary, name: 'salary', label: 'Salary' },
         { type: 'text', value: location, name: 'location', label: 'Location' },
@@ -70,6 +70,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
     ];
 
     return (
+
         <>
             <BreadcrumbBar page='Edit Information' />
             <div className='headingContainer'>
@@ -84,6 +85,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
                 />
             </div>
         </>
+
     );
 }
 

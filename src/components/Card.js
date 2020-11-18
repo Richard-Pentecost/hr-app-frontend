@@ -43,8 +43,8 @@ const Card = ({user, link}) => {
                 <span className='cardInformation__info'>{moment(user.doB).format('Do MMM YYYY')}</span>
             </div>
             <div className='cardInformation'>
-                <label className='cardInformation__label'>Access Level: </label>
-                <span className='cardInformation__info'>{user.permissionLevel}</span>
+                <label className='cardInformation__label'>Admin Level: </label>
+                <span className='cardInformation__info'>{user.adminLevel}</span>
             </div>
             <div className='cardInformation'>
                 <label className='cardInformation__label'>Next of Kin: </label>

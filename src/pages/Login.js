@@ -23,7 +23,7 @@ const Login = ({ setIsLoggedIn, setId }) => {
     const submitHandler = async (event) => {
         event.preventDefault();
         const loginData = {
-            username: email,
+            email: email,
             password,
         }
 
