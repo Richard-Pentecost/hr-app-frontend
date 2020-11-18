@@ -13,7 +13,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-                const response = await axios.get(`${URL}/userdb/${id}`);
+                const response = await axios.get(`${URL}/user/${id}`);
                 setUser(response.data.user);
                 console.log(user)
 			} catch (error) {
@@ -43,7 +43,7 @@ const EditInformation = ({history, isLoggedIn, id, user, setUser}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.put(`${URL}/userdb/${id}`, user );
+            const response = await axios.put(`${URL}/user/${id}`, user );
             console.log(response.data);
             setUser(response.data.user);
 

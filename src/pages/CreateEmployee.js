@@ -43,7 +43,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${URL}/userdb`, newUser);
+      const response = await axios.post(`${URL}/user`, newUser);
       setCurrentEmployeeId(response.data.user.userId);
       setNewUser({initialState});
       history.push('/view-employee');

@@ -14,7 +14,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-                const response = await axios.get(`${URL}/userdb/${currentEmployeeId}`);
+                const response = await axios.get(`${URL}/user/${currentEmployeeId}`);
                 setCurrentEmployee(response.data.user);
 			} catch (error) {
 				console.log(error);
@@ -43,7 +43,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.put(`${URL}/userdb/${currentEmployeeId}`, currentEmployee );
+            const response = await axios.put(`${URL}/user/${currentEmployeeId}`, currentEmployee );
             setCurrentEmployee(response.data.user);
 
             history.push('/view-employee');

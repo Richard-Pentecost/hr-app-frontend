@@ -18,7 +18,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     e.stopPropagation();
 
     try {
-      const response = await axios.delete(`${URL}/userdb/${id}`);
+      const response = await axios.delete(`${URL}/user/${id}`);
       console.log(response);
       setCurrentEmployeeId(id);
     } catch (error) {
@@ -28,7 +28,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
-        const response = await axios.get(`${URL}/userdb`);
+        const response = await axios.get(`${URL}/user`);
 	
         setUsers(response.data.users);
         console.log(users)
