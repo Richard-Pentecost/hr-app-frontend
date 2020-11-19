@@ -3,13 +3,17 @@ import Card from '../components/Card';
 import axios from 'axios';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
+import TokenManager from '../utils/token-manager';
 
-const Home = ({id, user, setUser}) => {
+const Home = ({user, setUser}) => {
 
 	useEffect(() => {
 		const fetchUser = async () => {
+			const decodedToken = TokenManager.getTokenPayload();
+			const id = decodedToken.unique_name;
 			try {
 				const response = await axios.get(`${URL}/user/${id}`);
+				console.log(response.data.user);
 				setUser(response.data.user);
 			} catch (error) {
 				console.log(error);
@@ -17,11 +21,10 @@ const Home = ({id, user, setUser}) => {
 		}
 		fetchUser();
 
-	}, [setUser, id]);
+	}, [setUser]);
 
-		
 	let userInfo = null;
-	if (user.firstName && user.role && user.email && user.telephone) {
+	if (user) {
 		userInfo = ( 
 			<div className='userInfo__header'>
 				<h1 className='userInfo__headerText'>Welcome {user.firstName}!</h1>
@@ -30,9 +33,8 @@ const Home = ({id, user, setUser}) => {
 				<h2 className='userInfo__text'>{user.telephone}</h2>
 			</div>
 		);
-	}
-
-
+	};
+	
 	return (
 		<>
 		<div className='userInfo'>

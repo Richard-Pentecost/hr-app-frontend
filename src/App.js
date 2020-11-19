@@ -10,26 +10,33 @@ import CreateEmployee from './pages/CreateEmployee';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import { ThemeProvider } from '@material-ui/core/styles';
+import TokenManager from './utils/token-manager';
 import theme from "./resources/theme";
 import './style/App.scss';
 
 const App = () => {
-	const [isLoggedIn, setIsLoggedIn] = useState(false);
-	const [id, setId] = useState('');
+	// const [isLoggedIn, setIsLoggedIn] = useState(false);
+	const [token, setToken] = useState(TokenManager.isTokenValid() ? TokenManager.getTokenPayload() : null);
 	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', permissionsLevel:'', location:''})
 	const [currentEmployeeId, setCurrentEmployeeId] = useState('');
+
+
+	const isLoggedIn = () => {
+    return Boolean(token) && TokenManager.isTokenValid();
+	}
+	
 	return (
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
 				<div className="app">
-					<Navbar setIsLoggedIn={setIsLoggedIn} isLoggedIn={isLoggedIn} />
+					<Navbar authenticate={isLoggedIn} token={token} />
 					<Switch>
 						<Route
 							exact 
 							path='/' 
-							render={props => (isLoggedIn ?
+							render={props => (isLoggedIn() ?
 								<Redirect to='/home' /> : 
-								<Login {...props} setIsLoggedIn={setIsLoggedIn} setId={setId} />
+								<Login {...props} setToken={setToken} />
 							)}
 						/>
 
@@ -37,57 +44,57 @@ const App = () => {
 							exact
 							path="/home"
 							component={Home}
-							isLoggedIn={isLoggedIn}
-							id={id}
 							user={user} 
 							setUser={setUser}
+							currentEmployeeId={currentEmployeeId}
+							authenticate={isLoggedIn}
 						/>
 
 						<AuthRoute 
 							exact
 							path='/edit-information'
 							component={EditInformation}
-							isLoggedIn={isLoggedIn}
-							id={id}
 							user={user} 
+							currentEmployeeId={currentEmployeeId}
 							setUser={setUser}
+							authenticate={isLoggedIn}
 						/>
 
 						<AuthRoute 
 							exact
 							path='/employees-list'
 							component={EmployeesList}
-							isLoggedIn={isLoggedIn}
+							authenticate={isLoggedIn}
 							setCurrentEmployeeId = {setCurrentEmployeeId}
 							currentEmployeeId = {currentEmployeeId}
 						/>
-
+					
 						<AuthRoute 
 							exact
 							path='/create-employee'
 							component={CreateEmployee}
-							isLoggedIn={isLoggedIn}
-							id={id}
+							authenticate={isLoggedIn}
 							user={user} 
 							setUser={setUser}
+							currentEmployeeId={currentEmployeeId}
 							setCurrentEmployeeId = {setCurrentEmployeeId}
 						/>
-
+						
 						<AuthRoute 
 							exact
 							path='/view-employee'
 							component={ViewEmployee}
-							isLoggedIn={isLoggedIn}
+							authenticate={isLoggedIn}
 							currentEmployeeId = {currentEmployeeId}
 						/>
-
+						
 						<AuthRoute 
 							exact
 							path='/edit-employee'
 							component={EditEmployee}
-							isLoggedIn={isLoggedIn}
+							authenticate={isLoggedIn}
 							currentEmployeeId = {currentEmployeeId}
-						/>
+						/> 
 					</Switch>
 				</div>
 			</BrowserRouter>

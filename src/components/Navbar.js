@@ -2,9 +2,10 @@ import React, { useState , useEffect, useCallback} from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../skillsForCareLogo.png';
 import Dropdown from './Dropdown';
+import TokenManager from '../utils/token-manager';
 import '../style/Navbar.scss';
 
-const Navbar = props => {
+const Navbar = ({authenticate, token}) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const container = React.createRef();
 
@@ -26,13 +27,14 @@ const Navbar = props => {
 	}
 
 	const handleLogout = () => {
-		props.setIsLoggedIn(false);
+		// props.setIsLoggedIn(false);
+		TokenManager.removeToken(token);
 	};
 
 	return (
 		<div className='navbar'>
 			<div className='menuBar'>
-				{props.isLoggedIn ? (
+				{authenticate() ? (
 					<div ref={container} className='menuBar__menu' onClick={handleShowDropdown}>
 						<span>Menu</span>
 						{showDropdown && <Dropdown onLogout={handleLogout} />}

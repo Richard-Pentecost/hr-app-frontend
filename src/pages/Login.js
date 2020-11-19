@@ -3,9 +3,10 @@ import axios from 'axios';
 import { URL } from '../utils/Constants';
 import Form from '../components/Form';
 import Heading from '../components/Heading';
+import TokenManager from '../utils/token-manager';
 import '../style/Login.scss';
 
-const Login = ({ setIsLoggedIn, setId }) => {
+const Login = ({ setToken }) => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
@@ -28,10 +29,12 @@ const Login = ({ setIsLoggedIn, setId }) => {
         }
 
         try {
-            const response = await axios.post(`${URL}/login`, loginData);
-            setId(response.data.id);
-            setIsLoggedIn(true);
+            const response = await axios.post(`${URL}/login/authenticate`, loginData);
+            TokenManager.setToken(response.data.token);
+            const token = TokenManager.getTokenPayload();
+            setToken(token);
         } catch (error) {
+            console.log(error);
             const { data } = error.response
             let errorMessage;
             data.message ? errorMessage = data.message : errorMessage = data.title;

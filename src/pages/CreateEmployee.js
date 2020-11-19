@@ -14,7 +14,7 @@ const initialState = {
   role: '',
   address: '',
   telephone:'',
-  doB:new Date(),
+  doB: new Date(),
   nextOfKin:'',
   salary:'',
   location: '',
