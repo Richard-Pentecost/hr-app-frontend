@@ -1,10 +1,11 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
-import { Link, withRouter } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 import Table from '@govuk-react/table';
-import Breadcrumbs from '@govuk-react/breadcrumbs';
+import BreadcrumbBar from '../components/BreadcrumbBar';
 import { URL } from '../utils/Constants';
 import '../style/EmployeesList.scss';
+import Heading from '../components/Heading';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   const [users, setUsers] = useState([]);
@@ -40,13 +41,12 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     }, [currentEmployeeId]);
 
   return (
-    <div className='employeeList'>
-      <Breadcrumbs >
-        <Breadcrumbs.Link as={Link} to='/home' className='breadcrumbs'>Home</Breadcrumbs.Link>
-        View Employees
-      </Breadcrumbs>
-      <Table caption="View All Employees">
-      
+    <>
+      <BreadcrumbBar page='View Employees'/>
+      <div className='headingContainer'>
+      <Heading>View Employees</Heading>
+      </div>
+      <Table className='employeeTable'>
         <Table.Row>
           <Table.CellHeader>First Name</Table.CellHeader>
           <Table.CellHeader>Surname</Table.CellHeader>
@@ -65,7 +65,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
             <Table.Cell><button onClick={(e)=>deleteHandler(e, user.userId)}>Delete</button></Table.Cell>
           </Table.Row>))}
       </Table>
-    </div>
+    </>
   );
 };
 
