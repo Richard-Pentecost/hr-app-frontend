@@ -34,7 +34,7 @@ const Home = ({user, setUser}) => {
 			</div>
 		);
 	};
-	
+
 	return (
 		<>
 		<div className='userInfo'>

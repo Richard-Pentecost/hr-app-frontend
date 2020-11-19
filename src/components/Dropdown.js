@@ -23,7 +23,7 @@ const Dropdown = (props) => {
 			</div>
 			<div className='dropdownList__item'>
 				<Link to='/employees-list' className='dropdownList__link'>
-					List employees
+					View Employees
 				</Link>
 			</div>
 			<div className='dropdownList__item'>

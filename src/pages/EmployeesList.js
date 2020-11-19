@@ -43,9 +43,9 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     <div className='employeeList'>
       <Breadcrumbs >
         <Breadcrumbs.Link as={Link} to='/home' className='breadcrumbs'>Home</Breadcrumbs.Link>
-        Employees List
+        View Employees
       </Breadcrumbs>
-      <Table caption="List of Employees">
+      <Table caption="View All Employees">
       
         <Table.Row>
           <Table.CellHeader>First Name</Table.CellHeader>
