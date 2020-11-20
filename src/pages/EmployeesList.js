@@ -9,6 +9,7 @@ import Heading from '../components/Heading';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   const [users, setUsers] = useState([]);
+  const [deleteFlag, setDeleteFlag] = useState(false);
   
   const handleClick = (id) => {
     setCurrentEmployeeId(id);
@@ -17,17 +18,20 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 
   const deleteHandler = async (e, id) => {
     e.stopPropagation();
-
+    console.log(currentEmployeeId);
     try {
       const response = await axios.delete(`${URL}/user/${id}`);
       console.log(response);
-      setCurrentEmployeeId(id);
+      setDeleteFlag(!deleteFlag)
+      
     } catch (error) {
       console.log(error);
     }
   };
 
   useEffect(() => {
+    console.log('*********************UseEffect*************');
+    console.log(currentEmployeeId);
 		const fetchAllUsers = async () => {
 			try {
         
@@ -40,13 +44,13 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 			}
 		};
 		fetchAllUsers();
-    }, [currentEmployeeId]);
+    }, [deleteFlag]);
 
   return (
     <>
       <BreadcrumbBar page='View Employees'/>
       <div className='headingContainer'>
-      <Heading>View Employees</Heading>
+        <Heading>View Employees</Heading>
       </div>
       <div className='employeeTable'>
         <Table>
