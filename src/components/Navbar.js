@@ -5,7 +5,7 @@ import Dropdown from './Dropdown';
 import TokenManager from '../utils/token-manager';
 import '../style/Navbar.scss';
 
-const Navbar = ({authenticate, token}) => {
+const Navbar = ({authenticate, token, adminLevel}) => {
 	const [showDropdown, setShowDropdown] = useState(false);
 	const container = React.createRef();
 
@@ -37,7 +37,7 @@ const Navbar = ({authenticate, token}) => {
 				{authenticate() ? (
 					<div ref={container} className='menuBar__menu' onClick={handleShowDropdown}>
 						<span>Menu</span>
-						{showDropdown && <Dropdown onLogout={handleLogout} />}
+						{showDropdown && <Dropdown onLogout={handleLogout} adminLevel={adminLevel} />}
 					</div>
 				) : null }
 			</div>

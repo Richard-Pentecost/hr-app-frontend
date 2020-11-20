@@ -1,4 +1,4 @@
-import React, { useEffect, } from 'react';
+import React, { useEffect, useState } from 'react';
 import { URL } from '../utils/Constants';
 import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
@@ -10,6 +10,7 @@ import { withRouter } from 'react-router';
 import '../style/CreateEmployee.scss';
 
 const EditInformation = ({history, user, setUser}) => {
+    const [confirmPassword, setConfirmPassword] = useState('');
 
 	useEffect(() => {
         const fetchUser = async () => {
@@ -27,18 +28,20 @@ const EditInformation = ({history, user, setUser}) => {
     
 
     const handleInputChange = event => {
+        
         if (event.target === undefined) {
             setUser({
                 ...user,
                 'doB': event,
             })
+        } else if (event.target.name === 'confirmPassword') {
+            setConfirmPassword(event.target.value);
         } else {
             setUser({
                 ...user,
                 [event.target.name]: event.target.value}
             );
         }
-        
     }
 
     const handleSubmit = async (event) => {
@@ -54,19 +57,16 @@ const EditInformation = ({history, user, setUser}) => {
 
     let formArr = null;
     if (user.firstName !== '') {
-        const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, adminLevel, salary } = user;
+        const { firstName, surname, telephone, doB, nextOfKin, address, password  } = user;
         formArr = [
             { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
             { type: 'text', value: surname, name: 'surname', label: 'Surname' },
-            { type: 'text', value: role, name: 'role', label: 'Role' },
-            { type: 'email', value: email, name: 'email', label: 'Email' },
             { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
             { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
-            { type: 'select', value: adminLevel, name: 'adminLevel', label: 'Admin Level' },  
             { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
-            { type: 'text', value: salary, name: 'salary', label: 'Salary' },
-            { type: 'text', value: location, name: 'location', label: 'Location' },
             { type: 'text', value: address, name: 'address', label: 'Address' },
+            { type: 'password', value: password, name: 'password', label: 'Password' },
+            { type: 'password', value: confirmPassword, name: 'confirmPassword', label: 'Confirm Password' },
         ];
     };
 
