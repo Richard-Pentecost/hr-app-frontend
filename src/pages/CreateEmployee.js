@@ -12,14 +12,12 @@ const initialState = {
   surname: '',
   email: '',
   role: '',
-  address: '',
-  telephone:'',
-  doB: new Date(),
-  nextOfKin:'',
   salary:'',
   location: '',
-  manager: '',
+  managerEmail: '',
   adminLevel: '',
+  password: '',
+  confirmPassword:''
 };
 
 const CreateEmployee = ({history, setCurrentEmployeeId}) => {
@@ -43,29 +41,31 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-      const response = await axios.post(`${URL}/user`, newUser);
+      const {confirmPassword, ...userObj}  = newUser;
+      console.log(userObj);
+      const response = await axios.post(`${URL}/user`, userObj);
       setCurrentEmployeeId(response.data.user.userId);
       setNewUser({initialState});
       history.push('/view-employee');
     } catch (error) {
-
+        console.log(error);
     }
     
   }
 
-  const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, adminLevel, salary } = newUser;
+  const { firstName, surname, email , role, location, adminLevel, salary, password, managerEmail, confirmPassword } = newUser;
   const formArr = [
     { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
     { type: 'text', value: surname, name: 'surname', label: 'Surname' },
     { type: 'text', value: role, name: 'role', label: 'Role' },
     { type: 'email', value: email, name: 'email', label: 'Email' },
-    { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
-    { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
+    { type: 'email', value: managerEmail, name: 'managerEmail', label: 'Manager Email' },
     { type: 'select', value: adminLevel, name: 'adminLevel', label: 'Admin Level' },  
-    { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
     { type: 'text', value: salary, name: 'salary', label: 'Salary' },
     { type: 'text', value: location, name: 'location', label: 'Location' },
-    { type: 'text', value: address, name: 'address', label: 'Address' },
+    { type: 'password', value: password, name: 'password', label: 'Password' },
+    { type: 'password', value: confirmPassword, name: 'confirmPassword', label: 'Confirm Password' },
+
   ];
 
   return (
