@@ -11,7 +11,7 @@ const BreadcrumbBar = ({page, prevPages}) => {
       <Breadcrumbs>
         <Breadcrumbs.Link as={Link} to='/home' className='breadcrumbs'>Home</Breadcrumbs.Link>
         {prevPages && prevPages.map(({name, link}) => (
-          <Breadcrumbs.Link as={Link} to={link} className='breadcrumbs'>{name} </Breadcrumbs.Link>
+          <Breadcrumbs.Link as={Link} to={link} key={name} className='breadcrumbs'>{name} </Breadcrumbs.Link>
         ))}
         {page}
       </Breadcrumbs>
