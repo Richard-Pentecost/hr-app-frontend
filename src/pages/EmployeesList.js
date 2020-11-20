@@ -9,6 +9,7 @@ import Heading from '../components/Heading';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   const [users, setUsers] = useState([]);
+  const [deleteFlag, setDeleteFlag] = useState(false);
   
   const handleClick = (id) => {
     setCurrentEmployeeId(id);
@@ -21,7 +22,8 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     try {
       const response = await axios.delete(`${URL}/user/${id}`);
       console.log(response);
-      setCurrentEmployeeId('');
+      setDeleteFlag(!deleteFlag)
+      
     } catch (error) {
       console.log(error);
     }
@@ -42,7 +44,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 			}
 		};
 		fetchAllUsers();
-    }, [currentEmployeeId]);
+    }, [deleteFlag]);
 
   return (
     <>
