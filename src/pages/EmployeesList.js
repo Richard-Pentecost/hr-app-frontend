@@ -17,16 +17,19 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 
   const deleteHandler = async (e, id) => {
     e.stopPropagation();
-
+    console.log(currentEmployeeId);
     try {
       const response = await axios.delete(`${URL}/user/${id}`);
       console.log(response);
-      setCurrentEmployeeId(id);
+      setCurrentEmployeeId('');
     } catch (error) {
       console.log(error);
     }
   };
+
   useEffect(() => {
+    console.log('*********************UseEffect*************');
+    console.log(currentEmployeeId);
 		const fetchAllUsers = async () => {
 			try {
         const response = await axios.get(`${URL}/user`);
