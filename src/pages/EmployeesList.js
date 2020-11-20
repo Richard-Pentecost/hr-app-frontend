@@ -47,7 +47,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     <>
       <BreadcrumbBar page='View Employees'/>
       <div className='headingContainer'>
-      <Heading>View Employees</Heading>
+        <Heading>View Employees</Heading>
       </div>
       <div className='employeeTable'>
         <Table>
