@@ -16,16 +16,16 @@ const Dropdown = ({onLogout, adminLevel}) => {
 					Edit Information
 				</Link>
 			</div>
-			{adminLevel== 'Admin' && 			
+			{(adminLevel === 'Admin') && 			
 			<div className='dropdownList__item'>
 				<Link to='/create-employee' className='dropdownList__link'>
 					Create Employee
 				</Link>
 			</div>}
-			{adminLevel=='Admin' && 
+			{(adminLevel !== 'Employee') && 
 			<div className='dropdownList__item'>
 				<Link to='/employees-list' className='dropdownList__link'>
-					View Employees
+					View Employees { adminLevel === 'Manager' && 'You Manage' }
 				</Link>
 			</div>}
 			

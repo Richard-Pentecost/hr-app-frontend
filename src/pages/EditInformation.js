@@ -28,20 +28,19 @@ const EditInformation = ({history, user, setUser}) => {
     
 
     const handleInputChange = event => {
-        if (event.target.name === 'confirmPassword') {
+        
+        if (event.target === undefined) {
+            setUser({
+                ...user,
+                'doB': event,
+            })
+        } else if (event.target.name === 'confirmPassword') {
             setConfirmPassword(event.target.value);
         } else {
-            if (event.target === undefined) {
-                setUser({
-                    ...user,
-                    'doB': event,
-                })
-            } else {
-                setUser({
-                    ...user,
-                    [event.target.name]: event.target.value}
-                );
-            }
+            setUser({
+                ...user,
+                [event.target.name]: event.target.value}
+            );
         }
     }
 

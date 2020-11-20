@@ -26,9 +26,11 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
       console.log(error);
     }
   };
+
   useEffect(() => {
 		const fetchAllUsers = async () => {
 			try {
+        
         const response = await axios.get(`${URL}/user`);
 	
         setUsers(response.data.users);
