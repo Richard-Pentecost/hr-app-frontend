@@ -2,7 +2,7 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/Dropdown.scss';
 
-const Dropdown = (props) => {
+const Dropdown = ({onLogout, adminLevel}) => {
 	
 	return (
 		<div className='dropdownList'>
@@ -16,18 +16,21 @@ const Dropdown = (props) => {
 					Edit Information
 				</Link>
 			</div>
+			{adminLevel== 'Admin' && 			
 			<div className='dropdownList__item'>
 				<Link to='/create-employee' className='dropdownList__link'>
 					Create Employee
 				</Link>
-			</div>
+			</div>}
+			{adminLevel=='Admin' && 
 			<div className='dropdownList__item'>
 				<Link to='/employees-list' className='dropdownList__link'>
 					View Employees
 				</Link>
-			</div>
+			</div>}
+			
 			<div className='dropdownList__item'>
-				<Link to='/' className='dropdownList__link' onClick={props.onLogout}>
+				<Link to='/' className='dropdownList__link' onClick={onLogout}>
 					Logout
 				</Link>
 			</div>

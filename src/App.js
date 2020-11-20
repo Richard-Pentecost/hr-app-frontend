@@ -15,9 +15,9 @@ import theme from "./resources/theme";
 import './style/App.scss';
 
 const App = () => {
-	// const [isLoggedIn, setIsLoggedIn] = useState(false);
+
 	const [token, setToken] = useState(TokenManager.isTokenValid() ? TokenManager.getTokenPayload() : null);
-	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', permissionsLevel:'', location:''})
+	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', adminLevel:'', location:''})
 	const [currentEmployeeId, setCurrentEmployeeId] = useState('');
 
 
@@ -29,7 +29,7 @@ const App = () => {
 		<ThemeProvider theme={theme}>
 			<BrowserRouter>
 				<div className="app">
-					<Navbar authenticate={isLoggedIn} token={token} />
+					<Navbar authenticate={isLoggedIn} token={token} adminLevel={user.adminLevel} />
 					<Switch>
 						<Route
 							exact 
