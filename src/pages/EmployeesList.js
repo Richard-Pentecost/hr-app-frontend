@@ -42,7 +42,6 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 			try { 
         const response = await axios.get(`${URL}/user`);
         setUsers(response.data.users);
-        setFilteredUsers(response.data.users);
 			} catch (error) {
 				console.log(error);
 			}
@@ -56,7 +55,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
         user.surname.toLowerCase().includes(searchField.toLowerCase());
       });
       setFilteredUsers(filtered);
-    }, [searchField]);
+    }, [searchField, users]);
 
   return (
     <>
