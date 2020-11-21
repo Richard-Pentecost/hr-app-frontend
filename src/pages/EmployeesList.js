@@ -10,6 +10,8 @@ import Heading from '../components/Heading';
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   const [users, setUsers] = useState([]);
   const [deleteFlag, setDeleteFlag] = useState(false);
+  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [searchField, setSearchField] = useState('');
   
   const handleClick = (id) => {
     setCurrentEmployeeId(id);
@@ -29,16 +31,18 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     }
   };
 
+  const onSearchChange = (e) => {
+    setSearchField(e.target.value); 
+  };
+
   useEffect(() => {
     console.log('*********************UseEffect*************');
     console.log(currentEmployeeId);
 		const fetchAllUsers = async () => {
-			try {
-        
+			try { 
         const response = await axios.get(`${URL}/user`);
-	
         setUsers(response.data.users);
-        console.log(users)
+        setFilteredUsers(response.data.users);
 			} catch (error) {
 				console.log(error);
 			}
@@ -46,12 +50,25 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 		fetchAllUsers();
     }, [deleteFlag]);
 
+    useEffect(() => {
+      let filtered = users.filter(user => {
+        return user.firstName.toLowerCase().includes(searchField.toLowerCase()) ||
+        user.surname.toLowerCase().includes(searchField.toLowerCase());
+      });
+      setFilteredUsers(filtered);
+    }, [searchField]);
+
   return (
     <>
       <BreadcrumbBar page='View Employees'/>
       <div className='headingContainer'>
         <Heading>View Employees</Heading>
       </div>
+      <input
+		    type='search'
+		    placeholder='Search Employees'
+		    onChange={onSearchChange} 
+		  />
       <div className='employeeTable'>
         <Table>
           <Table.Row>
@@ -62,7 +79,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
             <Table.CellHeader>Location</Table.CellHeader>
             <Table.CellHeader></Table.CellHeader>
           </Table.Row>
-            {users.map((user, index)=>(
+            {filteredUsers.map((user, index)=>(
             <Table.Row onClick={()=>handleClick(user.userId)} className='tableRow' key={index}>
               <Table.Cell>{user.firstName}</Table.Cell>
               <Table.Cell>{user.surname}</Table.Cell>
