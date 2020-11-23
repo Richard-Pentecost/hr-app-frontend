@@ -2,7 +2,7 @@ import React, { useEffect } from 'react';
 import Card from '../components/Card';
 import axios from 'axios';
 import "../style/Home.scss";
-import { localURL, URL } from '../utils/Constants';
+import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 
 const Home = ({user, setUser}) => {
@@ -13,7 +13,7 @@ const Home = ({user, setUser}) => {
 			const id = decodedToken.unique_name;
 			try {
 				const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-				const response = await axios.get(`${localURL}/user/${id}`, axiosHeaders);
+				const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
 				console.log(response.data.user);
 				setUser(response.data.user);
 			} catch (error) {

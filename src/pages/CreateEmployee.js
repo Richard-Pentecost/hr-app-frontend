@@ -3,7 +3,7 @@ import Heading from '../components/Heading';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Form from '../components/Form';
 import '../style/CreateEmployee.scss';
-import { localURL, URL } from '../utils/Constants';
+import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import axios from 'axios';
 import { withRouter } from 'react-router';
@@ -45,7 +45,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
       const {confirmPassword, ...userObj}  = newUser;
       console.log(userObj);
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-      const response = await axios.post(`${localURL}/user`, userObj, axiosHeaders);
+      const response = await axios.post(`${URL}/user`, userObj, axiosHeaders);
       setCurrentEmployeeId(response.data.user.userId);
       setNewUser({initialState});
       history.push('/view-employee');

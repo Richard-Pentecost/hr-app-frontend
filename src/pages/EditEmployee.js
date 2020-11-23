@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { localURL, URL } from '../utils/Constants';
+import { URL } from '../utils/Constants';
 import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
@@ -16,7 +16,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
 		const fetchUser = async () => {
 			try {
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-                const response = await axios.get(`${localURL}/user/${currentEmployeeId}`, axiosHeaders);
+                const response = await axios.get(`${URL}/user/${currentEmployeeId}`, axiosHeaders);
                 setCurrentEmployee(response.data.user);
 			} catch (error) {
 				console.log(error);
@@ -46,7 +46,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
         event.preventDefault();
         try {
             const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-            const response = await axios.put(`${localURL}/user/${currentEmployeeId}`, currentEmployee, axiosHeaders );
+            const response = await axios.put(`${URL}/user/${currentEmployeeId}`, currentEmployee, axiosHeaders );
             setCurrentEmployee(response.data.user);
 
             history.push('/view-employee');

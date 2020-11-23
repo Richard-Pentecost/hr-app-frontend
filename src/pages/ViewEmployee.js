@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 import axios from 'axios';
 import "../style/Home.scss";
-import { localURL, URL } from '../utils/Constants';
+import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
@@ -13,7 +13,7 @@ const ViewEmployee = ({currentEmployeeId}) => {
 		const fetchUser = async () => {
 			try {
 				const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-				const response = await axios.get(`${localURL}/user/${currentEmployeeId}`, axiosHeaders);
+				const response = await axios.get(`${URL}/user/${currentEmployeeId}`, axiosHeaders);
 				setCurrentEmployee(response.data.user);
 			} catch (error) {
 				console.log(error);

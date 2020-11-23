@@ -3,7 +3,7 @@ import axios from 'axios';
 import { withRouter } from 'react-router-dom';
 import Table from '@govuk-react/table';
 import BreadcrumbBar from '../components/BreadcrumbBar';
-import { localURL, URL } from '../utils/Constants';
+import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
@@ -24,7 +24,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
     console.log(currentEmployeeId);
     try {
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken(), adminLevel }};
-      const response = await axios.delete(`${localURL}/user/${id}`, axiosHeaders);
+      const response = await axios.delete(`${URL}/user/${id}`, axiosHeaders);
       console.log(response);
       setDeleteFlag(!deleteFlag)
       
@@ -49,7 +49,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
             email,
           },
         };
-        const response = await axios.get(`${localURL}/user`, axiosHeaders);
+        const response = await axios.get(`${URL}/user`, axiosHeaders);
         setUsers(response.data.users);
 			} catch (error) {
 				console.log(error);
