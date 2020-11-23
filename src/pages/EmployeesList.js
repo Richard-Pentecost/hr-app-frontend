@@ -50,9 +50,9 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     }, [deleteFlag]);
 
     useEffect(() => {
-      let filtered = users.filter(user => {
-        return user.firstName.toLowerCase().includes(searchField.toLowerCase()) ||
-        user.surname.toLowerCase().includes(searchField.toLowerCase());
+      const filtered = users.filter(user => {
+        const name = `${user.firstName.toLowerCase()} ${user.surname.toLowerCase()}`;
+        return name.includes(searchField.toLowerCase());
       });
       setFilteredUsers(filtered);
     }, [searchField, users]);
