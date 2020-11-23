@@ -12,7 +12,8 @@ const Home = ({user, setUser}) => {
 			const decodedToken = TokenManager.getTokenPayload();
 			const id = decodedToken.unique_name;
 			try {
-				const response = await axios.get(`${URL}/user/${id}`);
+				const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+				const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
 				console.log(response.data.user);
 				setUser(response.data.user);
 			} catch (error) {

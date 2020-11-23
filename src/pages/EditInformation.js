@@ -15,9 +15,10 @@ const EditInformation = ({history, user, setUser}) => {
 	useEffect(() => {
         const fetchUser = async () => {
             try {
+                const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
                 const decodedToken = TokenManager.getTokenPayload();
                 const id = decodedToken.unique_name;
-                const response = await axios.get(`${URL}/user/${id}`);
+                const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
                 setUser(response.data.user);
             } catch (error) {
                 console.log(error);

@@ -4,6 +4,7 @@ import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import Form from '../components/Form';
+import TokenManager from '../utils/token-manager';
 import { withRouter } from 'react-router';
 
 import '../style/CreateEmployee.scss';
@@ -14,7 +15,8 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
-                const response = await axios.get(`${URL}/user/${currentEmployeeId}`);
+                const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+                const response = await axios.get(`${URL}/user/${currentEmployeeId}`, axiosHeaders);
                 setCurrentEmployee(response.data.user);
 			} catch (error) {
 				console.log(error);
@@ -43,7 +45,8 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
-            const response = await axios.put(`${URL}/user/${currentEmployeeId}`, currentEmployee );
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            const response = await axios.put(`${URL}/user/${currentEmployeeId}`, currentEmployee, axiosHeaders );
             setCurrentEmployee(response.data.user);
 
             history.push('/view-employee');

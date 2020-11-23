@@ -4,10 +4,11 @@ import { withRouter } from 'react-router-dom';
 import Table from '@govuk-react/table';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import { URL } from '../utils/Constants';
+import TokenManager from '../utils/token-manager';
 import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
 
-const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
+const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel}) => {
   const [users, setUsers] = useState([]);
   const [deleteFlag, setDeleteFlag] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -22,7 +23,8 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     e.stopPropagation();
     console.log(currentEmployeeId);
     try {
-      const response = await axios.delete(`${URL}/user/${id}`);
+      const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken(), adminLevel }};
+      const response = await axios.delete(`${URL}/user/${id}`, axiosHeaders);
       console.log(response);
       setDeleteFlag(!deleteFlag)
       
@@ -36,18 +38,25 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   };
 
   useEffect(() => {
-    console.log('*********************UseEffect*************');
-    console.log(currentEmployeeId);
+    // console.log('*********************UseEffect*************');
+    // console.log(currentEmployeeId);
 		const fetchAllUsers = async () => {
 			try { 
-        const response = await axios.get(`${URL}/user`);
+        const axiosHeaders = { 
+          headers: { 
+            Authorization: 'Bearer ' + TokenManager.getToken(),
+            adminLevel,
+            email,
+          },
+        };
+        const response = await axios.get(`${URL}/user`, axiosHeaders);
         setUsers(response.data.users);
 			} catch (error) {
 				console.log(error);
 			}
 		};
 		fetchAllUsers();
-    }, [deleteFlag]);
+    }, [deleteFlag, adminLevel, email]);
 
     useEffect(() => {
       const filtered = users.filter(user => {
