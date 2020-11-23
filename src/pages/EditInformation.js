@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { URL } from '../utils/Constants';
+import { localURL, URL } from '../utils/Constants';
 import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
@@ -15,9 +15,10 @@ const EditInformation = ({history, user, setUser}) => {
 	useEffect(() => {
         const fetchUser = async () => {
             try {
+                const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
                 const decodedToken = TokenManager.getTokenPayload();
                 const id = decodedToken.unique_name;
-                const response = await axios.get(`${URL}/user/${id}`);
+                const response = await axios.get(`${localURL}/user/${id}`, axiosHeaders);
                 setUser(response.data.user);
             } catch (error) {
                 console.log(error);
