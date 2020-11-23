@@ -65,6 +65,8 @@ const App = () => {
 							path='/employees-list'
 							component={EmployeesList}
 							authenticate={isLoggedIn}
+							email={user.email}
+							adminLevel={user.adminLevel}
 							setCurrentEmployeeId = {setCurrentEmployeeId}
 							currentEmployeeId = {currentEmployeeId}
 						/>

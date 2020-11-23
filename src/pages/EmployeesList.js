@@ -8,7 +8,7 @@ import TokenManager from '../utils/token-manager';
 import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
 
-const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
+const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel}) => {
   const [users, setUsers] = useState([]);
   const [deleteFlag, setDeleteFlag] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -23,7 +23,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
     e.stopPropagation();
     console.log(currentEmployeeId);
     try {
-      const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+      const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken(), adminLevel }};
       const response = await axios.delete(`${localURL}/user/${id}`, axiosHeaders);
       console.log(response);
       setDeleteFlag(!deleteFlag)
@@ -38,11 +38,17 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
   };
 
   useEffect(() => {
-    console.log('*********************UseEffect*************');
-    console.log(currentEmployeeId);
+    // console.log('*********************UseEffect*************');
+    // console.log(currentEmployeeId);
 		const fetchAllUsers = async () => {
 			try { 
-        const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+        const axiosHeaders = { 
+          headers: { 
+            Authorization: 'Bearer ' + TokenManager.getToken(),
+            adminLevel,
+            email,
+          },
+        };
         const response = await axios.get(`${localURL}/user`, axiosHeaders);
         setUsers(response.data.users);
 			} catch (error) {
@@ -50,7 +56,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId}) => {
 			}
 		};
 		fetchAllUsers();
-    }, [deleteFlag]);
+    }, [deleteFlag, adminLevel, email]);
 
     useEffect(() => {
       const filtered = users.filter(user => {
