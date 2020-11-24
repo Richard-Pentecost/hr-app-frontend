@@ -11,7 +11,6 @@ import { withRouter } from 'react-router';
 import '../style/CreateEmployee.scss';
 
 const EditInformation = ({history, user, setUser}) => {
-    const [confirmPassword, setConfirmPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
@@ -39,8 +38,6 @@ const EditInformation = ({history, user, setUser}) => {
                 ...user,
                 'doB': event,
             })
-        } else if (event.target.name === 'confirmPassword') {
-            setConfirmPassword(event.target.value);
         } else {
             setUser({
                 ...user,
@@ -53,7 +50,8 @@ const EditInformation = ({history, user, setUser}) => {
         event.preventDefault();
         try {
             setLoading(true);
-            const response = await axios.put(`${URL}/user/${user.userId}`, user );
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            const response = await axios.put(`${URL}/user/${user.userId}`, axiosHeaders, user );
             setUser(response.data.user);
             setLoading(false);
             history.push('/home');
@@ -65,7 +63,7 @@ const EditInformation = ({history, user, setUser}) => {
 
     let formArr = null;
     if (user.firstName !== '') {
-        const { firstName, surname, telephone, doB, nextOfKin, address, password  } = user;
+        const { firstName, surname, telephone, doB, nextOfKin, address  } = user;
         formArr = [
             { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
             { type: 'text', value: surname, name: 'surname', label: 'Surname' },
@@ -73,8 +71,6 @@ const EditInformation = ({history, user, setUser}) => {
             { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
             { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
             { type: 'text', value: address, name: 'address', label: 'Address' },
-            { type: 'password', value: password, name: 'password', label: 'Password' },
-            { type: 'password', value: confirmPassword, name: 'confirmPassword', label: 'Confirm Password' },
         ];
     };
 

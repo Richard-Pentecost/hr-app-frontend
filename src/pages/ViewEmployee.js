@@ -31,10 +31,10 @@ const ViewEmployee = ({currentEmployeeId}) => {
 
 	return (
 		<>
-            <BreadcrumbBar page = 'Employee Information' prevPages = {[{name:'View Employees', link: '/employees-list'}]} />
-            <div className='headingContainer'>
-                <Heading>Employee Information</Heading>
-            </div>
+			<BreadcrumbBar page = 'Employee Information' prevPages = {[{name:'View Employees', link: '/employees-list'}]} />
+			<div className='headingContainer'>
+					<Heading>Employee Information</Heading>
+			</div>
 			<LoadingBox
 				loading={loading}
 				backgroundColor={'#fff'}

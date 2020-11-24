@@ -9,6 +9,7 @@ import EmployeesList from './pages/EmployeesList';
 import CreateEmployee from './pages/CreateEmployee';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
+import ChangePassword from './pages/ChangePassword';
 import { ThemeProvider } from '@material-ui/core/styles';
 import TokenManager from './utils/token-manager';
 import theme from "./resources/theme";
@@ -97,6 +98,15 @@ const App = () => {
 							authenticate={isLoggedIn}
 							currentEmployeeId = {currentEmployeeId}
 						/> 
+
+						<AuthRoute 
+							exact
+							path="/change-password"
+							component={ChangePassword}
+							user={user} 
+							setUser={setUser}
+							authenticate={isLoggedIn}
+						/>
 					</Switch>
 				</div>
 			</BrowserRouter>
