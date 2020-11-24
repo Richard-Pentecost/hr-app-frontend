@@ -5,9 +5,10 @@ import TokenManager from '../utils/token-manager';
 import Table from '@govuk-react/table';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
+import moment from 'moment';
 
 const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
-    const [visitors, setVisitors] = useState([{visitorId:1, firstName:"Azlina", surname:"Yeo",company:"Disneyland",appointment:"Monday 15:30"},{visitorId:2, firstName:"Joanna", surname:"Fawl", company: "Abc", appointment: "Monday 15:30"}]);
+    const [visitors, setVisitors] = useState([]);
     const [filteredVisitors, setFilteredVisitors] = useState([]);
     const [searchField, setSearchField] = useState('');
     const [deleteFlag, setDeleteFlag] = useState(false);
@@ -44,11 +45,9 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                         email,
                     },
                 };
-                /* Uncomment below when api is up */
-                /* const response = await axios.get(`${URL}/visitor`, axiosHeaders);
+                const response = await axios.get(`${URL}/visitor`, axiosHeaders);
                 console.log(response);
                 setVisitors(response.data.visitors);
-                */
             } catch (error) {
                 console.log(error);
             }
@@ -56,9 +55,11 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
         }
         fetchVisitsList();
 
-    },[deleteFlag])
+    },[deleteFlag, adminLevel, email])
 
     useEffect(() => {
+        console.log(adminLevel);
+        console.log(email);
         console.log(visitors);
         const filtered = visitors.filter(visitor => {
             const name = `${visitor.firstName.toLowerCase()} ${visitor.surname.toLowerCase()}`;
@@ -84,6 +85,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     <Table.CellHeader>First Name</Table.CellHeader>
                     <Table.CellHeader>Surname</Table.CellHeader>
                     <Table.CellHeader>Company</Table.CellHeader>
+                    {adminLevel==='Admin' && <Table.CellHeader>Employee Email</Table.CellHeader>}
                     <Table.CellHeader>Appointment Time</Table.CellHeader>
                     <Table.CellHeader></Table.CellHeader>
                 </Table.Row>
@@ -92,7 +94,8 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     <Table.Cell>{visitor.firstName}</Table.Cell>
                     <Table.Cell>{visitor.surname}</Table.Cell>
                     <Table.Cell>{visitor.company}</Table.Cell>
-                    <Table.Cell>{visitor.appointment}</Table.Cell>
+                    {adminLevel==='Admin' && <Table.Cell>{visitor.employeeEmail}</Table.Cell>}
+                    <Table.Cell>{moment(visitor.appointment).format('llll')}</Table.Cell>
                     <Table.Cell><button onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</button></Table.Cell>
                     </Table.Row>))}
                 </Table>

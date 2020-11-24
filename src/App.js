@@ -8,6 +8,7 @@ import EditEmployee from './pages/EditEmployee';
 import EmployeesList from './pages/EmployeesList';
 import CreateEmployee from './pages/CreateEmployee';
 import VisitsList from './pages/VisitsList';
+import ViewVisit from './pages/ViewVisit';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -21,8 +22,6 @@ const App = () => {
 	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', adminLevel:'', location:''})
 	const [currentEmployeeId, setCurrentEmployeeId] = useState('');
 	const [currentVisitId, setCurrentVisitId] = useState('');
-	/* DELETE THIS AFTER API IS UP */
-	const [visits, setVisits] = useState([{visitorId:1, firstName:"Azlina", surname:"Yeo",company:"Disneyland",appointment:"Monday 15:30"},{visitorId:2, firstName:"Joanna", surname:"Fawl", company: "Abc", appointment: "Monday 15:30"}])
 	
 	const isLoggedIn = () => {
     return Boolean(token) && TokenManager.isTokenValid();
@@ -101,29 +100,25 @@ const App = () => {
 							currentEmployeeId = {currentEmployeeId}
 						/> 
 
-						<Route
+						<AuthRoute
 							exact
 							path='/visits-list'
-							render={ (props) => 
-							<VisitsList {...props} 
+							component={VisitsList}
+							authenticate={isLoggedIn}
 							adminLevel={user.adminLevel} 
 							email={user.email} 
-							setCurrentVisitId = {setCurrentVisitId}
-							/>
-							}
+							setCurrentVisitId={setCurrentVisitId}
 						/>
 
-						{/* <Route
+						<AuthRoute
 							exact
 							path='/view-visit'
-							render={ (props) => 
-							<ViewVisit {...props} 
+							component={ViewVisit}
+							authenticate={isLoggedIn}
 							adminLevel={user.adminLevel} 
 							email={user.email} 
 							currentVisitId = {currentVisitId}
-							/>
-							}
-						/> */}
+						/>
 					</Switch>
 				</div>
 			</BrowserRouter>
