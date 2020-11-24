@@ -26,7 +26,7 @@ describe('Logging in', () => {
         wrapper.find('form').simulate('submit', { 
 			preventDefault: jest.fn()
         });
-        const welcomeMessage = <h1 className='userInfo__headerText'>Welcome Joanna!</h1>
+        //const welcomeMessage = <h1 className='userInfo__headerText'>Welcome Joanna!</h1>
         expect(true).toEqual(true);
     }); 
 });

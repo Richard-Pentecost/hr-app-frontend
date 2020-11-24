@@ -104,7 +104,7 @@ describe('Login', () => {
         wrapper.find('form').simulate('submit', { 
 			preventDefault: jest.fn()
 		});
-		const errorMessage = <div className='errorMessage'>There was an error logging in</div>;
+		//const errorMessage = <div className='errorMessage'>There was an error logging in</div>;
         // expect(wrapper.contains(errorMessage)).toEqual(true);
         expect(true).toEqual(true);
     });
@@ -126,7 +126,7 @@ describe('Login', () => {
         wrapper.find('form').simulate('submit', { 
 			preventDefault: jest.fn()
         });
-		const successMessage = <div className='successMessage'>You have successfully logged in as rpentecost</div>
+		//const successMessage = <div className='successMessage'>You have successfully logged in as rpentecost</div>
         // expect(wrapper.contains(successMessage)).toEqual(true);
         expect(true).toEqual(true);
     });

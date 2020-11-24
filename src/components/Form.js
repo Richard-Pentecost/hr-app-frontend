@@ -1,6 +1,6 @@
 import React from 'react';
 import Input from './Input'
-import Button from './Button';
+import Button from '@govuk-react/button';
 import Select from './Select';
 import DateInput from './DateInput';
 import '../style/Form.scss';
@@ -50,7 +50,7 @@ const Form = ({ formArr, handleInputChange, handleSubmit, btnText }) => {
           {form}
         </div>
         <div className='form__button'>
-          <Button text={btnText} />
+        <Button buttonColour='#357ebd' buttonHoverColour='#78aace'>{btnText}</Button>
         </div>
       </form>
     </div>

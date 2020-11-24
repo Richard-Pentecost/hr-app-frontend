@@ -59,8 +59,6 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     },[deleteFlag, adminLevel, email])
 
     useEffect(() => {
-        console.log(adminLevel);
-        console.log(email);
         console.log(visitors);
         const filtered = visitors.filter(visitor => {
             const name = `${visitor.firstName.toLowerCase()} ${visitor.surname.toLowerCase()}`;
@@ -80,7 +78,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     placeholder='Search Employees'
                     onChange={onSearchChange} 
             />
-            <div className='visitsTable'>
+            <div className='employeeTable'>
                 <Table>
                 <Table.Row>
                     <Table.CellHeader>First Name</Table.CellHeader>
