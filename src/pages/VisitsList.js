@@ -5,6 +5,7 @@ import TokenManager from '../utils/token-manager';
 import Table from '@govuk-react/table';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
+import Button from '@govuk-react/button';
 import moment from 'moment';
 
 const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
@@ -96,7 +97,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     <Table.Cell>{visitor.company}</Table.Cell>
                     {adminLevel==='Admin' && <Table.Cell>{visitor.employeeEmail}</Table.Cell>}
                     <Table.Cell>{moment(visitor.appointment).format('llll')}</Table.Cell>
-                    <Table.Cell><button onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</button></Table.Cell>
+                    <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</Button></Table.Cell>
                     </Table.Row>))}
                 </Table>
             </div>
