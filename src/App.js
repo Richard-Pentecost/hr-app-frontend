@@ -20,8 +20,10 @@ const App = () => {
 	const [token, setToken] = useState(TokenManager.isTokenValid() ? TokenManager.getTokenPayload() : null);
 	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', adminLevel:'', location:''})
 	const [currentEmployeeId, setCurrentEmployeeId] = useState('');
-
-
+	const [currentVisitId, setCurrentVisitId] = useState('');
+	/* DELETE THIS AFTER API IS UP */
+	const [visits, setVisits] = useState([{visitorId:1, firstName:"Azlina", surname:"Yeo",company:"Disneyland",appointment:"Monday 15:30"},{visitorId:2, firstName:"Joanna", surname:"Fawl", company: "Abc", appointment: "Monday 15:30"}])
+	
 	const isLoggedIn = () => {
     return Boolean(token) && TokenManager.isTokenValid();
 	}
@@ -103,9 +105,25 @@ const App = () => {
 							exact
 							path='/visits-list'
 							render={ (props) => 
-							<VisitsList {...props}/>
+							<VisitsList {...props} 
+							adminLevel={user.adminLevel} 
+							email={user.email} 
+							setCurrentVisitId = {setCurrentVisitId}
+							/>
 							}
 						/>
+
+						{/* <Route
+							exact
+							path='/view-visit'
+							render={ (props) => 
+							<ViewVisit {...props} 
+							adminLevel={user.adminLevel} 
+							email={user.email} 
+							currentVisitId = {currentVisitId}
+							/>
+							}
+						/> */}
 					</Switch>
 				</div>
 			</BrowserRouter>

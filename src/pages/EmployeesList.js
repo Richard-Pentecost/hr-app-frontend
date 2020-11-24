@@ -21,7 +21,6 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
 
   const deleteHandler = async (e, id) => {
     e.stopPropagation();
-    console.log(currentEmployeeId);
     try {
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken(), adminLevel }};
       const response = await axios.delete(`${URL}/user/${id}`, axiosHeaders);
@@ -38,8 +37,6 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
   };
 
   useEffect(() => {
-    // console.log('*********************UseEffect*************');
-    // console.log(currentEmployeeId);
 		const fetchAllUsers = async () => {
 			try { 
         const axiosHeaders = { 
@@ -68,7 +65,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
 
   return (
     <>
-      <BreadcrumbBar page='View Employees'/>useEffect()
+      <BreadcrumbBar page='View Employees'/>
       <div className='headingContainer'>
         <Heading>View Employees</Heading>
       </div>
