@@ -68,7 +68,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
 
   return (
     <>
-      <BreadcrumbBar page='View Employees'/>
+      <BreadcrumbBar page='View Employees'/>useEffect()
       <div className='headingContainer'>
         <Heading>View Employees</Heading>
       </div>

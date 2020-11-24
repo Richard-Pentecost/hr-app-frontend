@@ -7,6 +7,7 @@ import ViewEmployee from './pages/ViewEmployee';
 import EditEmployee from './pages/EditEmployee';
 import EmployeesList from './pages/EmployeesList';
 import CreateEmployee from './pages/CreateEmployee';
+import VisitsList from './pages/VisitsList';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -97,6 +98,14 @@ const App = () => {
 							authenticate={isLoggedIn}
 							currentEmployeeId = {currentEmployeeId}
 						/> 
+
+						<Route
+							exact
+							path='/visits-list'
+							render={ (props) => 
+							<VisitsList {...props}/>
+							}
+						/>
 					</Switch>
 				</div>
 			</BrowserRouter>
