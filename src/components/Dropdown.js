@@ -28,7 +28,11 @@ const Dropdown = ({onLogout, adminLevel}) => {
 					{ adminLevel === 'Manager' ? "View Your Team" : "View Employees" }
 				</Link>
 			</div>}
-			
+			<div className='dropdownList__item'>
+				<Link to='/change-password' className='dropdownList__link'>
+					Change Password
+				</Link>
+			</div>
 			<div className='dropdownList__item'>
 				<Link to='/' className='dropdownList__link' onClick={onLogout}>
 					Logout
