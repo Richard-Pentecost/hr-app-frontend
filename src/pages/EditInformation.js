@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { URL } from '../utils/Constants';
 import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
+import LoadingBox from '@govuk-react/loading-box';
 import Heading from '../components/Heading';
 import Form from '../components/Form';
 import TokenManager from '../utils/token-manager';
@@ -11,16 +12,20 @@ import '../style/CreateEmployee.scss';
 
 const EditInformation = ({history, user, setUser}) => {
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
         const fetchUser = async () => {
             try {
+                setLoading(true);
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
                 const decodedToken = TokenManager.getTokenPayload();
                 const id = decodedToken.unique_name;
                 const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
                 setUser(response.data.user);
+                setLoading(false);
             } catch (error) {
+                setLoading(false);
                 console.log(error);
             }
         };
@@ -29,7 +34,6 @@ const EditInformation = ({history, user, setUser}) => {
     
 
     const handleInputChange = event => {
-        
         if (event.target === undefined) {
             setUser({
                 ...user,
@@ -48,10 +52,13 @@ const EditInformation = ({history, user, setUser}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            setLoading(true);
             const response = await axios.put(`${URL}/user/${user.userId}`, user );
             setUser(response.data.user);
+            setLoading(false);
             history.push('/home');
         } catch (error) {
+            setLoading(false);
             console.log(error.response);
         }
     }
@@ -77,16 +84,25 @@ const EditInformation = ({history, user, setUser}) => {
             <div className='headingContainer'>
                 <Heading>Edit Information</Heading>
             </div>
-            <div className='formContainer'>
-                {formArr &&
-                    <Form 
-                        formArr={formArr}
-                        handleInputChange={handleInputChange}
-                        handleSubmit={handleSubmit}
-                        btnText='Save'
-                    />
-                }       
-            </div>
+            <LoadingBox
+				loading={loading}
+				backgroundColor={'#fff'}
+				timeIn={800}
+				timeOut={200}
+				backgroundColorOpacity={0.85}
+				spinnerColor={'#000'}
+			>
+                <div className='formContainer'>
+                    {formArr &&
+                        <Form 
+                            formArr={formArr}
+                            handleInputChange={handleInputChange}
+                            handleSubmit={handleSubmit}
+                            btnText='Save'
+                        />
+                    }       
+                </div>
+            </LoadingBox>
         </>
 
     );

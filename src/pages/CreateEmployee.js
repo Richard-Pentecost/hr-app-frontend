@@ -6,6 +6,7 @@ import '../style/CreateEmployee.scss';
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import axios from 'axios';
+import LoadingBox from '@govuk-react/loading-box';
 import { withRouter } from 'react-router';
 
 const initialState = {
@@ -22,7 +23,8 @@ const initialState = {
 };
 
 const CreateEmployee = ({history, setCurrentEmployeeId}) => {
-  const [newUser, setNewUser] = useState(initialState)
+  const [newUser, setNewUser] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   
   const handleInputChange = event => {
     if (event.target === undefined) {
@@ -42,15 +44,17 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
+      setLoading(true);
       const {confirmPassword, ...userObj}  = newUser;
-      console.log(userObj);
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
       const response = await axios.post(`${URL}/user`, userObj, axiosHeaders);
       setCurrentEmployeeId(response.data.user.userId);
       setNewUser({initialState});
+      setLoading(false);
       history.push('/view-employee');
     } catch (error) {
-        console.log(error);
+      setLoading(false);
+      console.log(error);
     }
     
   }
@@ -76,14 +80,23 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
       <div className='headingContainer'>
         <Heading>Create Employee</Heading>
       </div>
-      <div className='formContainer'>
-        <Form 
-          formArr={formArr}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          btnText='Save'
-        />
-      </div>
+      <LoadingBox
+        loading={loading}
+        backgroundColor={'#fff'}
+        timeIn={800}
+        timeOut={200}
+        backgroundColorOpacity={0.85}
+        spinnerColor={'#000'}
+      >
+        <div className='formContainer'>
+          <Form 
+            formArr={formArr}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            btnText='Save'
+          />
+        </div>
+      </LoadingBox>
     </>
   )
 }
