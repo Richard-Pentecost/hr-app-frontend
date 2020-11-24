@@ -9,6 +9,8 @@ import EmployeesList from './pages/EmployeesList';
 import CreateEmployee from './pages/CreateEmployee';
 import VisitsList from './pages/VisitsList';
 import ViewVisit from './pages/ViewVisit';
+import CreateVisit from './pages/CreateVisit';
+import EditVisit from './pages/EditVisit';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import { ThemeProvider } from '@material-ui/core/styles';
@@ -118,6 +120,23 @@ const App = () => {
 							adminLevel={user.adminLevel} 
 							email={user.email} 
 							currentVisitId = {currentVisitId}
+						/>
+
+						<AuthRoute
+							exact
+							path='/edit-visit'
+							component={EditVisit}
+							authenticate={isLoggedIn}
+							currentVisitId = {currentVisitId}
+						/>
+
+						<AuthRoute
+							exact
+							path='/create-visit'
+							component={CreateVisit}
+							authenticate={isLoggedIn}
+							currentVisitId = {currentVisitId}
+							setCurrentVisitId={setCurrentVisitId}
 						/>
 					</Switch>
 				</div>

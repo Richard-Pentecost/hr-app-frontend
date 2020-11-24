@@ -29,6 +29,11 @@ const Dropdown = ({onLogout, adminLevel}) => {
 				</Link>
 			</div>}
 			<div className='dropdownList__item'>
+				<Link to='/create-visit' className='dropdownList__link'>
+					Create Visit
+				</Link>
+			</div>
+			<div className='dropdownList__item'>
 				<Link to='/visits-list' className='dropdownList__link'>
 					View Visits
 				</Link>

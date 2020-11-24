@@ -3,6 +3,7 @@ import Input from './Input'
 import Button from '@govuk-react/button';
 import Select from './Select';
 import DateInput from './DateInput';
+import DateTimeInput from './DateTimeInput';
 import '../style/Form.scss';
 
 const Form = ({ formArr, handleInputChange, handleSubmit, btnText }) => {
@@ -22,6 +23,16 @@ const Form = ({ formArr, handleInputChange, handleSubmit, btnText }) => {
       case 'date':
         return ( 
           <DateInput 
+            key={input.name}
+            value={input.value}
+            name={input.name}
+            label={input.label}
+            inputChangeHandler={handleInputChange}
+          />
+        );
+        case 'dateTime':
+        return ( 
+          <DateTimeInput 
             key={input.name}
             value={input.value}
             name={input.name}

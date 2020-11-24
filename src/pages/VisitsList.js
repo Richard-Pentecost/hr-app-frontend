@@ -7,6 +7,10 @@ import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import Button from '@govuk-react/button';
 import moment from 'moment';
+import SearchBox from '@govuk-react/search-box'
+import Layout from '@govuk-react/layout';
+import GridRow from '@govuk-react/grid-row';
+import GridCol from '@govuk-react/grid-col';
 
 const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     const [visitors, setVisitors] = useState([]);
@@ -71,13 +75,22 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
         <>
             <BreadcrumbBar page='View Visits'/>
             <div className='headingContainer'>
-                <Heading>View Visits</Heading>
+                <Heading>View Visits</Heading><br></br>
             </div>
-            <input
-                    type='search'
-                    placeholder='Search Employees'
-                    onChange={onSearchChange} 
-            />
+            <Layout>
+                <GridRow>
+                    <GridCol style={{display:'flex', justifyContent:'flex-end', paddingRight:'25px'}}>
+                    <SearchBox
+                        style={{width:'30%'}} 
+                        type='search'
+                        placeholder='Search Visits'
+                            onChange={onSearchChange} 
+                        />
+                    </GridCol>
+                </GridRow>
+                
+            </Layout>
+            
             <div className='employeeTable'>
                 <Table>
                 <Table.Row>

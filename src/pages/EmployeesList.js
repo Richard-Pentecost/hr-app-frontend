@@ -85,7 +85,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
             <Table.CellHeader></Table.CellHeader>
           </Table.Row>
             {filteredUsers.map((user, index)=>(
-            <Table.Row onClick={()=>handleClick(user.userId)} className='tableRow' key={index}>
+            <Table.Row onClick={(e)=>handleClick(user.userId)} className='tableRow' key={index}>
               <Table.Cell>{user.firstName}</Table.Cell>
               <Table.Cell>{user.surname}</Table.Cell>
               <Table.Cell>{user.email}</Table.Cell>
