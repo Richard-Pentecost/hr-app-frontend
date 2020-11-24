@@ -51,7 +51,7 @@ const EditInformation = ({history, user, setUser}) => {
         try {
             setLoading(true);
             const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-            const response = await axios.put(`${URL}/user/${user.userId}`, axiosHeaders, user );
+            const response = await axios.put(`${URL}/user/${user.userId}`, user, axiosHeaders);
             setUser(response.data.user);
             setLoading(false);
             history.push('/home');
