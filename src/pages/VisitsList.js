@@ -116,7 +116,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     <Table.CellHeader></Table.CellHeader>
                 </Table.Row>
                     {filteredVisitors.map((visitor, index)=>(
-                    <Table.Row onClick={()=>handleClick(visitor.visitorId)} className='tableRow' key={index}>
+                    <Table.Row onClick={()=>handleClick(visitor.visitorId)} className='tableRow' key={index} >
                     <Table.Cell>{visitor.firstName}</Table.Cell>
                     <Table.Cell>{visitor.surname}</Table.Cell>
                     <Table.Cell>{visitor.company}</Table.Cell>

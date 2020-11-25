@@ -4,14 +4,20 @@ import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
+import SignInCard from '../components/SignInCard';
 import axios from 'axios';
 import InfoCard from '../components/InfoCard';
 import LoadingBox from '@govuk-react/loading-box';
+import LabelText from '@govuk-react/label-text';
+import Label from '@govuk-react/label';
+import GridRow from '@govuk-react/grid-row';
+import GridCol from '@govuk-react/grid-col';
 
 const ViewVisit = ({currentVisitId}) => {
     const [currentVisit, setCurrentVisit] = useState('');
     const [loading, setLoading] = useState(false);
-
+    const [signInButtonClicked, setSignInButtonClicked] = useState(false);
+    
     useEffect(()=>{
         const fetchVisit = async()=>{
             try {
@@ -28,7 +34,30 @@ const ViewVisit = ({currentVisitId}) => {
             }
         }
         fetchVisit();
-    },[currentVisitId])
+    },[currentVisitId, signInButtonClicked])
+
+    const signInHandler = async (event) =>{
+        event.preventDefault();
+        
+        try {
+            var visitObj = {visitorId: currentVisitId};
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            if (!currentVisit.signInFlag) {
+              
+                visitObj = {visitorId: currentVisitId, signInFlag: true, signOutFlag: false, signIn: moment(new Date().now).format()};
+                console.log(visitObj)
+            } else {
+                visitObj = {visitorId: currentVisitId, signInFlag: true, signOutFlag: true, signOut: moment(new Date().now).format()};
+                console.log(visitObj)
+            }
+            const response = await axios.put(`${URL}/visitor/${currentVisitId}`, visitObj, axiosHeaders); 
+            setSignInButtonClicked(!signInButtonClicked);
+            //setCurrentVisit()
+
+        } catch (error) {
+            console.log(error);
+        }
+    }
     
     const { firstName, surname, company , role, telephone, email, employeeEmail, appointment } = currentVisit;
    
@@ -41,7 +70,6 @@ const ViewVisit = ({currentVisitId}) => {
         { label: 'Email', info: email },
         { label: 'Employee Email', info: employeeEmail },
         { label: 'Appointment', info: moment(appointment).format('llll') }
-      
     ];
 
     return (
@@ -59,8 +87,17 @@ const ViewVisit = ({currentVisitId}) => {
 				spinnerColor={'#000'}
 			>
             <div className='userInfo'>
-                <InfoCard infoArray={infoArray} link='/edit-visit' />
+                <GridRow>
+                    <GridCol>
+                        <InfoCard infoArray={infoArray} link='/edit-visit' />
+                    </GridCol>
+                    <GridCol>
+                        <SignInCard signInHandler={signInHandler} currentVisit={currentVisit}/>
+                    </GridCol>
+                </GridRow>
+              
             </div>
+  
             </LoadingBox>
 		</>
     )

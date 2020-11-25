@@ -5,7 +5,7 @@ import moment from 'moment';
 import CreateIcon from '@material-ui/icons/Create';
 
 const Card = ({user, link}) => {
-    //console.log(user.firstName);
+    
     return (
         <div className='card'>
             <div className='cardHeader'>

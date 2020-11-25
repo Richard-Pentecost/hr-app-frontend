@@ -63,7 +63,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
         }
     }
 
-    const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, adminLevel, salary } = currentEmployee;
+    const { firstName, surname, email , role, location, address, nextOfKin, doB, telephone, adminLevel, salary, managerEmail } = currentEmployee;
     const formArr = [
         { type: 'text', value: firstName, name: 'firstName', label: 'First name' },
         { type: 'text', value: surname, name: 'surname', label: 'Surname' },
@@ -72,6 +72,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
         { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
         { type: 'date', value: doB, name: 'doB', label: 'Date of Birth' },
         { type: 'select', value: adminLevel, name: 'adminLevel', label: 'Admin Level' },  
+        { type: 'email', value: managerEmail, name: 'managerEmail', label: 'Manager Email' },
         { type: 'text', value: nextOfKin, name: 'nextOfKin', label: 'Next of Kin' },
         { type: 'text', value: salary, name: 'salary', label: 'Salary' },
         { type: 'text', value: location, name: 'location', label: 'Location' },
