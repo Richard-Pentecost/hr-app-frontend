@@ -8,6 +8,7 @@ import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
 import LoadingBox from '@govuk-react/loading-box';
 import EmployeeTable from '../components/EmployeeTable';
+import SearchBar from '../components/SearchBar';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel}) => {
   const [users, setUsers] = useState([]);
@@ -34,10 +35,6 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
       setLoading(false);
       console.log(error);
     }
-  };
-
-  const onSearchChange = (e) => {
-    setSearchField(e.target.value); 
   };
 
   useEffect(() => {
@@ -76,11 +73,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
       <div className='headingContainer'>
         <Heading>View Employees</Heading>
       </div>
-      <input
-        type='search'
-        placeholder='Search Employees'
-        onChange={onSearchChange} 
-      />
+      <SearchBar setSearchField={setSearchField} placeholder="Search Employees" />
       <LoadingBox
         loading={loading}
         backgroundColor={'#fff'}
@@ -96,25 +89,6 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
             deleteHandler={deleteHandler} 
             adminLevel={adminLevel}
           />
-          {/* <Table>
-            <Table.Row>
-              <Table.CellHeader>First Name</Table.CellHeader>
-              <Table.CellHeader>Surname</Table.CellHeader>
-              <Table.CellHeader>Email</Table.CellHeader>
-              <Table.CellHeader>Role</Table.CellHeader>
-              <Table.CellHeader>Location</Table.CellHeader>
-              <Table.CellHeader></Table.CellHeader>
-            </Table.Row>
-              {filteredUsers.map((user, index)=>(
-              <Table.Row onClick={()=>handleClick(user.userId)} className='tableRow' key={index}>
-                <Table.Cell>{user.firstName}</Table.Cell>
-                <Table.Cell>{user.surname}</Table.Cell>
-                <Table.Cell>{user.email}</Table.Cell>
-                <Table.Cell>{user.role}</Table.Cell>
-                <Table.Cell>{user.location}</Table.Cell>
-                <Table.Cell><button onClick={(e)=>deleteHandler(e, user.userId)}>Delete</button></Table.Cell>
-              </Table.Row>))}
-              </Table> */}
         </div>
       </LoadingBox>
     </>
