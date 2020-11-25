@@ -24,8 +24,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     const deleteHandler = async (e, id) => {
         e.stopPropagation();
         try {
-            const response = await axios.delete(`${URL}/visitor/${id}`);
-            console.log(response);
+            await axios.delete(`${URL}/visitor/${id}`);
             setDeleteFlag(!deleteFlag)
             setLoading(false);
         } catch (error) {
@@ -46,7 +45,6 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     },
                 };
                 const response = await axios.get(`${URL}/visitor`, axiosHeaders);
-                console.log(response);
                 setVisitors(response.data.visitors);
                 setLoading(false);
             } catch (error) {
@@ -60,7 +58,6 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     },[deleteFlag, adminLevel, email])
 
     useEffect(() => {
-        console.log(visitors);
         const filtered = visitors.filter(visitor => {
             const name = `${visitor.firstName.toLowerCase()} ${visitor.surname.toLowerCase()}`;
             return name.includes(searchField.toLowerCase());

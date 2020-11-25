@@ -8,8 +8,6 @@ import SignInCard from '../components/SignInCard';
 import axios from 'axios';
 import InfoCard from '../components/InfoCard';
 import LoadingBox from '@govuk-react/loading-box';
-import LabelText from '@govuk-react/label-text';
-import Label from '@govuk-react/label';
 import GridRow from '@govuk-react/grid-row';
 import GridCol from '@govuk-react/grid-col';
 
@@ -22,11 +20,9 @@ const ViewVisit = ({currentVisitId}) => {
         const fetchVisit = async()=>{
             try {
                 setLoading(true);
-                console.log(currentVisitId)
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
                 const response = await axios.get(`${URL}/visitor/${currentVisitId}`, axiosHeaders);
                 setCurrentVisit(response.data.visit);
-                console.log(response);
                 setLoading(false);
             } catch(error){
                 setLoading(false);
@@ -40,17 +36,16 @@ const ViewVisit = ({currentVisitId}) => {
         event.preventDefault();
         
         try {
-            var visitObj = {visitorId: currentVisitId};
+            let visitObj = {visitorId: currentVisitId};
             const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
             if (!currentVisit.signInFlag) {
               
-                visitObj = {visitorId: currentVisitId, signInFlag: true, signOutFlag: false, signIn: moment(new Date().now).format()};
-                console.log(visitObj)
+                visitObj = {...visitObj, signInFlag: true, signOutFlag: false, signIn: moment(new Date().now).format()};
+
             } else {
-                visitObj = {visitorId: currentVisitId, signInFlag: true, signOutFlag: true, signOut: moment(new Date().now).format()};
-                console.log(visitObj)
+                visitObj = {...visitObj, signInFlag: true, signOutFlag: true, signOut: moment(new Date().now).format()};
             }
-            const response = await axios.put(`${URL}/visitor/${currentVisitId}`, visitObj, axiosHeaders); 
+            await axios.put(`${URL}/visitor/${currentVisitId}`, visitObj, axiosHeaders); 
             setSignInButtonClicked(!signInButtonClicked);
             //setCurrentVisit()
 

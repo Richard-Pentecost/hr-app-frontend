@@ -5,9 +5,6 @@ import '../style/Card.scss';
 
 const SignInCard = ({signInHandler, currentVisit}) => {
     const {signIn, signOut, signInFlag, signOutFlag} = currentVisit;
-    console.log(signInFlag);
-    console.log(signOutFlag);
-    console.log(signInFlag&&signOutFlag);
     return (
         <div className='card'>
             <div className='cardHeader'>
@@ -25,7 +22,7 @@ const SignInCard = ({signInHandler, currentVisit}) => {
             </div>
             <div className='cardInformation'>
                 {
-                    (signInFlag && signOutFlag) ? '' : <Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={signInHandler} >{signInFlag ? 'Sign Out' : 'Sign In'}</Button>
+                    !(signInFlag && signOutFlag) && <Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={signInHandler} >{signInFlag ? 'Sign Out' : 'Sign In'}</Button>
                 }
             </div>
         </div>
