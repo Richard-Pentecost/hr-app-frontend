@@ -14,9 +14,7 @@ import EditVisit from './pages/EditVisit';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import ChangePassword from './pages/ChangePassword';
-import { ThemeProvider } from '@material-ui/core/styles';
 import TokenManager from './utils/token-manager';
-import theme from "./resources/theme";
 import './style/App.scss';
 
 const App = () => {
@@ -31,127 +29,123 @@ const App = () => {
 	}
 	
 	return (
-		<ThemeProvider theme={theme}>
-			<BrowserRouter>
-				<div className="app">
-					<Navbar authenticate={isLoggedIn} token={token} adminLevel={user.adminLevel} />
-					<Switch>
-						<Route
-							exact 
-							path='/' 
-							render={props => (isLoggedIn() ?
-								<Redirect to='/home' /> : 
-								<Login {...props} setToken={setToken} />
-							)}
-						/>
+		<BrowserRouter>
+			<div className="app">
+				<Navbar authenticate={isLoggedIn} token={token} adminLevel={user.adminLevel} />
+				<Switch>
+					<Route
+						exact 
+						path='/' 
+						render={props => (isLoggedIn() ?
+							<Redirect to='/home' /> : 
+							<Login {...props} setToken={setToken} />
+						)}
+					/>
 
-						<AuthRoute 
-							exact
-							path="/home"
-							component={Home}
-							user={user} 
-							setUser={setUser}
-							currentEmployeeId={currentEmployeeId}
-							authenticate={isLoggedIn}
-						/>
+					<AuthRoute 
+						exact
+						path="/home"
+						component={Home}
+						user={user} 
+						setUser={setUser}
+						currentEmployeeId={currentEmployeeId}
+						authenticate={isLoggedIn}
+					/>
 
-						<AuthRoute 
-							exact
-							path='/edit-information'
-							component={EditInformation}
-							user={user} 
-							currentEmployeeId={currentEmployeeId}
-							setUser={setUser}
-							authenticate={isLoggedIn}
-						/>
+					<AuthRoute 
+						exact
+						path='/edit-information'
+						component={EditInformation}
+						user={user} 
+						currentEmployeeId={currentEmployeeId}
+						setUser={setUser}
+						authenticate={isLoggedIn}
+					/>
 
-						<AuthRoute 
-							exact
-							path='/employees-list'
-							component={EmployeesList}
-							authenticate={isLoggedIn}
-							email={user.email}
-							adminLevel={user.adminLevel}
-							setCurrentEmployeeId = {setCurrentEmployeeId}
-							currentEmployeeId = {currentEmployeeId}
-						/>
+					<AuthRoute 
+						exact
+						path='/employees-list'
+						component={EmployeesList}
+						authenticate={isLoggedIn}
+						email={user.email}
+						adminLevel={user.adminLevel}
+						setUser={setUser}
+						setCurrentEmployeeId = {setCurrentEmployeeId}
+						currentEmployeeId = {currentEmployeeId}
+					/>
+				
+					<AuthRoute 
+						exact
+						path='/create-employee'
+						component={CreateEmployee}
+						authenticate={isLoggedIn}
+						creatorsAdminLevel={user.adminLevel} 
+						setUser={setUser}
+						setCurrentEmployeeId = {setCurrentEmployeeId}
+					/>
 					
-						<AuthRoute 
-							exact
-							path='/create-employee'
-							component={CreateEmployee}
-							authenticate={isLoggedIn}
-							user={user} 
-							setUser={setUser}
-							currentEmployeeId={currentEmployeeId}
-							setCurrentEmployeeId = {setCurrentEmployeeId}
-						/>
-						
-						<AuthRoute 
-							exact
-							path='/view-employee'
-							component={ViewEmployee}
-							authenticate={isLoggedIn}
-							currentEmployeeId = {currentEmployeeId}
-						/>
-						
-						<AuthRoute 
-							exact
-							path='/edit-employee'
-							component={EditEmployee}
-							authenticate={isLoggedIn}
-							currentEmployeeId = {currentEmployeeId}
-						/> 
+					<AuthRoute 
+						exact
+						path='/view-employee/:userId'
+						component={ViewEmployee}
+						authenticate={isLoggedIn}
+					/>
+					
+					<AuthRoute 
+						exact
+						path='/view-employee/:userId/edit-employee'
+						component={EditEmployee}
+						authenticate={isLoggedIn}
+					/> 
 
-						<AuthRoute
-							exact
-							path='/visits-list'
-							component={VisitsList}
-							authenticate={isLoggedIn}
-							adminLevel={user.adminLevel} 
-							email={user.email} 
-							setCurrentVisitId={setCurrentVisitId}
-						/>
+					<AuthRoute
+						exact
+						path='/visits-list'
+						component={VisitsList}
+						authenticate={isLoggedIn}
+						adminLevel={user.adminLevel} 
+						email={user.email} 
+						setCurrentVisitId={setCurrentVisitId}
+					/>
 
-						<AuthRoute
-							exact
-							path='/view-visit'
-							component={ViewVisit}
-							authenticate={isLoggedIn}
-							adminLevel={user.adminLevel} 
-							email={user.email} 
-							currentVisitId = {currentVisitId}
-						/>
+					<AuthRoute
+						exact
+						path='/view-visit'
+						component={ViewVisit}
+						authenticate={isLoggedIn}
+						adminLevel={user.adminLevel} 
+						email={user.email} 
+						currentVisitId = {currentVisitId}
+					/>
 
-						<AuthRoute
-							exact
-							path='/edit-visit'
-							component={EditVisit}
-							authenticate={isLoggedIn}
-							currentVisitId = {currentVisitId}
-						/>
+					<AuthRoute
+						exact
+						path='/edit-visit'
+						component={EditVisit}
+						authenticate={isLoggedIn}
+						currentVisitId = {currentVisitId}
+					/>
 
-						<AuthRoute
-							exact
-							path='/create-visit'
-							component={CreateVisit}
-							authenticate={isLoggedIn}
-							currentVisitId = {currentVisitId}
-							setCurrentVisitId={setCurrentVisitId}
-            />
+					<AuthRoute
+						exact
+						path='/create-visit'
+						component={CreateVisit}
+						authenticate={isLoggedIn}
+						currentVisitId = {currentVisitId}
+						setCurrentVisitId={setCurrentVisitId}
+					/>
 
-						<AuthRoute 
-							exact
-							path="/change-password"
-							component={ChangePassword}
-							user={user} 
-							setUser={setUser}
-							authenticate={isLoggedIn}
-						/>
-					</Switch>
-				</div>
-			</BrowserRouter>
-		</ThemeProvider>
+					<AuthRoute 
+						exact
+						path="/change-password"
+						component={ChangePassword}
+						user={user} 
+						setUser={setUser}
+						authenticate={isLoggedIn}
+					/>
+				</Switch>
+			</div>
+		</BrowserRouter>
 	);
 }
 

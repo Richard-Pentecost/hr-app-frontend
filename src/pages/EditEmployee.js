@@ -6,28 +6,32 @@ import Heading from '../components/Heading';
 import Form from '../components/Form';
 import TokenManager from '../utils/token-manager';
 import { withRouter } from 'react-router';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import '../style/CreateEmployee.scss';
 
-const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
+const EditEmployee = ({history, match, isLoggedIn}) => {
     const [currentEmployee, setCurrentEmployee] = useState({});
     const [loading, setLoading] = useState(false);
+    const [employeeId, setEmployeeId] = useState('');
 
 	useEffect(() => {
+        setEmployeeId(match.params.userId);
 		const fetchUser = async () => {
 			try {
                 setLoading(true);
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-                const response = await axios.get(`${URL}/user/${currentEmployeeId}`, axiosHeaders);
+                const response = await axios.get(`${URL}/user/${employeeId}`, axiosHeaders);
                 setCurrentEmployee(response.data.user);
                 setLoading(false);
 			} catch (error) {
                 setLoading(false);
 				console.log(error);
 			}
-		};
-		fetchUser();
-    }, [setCurrentEmployee, currentEmployeeId]);
+        };
+        if (employeeId) {
+            fetchUser();
+        }
+    }, [setCurrentEmployee, match.params.userId, employeeId]);
     
 
     const handleInputChange = event => {
@@ -53,10 +57,10 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
         try {
             setLoading(true);
             const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-            const response = await axios.put(`${URL}/user/${currentEmployeeId}`, currentEmployee, axiosHeaders );
+            const response = await axios.put(`${URL}/user/${employeeId}`, currentEmployee, axiosHeaders );
             setCurrentEmployee(response.data.user);
             setLoading(false);
-            history.push('/view-employee');
+            history.push(`/view-employee/${employeeId}`);
         } catch (error) {
             setLoading(false);
             console.log(error.response);
@@ -81,18 +85,11 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
 
     return (
         <>
-            <BreadcrumbBar page='Edit Employee' prevPages={[ {name:'Employee Information', link: '/view-employee'} ]}/>
+            <BreadcrumbBar page='Edit Employee' prevPages={[ {name:'Employee Information', link: `/view-employee/${employeeId}` }]}/>
             <div className='headingContainer'>
                 <Heading>Edit Employee</Heading>
             </div>
-            <LoadingBox
-                loading={loading}
-                backgroundColor={'#fff'}
-                timeIn={800}
-                timeOut={200}
-                backgroundColorOpacity={0.85}
-                spinnerColor={'#000'}
-            >
+            <LoadingWrapper loading={loading}>
                 <div className='formContainer'>
                     <Form 
                         formArr={formArr}
@@ -101,7 +98,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
                         btnText='Save'
                     />
                 </div>
-            </LoadingBox>
+            </LoadingWrapper>
         </>
     );
 }

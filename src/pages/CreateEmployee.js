@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Heading from '../components/Heading';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Form from '../components/Form';
@@ -6,7 +6,7 @@ import '../style/CreateEmployee.scss';
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import axios from 'axios';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import { withRouter } from 'react-router';
 
 const initialState = {
@@ -22,10 +22,28 @@ const initialState = {
   confirmPassword:''
 };
 
-const CreateEmployee = ({history, setCurrentEmployeeId}) => {
+const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmployeeId}) => {
   const [newUser, setNewUser] = useState(initialState);
   const [loading, setLoading] = useState(false);
   
+  useEffect(() => {
+    const fetchUser = async () => {
+        try {
+            setLoading(true);
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            const decodedToken = TokenManager.getTokenPayload();
+            const id = decodedToken.unique_name;
+            const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
+            setUser(response.data.user);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    };
+    fetchUser();
+  }, [setUser]);
+
   const handleInputChange = event => {
     if (event.target === undefined) {
       setNewUser({
@@ -38,7 +56,6 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
           [event.target.name]: event.target.value}
       );
     }
-
   };
 
   const handleSubmit = async event => {
@@ -46,17 +63,20 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
     try {
       setLoading(true);
       const {confirmPassword, ...userObj}  = newUser;
-      const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+      const axiosHeaders = { 
+        headers: { 
+          Authorization: 'Bearer ' + TokenManager.getToken(),
+          adminLevel: creatorsAdminLevel,
+        }
+      };
       const response = await axios.post(`${URL}/user`, userObj, axiosHeaders);
-      setCurrentEmployeeId(response.data.user.userId);
       setNewUser({initialState});
       setLoading(false);
-      history.push('/view-employee');
+      history.push(`/view-employee/${response.data.user.userId}`);
     } catch (error) {
         setLoading(false);
         console.log(error);
     }
-    
   }
 
   const { firstName, surname, email , role, location, adminLevel, salary, password, managerEmail, confirmPassword } = newUser;
@@ -80,14 +100,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
       <div className='headingContainer'>
         <Heading>Create Employee</Heading>
       </div>
-      <LoadingBox
-        loading={loading}
-        backgroundColor={'#fff'}
-        timeIn={800}
-        timeOut={200}
-        backgroundColorOpacity={0.85}
-        spinnerColor={'#000'}
-      >
+      <LoadingWrapper loading={loading}>
         <div className='formContainer'>
           <Form 
             formArr={formArr}
@@ -96,7 +109,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
             btnText='Save'
           />
         </div>
-      </LoadingBox>
+      </LoadingWrapper>
     </>
   )
 }
