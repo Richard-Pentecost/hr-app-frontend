@@ -37,7 +37,7 @@ const ChangePassword = ({history, user, setUser}) => {
             }
         };
         fetchUser();
-    }, []);
+    }, [setUser]);
     
 
     const handleInputChange = event => {
