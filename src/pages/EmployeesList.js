@@ -71,7 +71,9 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
     <>
       <BreadcrumbBar page='View Employees'/>
       <div className='headingContainer'>
-        <Heading>View Employees</Heading>
+        <Heading>
+            View Employees
+        </Heading>  
       </div>
       <SearchBar setSearchField={setSearchField} placeholder="Search Employees" />
       <LoadingBox

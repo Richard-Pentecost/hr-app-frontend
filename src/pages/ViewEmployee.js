@@ -26,7 +26,6 @@ const ViewEmployee = ({currentEmployeeId}) => {
 			}
 		}
 		fetchUser();
-
 	}, [setCurrentEmployee, currentEmployeeId]);
 
 	return (

@@ -53,8 +53,8 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
       setLoading(false);
       history.push('/view-employee');
     } catch (error) {
-      setLoading(false);
-      console.log(error);
+        setLoading(false);
+        console.log(error);
     }
     
   }

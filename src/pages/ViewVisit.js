@@ -6,21 +6,25 @@ import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import axios from 'axios';
 import InfoCard from '../components/InfoCard';
+import LoadingBox from '@govuk-react/loading-box';
 
 const ViewVisit = ({currentVisitId}) => {
     const [currentVisit, setCurrentVisit] = useState('');
+    const [loading, setLoading] = useState(false);
 
     useEffect(()=>{
         const fetchVisit = async()=>{
-
-            try{
+            try {
+                setLoading(true);
                 console.log(currentVisitId)
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
                 const response = await axios.get(`${URL}/visitor/${currentVisitId}`, axiosHeaders);
                 setCurrentVisit(response.data.visit);
                 console.log(response);
-            }catch(error){
-
+                setLoading(false);
+            } catch(error){
+                setLoading(false);
+				console.log(error);
             }
         }
         fetchVisit();
@@ -40,16 +44,24 @@ const ViewVisit = ({currentVisitId}) => {
       
     ];
 
-
     return (
     	<>
             <BreadcrumbBar page = 'Visit Information' prevPages = {[{name:'View Visits', link: '/visits-list'}]} />
             <div className='headingContainer'>
                 <Heading>Visit Information</Heading>
             </div>
+            <LoadingBox
+				loading={loading}
+				backgroundColor={'#fff'}
+				timeIn={800}
+				timeOut={200}
+				backgroundColorOpacity={0.85}
+				spinnerColor={'#000'}
+			>
             <div className='userInfo'>
                 <InfoCard infoArray={infoArray} link='/edit-visit' />
             </div>
+            </LoadingBox>
 		</>
     )
 }

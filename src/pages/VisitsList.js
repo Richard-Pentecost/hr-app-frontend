@@ -8,15 +8,17 @@ import Heading from '../components/Heading';
 import Button from '@govuk-react/button';
 import moment from 'moment';
 import SearchBox from '@govuk-react/search-box'
-import Layout from '@govuk-react/layout';
 import GridRow from '@govuk-react/grid-row';
 import GridCol from '@govuk-react/grid-col';
+import '../style/CreateEmployee.scss';
+import LoadingBox from '@govuk-react/loading-box';
 
 const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     const [visitors, setVisitors] = useState([]);
     const [filteredVisitors, setFilteredVisitors] = useState([]);
     const [searchField, setSearchField] = useState('');
     const [deleteFlag, setDeleteFlag] = useState(false);
+    const [loading, setLoading] = useState(false);
     
     const handleClick = (id) => {
         setCurrentVisitId(id);
@@ -34,15 +36,17 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
             const response = await axios.delete(`${URL}/visitor/${id}`);
             console.log(response);
             setDeleteFlag(!deleteFlag)
-          
+            setLoading(false);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         const fetchVisitsList = async () => {
             try {
+                setLoading(true);
                 const axiosHeaders = {
                     headers: {
                         Authorization: 'Bearer ' + TokenManager.getToken(),
@@ -53,7 +57,9 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                 const response = await axios.get(`${URL}/visitor`, axiosHeaders);
                 console.log(response);
                 setVisitors(response.data.visitors);
+                setLoading(false);
             } catch (error) {
+                setLoading(false);
                 console.log(error);
             }
 
@@ -75,24 +81,32 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
         <>
             <BreadcrumbBar page='View Visits'/>
             <div className='headingContainer'>
-                <Heading>View Visits</Heading><br></br>
+                <Heading style={{flexDirection:'row'}}>
+                    <GridRow>
+                        <GridCol>
+                            View Visits
+                        </GridCol>
+                        <GridCol>
+                            <SearchBox
+                                style={{width:'100%'}} 
+                                type='search'
+                                placeholder='Search Visits'
+                                onChange={onSearchChange} 
+                            />
+                        </GridCol>
+                    </GridRow>
+                </Heading>
             </div>
-            <Layout>
-                <GridRow>
-                    <GridCol style={{display:'flex', justifyContent:'flex-end', paddingRight:'25px'}}>
-                    <SearchBox
-                        style={{width:'30%'}} 
-                        type='search'
-                        placeholder='Search Visits'
-                            onChange={onSearchChange} 
-                        />
-                    </GridCol>
-                </GridRow>
-                
-            </Layout>
-            
-            <div className='employeeTable'>
-                <Table>
+            <LoadingBox
+                loading={loading}
+                backgroundColor={'#fff'}
+                timeIn={800}
+                timeOut={200}
+                backgroundColorOpacity={0.85}
+                spinnerColor={'#000'}
+            >
+                <div align='center'>
+                <Table style={{width:'85%', justifyContent: 'center', margin:'40px 50px'}} >
                 <Table.Row>
                     <Table.CellHeader>First Name</Table.CellHeader>
                     <Table.CellHeader>Surname</Table.CellHeader>
@@ -111,7 +125,8 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</Button></Table.Cell>
                     </Table.Row>))}
                 </Table>
-            </div>
+                </div>
+            </LoadingBox>
         </>
     )
 }
