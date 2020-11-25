@@ -1,10 +1,10 @@
 import React from 'react';
 import SearchBox from '@govuk-react/search-box'
-import Layout from '@govuk-react/layout';
+// import Layout from '@govuk-react/layout';
 import GridRow from '@govuk-react/grid-row';
 import GridCol from '@govuk-react/grid-col';
 
-const SearchBar = ({ setSearchField, placeholder }) => {
+const SearchBar = ({ setSearchField, placeholder, heading }) => {
 
     const onSearchChange = (e) => {
         setSearchField(e.target.value); 
@@ -12,19 +12,20 @@ const SearchBar = ({ setSearchField, placeholder }) => {
 
     return (
         <>
-          <Layout>
-              <GridRow>
-                  <GridCol style={{display:'flex', justifyContent:'flex-end', paddingRight:'25px'}}>
-                  <SearchBox
-                      style={{width:'30%'}} 
-                      type='search'
-                      placeholder={placeholder}
-                      onChange={onSearchChange} 
-                      />
-                  </GridCol>
-              </GridRow>
-          </Layout>
-      </>
+            <GridRow>
+                <GridCol>
+                    {heading}
+                </GridCol>
+                <GridCol>
+                    <SearchBox
+                        style={{width:'100%'}} 
+                        type='search'
+                        placeholder={placeholder}
+                        onChange={onSearchChange} 
+                    />
+                </GridCol>
+            </GridRow>
+        </>
     )
 };
     

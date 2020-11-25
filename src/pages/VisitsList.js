@@ -7,11 +7,9 @@ import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import Button from '@govuk-react/button';
 import moment from 'moment';
-import SearchBox from '@govuk-react/search-box'
-import GridRow from '@govuk-react/grid-row';
-import GridCol from '@govuk-react/grid-col';
 import '../style/CreateEmployee.scss';
 import LoadingBox from '@govuk-react/loading-box';
+import SearchBar from '../components/SearchBar';
 
 const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     const [visitors, setVisitors] = useState([]);
@@ -25,14 +23,13 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
         history.push('./view-visit');
     };
     
-    const onSearchChange = (e) => {
-        setSearchField(e.target.value); 
-    };
+    // const onSearchChange = (e) => {
+    //     setSearchField(e.target.value); 
+    // };
 
     const deleteHandler = async (e, id) => {
         e.stopPropagation();
         try {
-          
             const response = await axios.delete(`${URL}/visitor/${id}`);
             console.log(response);
             setDeleteFlag(!deleteFlag)
@@ -82,7 +79,8 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
             <BreadcrumbBar page='View Visits'/>
             <div className='headingContainer'>
                 <Heading style={{flexDirection:'row'}}>
-                    <GridRow>
+                <SearchBar setSearchField={setSearchField} placeholder="Search Visits" heading='View Visits' />
+                    {/* <GridRow>
                         <GridCol>
                             View Visits
                         </GridCol>
@@ -94,7 +92,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                                 onChange={onSearchChange} 
                             />
                         </GridCol>
-                    </GridRow>
+                    </GridRow> */}
                 </Heading>
             </div>
             <LoadingBox
