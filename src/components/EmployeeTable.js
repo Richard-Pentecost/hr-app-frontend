@@ -1,5 +1,6 @@
 import React from 'react';
 import Table from '@govuk-react/table';
+import Button from '@govuk-react/button';
     
 const EmployeeTable = ({users, handleClick, deleteHandler, adminLevel}) => {
     return (
@@ -20,7 +21,11 @@ const EmployeeTable = ({users, handleClick, deleteHandler, adminLevel}) => {
                 <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>{user.role}</Table.Cell>
                 <Table.Cell>{user.location}</Table.Cell>
-                {adminLevel === "Admin" && <Table.Cell><button onClick={(e)=>deleteHandler(e, user.userId)}>Delete</button></Table.Cell>}
+                { adminLevel === "Admin" && (
+                  <Table.Cell>
+                    <Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, user.userId)}>Delete</Button>
+                  </Table.Cell>
+                )}
             </Table.Row>))}
           </Table>
         </>
