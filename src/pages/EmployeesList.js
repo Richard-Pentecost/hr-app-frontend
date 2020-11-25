@@ -8,6 +8,10 @@ import TokenManager from '../utils/token-manager';
 import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
 import LoadingBox from '@govuk-react/loading-box';
+import GridRow from '@govuk-react/grid-row';
+import GridCol from '@govuk-react/grid-col';
+import SearchBox from '@govuk-react/search-box'
+import Button from '@govuk-react/button';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel}) => {
   const [users, setUsers] = useState([]);
@@ -74,13 +78,22 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
     <>
       <BreadcrumbBar page='View Employees'/>
       <div className='headingContainer'>
-        <Heading>View Employees</Heading>
+        <Heading style={{flexDirection:'row'}}>
+            <GridRow>
+                <GridCol>
+                    View Employees
+                </GridCol>
+                <GridCol>
+                    <SearchBox
+                        style={{width:'100%'}} 
+                        type='search'
+                        placeholder='Search Employees'
+                        onChange={onSearchChange} 
+                    />
+                </GridCol>
+              </GridRow>
+          </Heading>  
       </div>
-      <input
-        type='search'
-        placeholder='Search Employees'
-        onChange={onSearchChange} 
-      />
       <LoadingBox
         loading={loading}
         backgroundColor={'#fff'}
@@ -89,8 +102,8 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
         backgroundColorOpacity={0.85}
         spinnerColor={'#000'}
       >
-        <div className='employeeTable'>
-          <Table>
+        <div align='center'>
+          <Table style={{width:'85%', justifyContent: 'center', margin:'40px 50px'}}>
             <Table.Row>
               <Table.CellHeader>First Name</Table.CellHeader>
               <Table.CellHeader>Surname</Table.CellHeader>
@@ -106,7 +119,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
                 <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>{user.role}</Table.Cell>
                 <Table.Cell>{user.location}</Table.Cell>
-                <Table.Cell><button onClick={(e)=>deleteHandler(e, user.userId)}>Delete</button></Table.Cell>
+                <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, user.userId)}>Delete</Button></Table.Cell>
               </Table.Row>))}
           </Table>
         </div>

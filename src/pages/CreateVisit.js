@@ -6,6 +6,7 @@ import '../style/CreateEmployee.scss';
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import axios from 'axios';
+import LoadingBox from '@govuk-react/loading-box';
 
 const initialState = {
   firstName: '',
@@ -15,12 +16,13 @@ const initialState = {
   telephone: '',
   employeeEmail: '',
   company: '',
-  appointment: '',
+  appointment: new Date().now,
 
 };
 
 const CreateVisit = ({history, setCurrentVisitId}) => {
   const [newVisit, setNewVisit] = useState(initialState)
+  const [loading, setLoading] = useState(false);
   
   const handleInputChange = event => {
       console.log(event);
@@ -41,13 +43,15 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-
+      setLoading(true);
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
       const response = await axios.post(`${URL}/visitor`, newVisit, axiosHeaders);
-      setCurrentVisitId(response.data.visitor.visitorId);
+      setCurrentVisitId(response.data.visit.visitorId);
       setNewVisit({initialState});
+      setLoading(false);
       history.push('/view-visit');
     } catch (error) {
+        setLoading(false);
         console.log(error);
     }
     
@@ -71,6 +75,14 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
       <div className='headingContainer'>
         <Heading>Create Visit</Heading>
       </div>
+      <LoadingBox
+        loading={loading}
+        backgroundColor={'#fff'}
+        timeIn={800}
+        timeOut={200}
+        backgroundColorOpacity={0.85}
+        spinnerColor={'#000'}
+      >
       <div className='formContainer'>
         <Form 
           formArr={formArr}
@@ -79,6 +91,7 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
           btnText='Save'
         />
       </div>
+      </LoadingBox>
     </>
   )
 }
