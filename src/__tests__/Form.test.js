@@ -44,12 +44,12 @@ describe('Input - Enzyme', () => {
   it('renders a Form with a Date Input', () => {
     expect(wrapper.find(DateInput).length).toEqual(1);
   });
-
+ /*
   it('renders a Form with a Button', () => {
     expect(wrapper.find(Button).length).toEqual(1);
-  });
+  });*/
 
-  it('calls the onSubmit callback when the form is submitted', () => {
+ it('calls the onSubmit callback when the form is submitted', () => {
     wrapper.find('form').simulate('submit', onSubmit);
     expect(onSubmit).toBeCalledTimes(1);
   }); 
