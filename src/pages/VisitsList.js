@@ -81,7 +81,6 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                             View Visits
                         </GridCol>
                         <GridCol>
-                            
                             <SearchBox
                                 style={{width:'100%'}} 
                                 type='search'
@@ -91,7 +90,6 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                         </GridCol>
                     </GridRow>
                 </Heading>
-
             </div>
             <div align='center'>
             <Table style={{width:'85%', justifyContent: 'center', margin:'40px 50px'}} >
