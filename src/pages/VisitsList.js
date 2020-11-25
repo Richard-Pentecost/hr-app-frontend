@@ -8,9 +8,9 @@ import Heading from '../components/Heading';
 import Button from '@govuk-react/button';
 import moment from 'moment';
 import SearchBox from '@govuk-react/search-box'
-import Layout from '@govuk-react/layout';
 import GridRow from '@govuk-react/grid-row';
 import GridCol from '@govuk-react/grid-col';
+import '../style/CreateEmployee.scss';
 
 const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     const [visitors, setVisitors] = useState([]);
@@ -75,42 +75,44 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
         <>
             <BreadcrumbBar page='View Visits'/>
             <div className='headingContainer'>
-                <Heading>View Visits</Heading><br></br>
+                <Heading style={{flexDirection:'row'}}>
+                    <GridRow>
+                        <GridCol>
+                            View Visits
+                        </GridCol>
+                        <GridCol>
+                            
+                            <SearchBox
+                                style={{width:'100%'}} 
+                                type='search'
+                                placeholder='Search Visits'
+                                onChange={onSearchChange} 
+                            />
+                        </GridCol>
+                    </GridRow>
+                </Heading>
+
             </div>
-            <Layout>
-                <GridRow>
-                    <GridCol style={{display:'flex', justifyContent:'flex-end', paddingRight:'25px'}}>
-                    <SearchBox
-                        style={{width:'30%'}} 
-                        type='search'
-                        placeholder='Search Visits'
-                            onChange={onSearchChange} 
-                        />
-                    </GridCol>
-                </GridRow>
-                
-            </Layout>
-            
-            <div className='employeeTable'>
-                <Table>
-                <Table.Row>
-                    <Table.CellHeader>First Name</Table.CellHeader>
-                    <Table.CellHeader>Surname</Table.CellHeader>
-                    <Table.CellHeader>Company</Table.CellHeader>
-                    {adminLevel==='Admin' && <Table.CellHeader>Employee Email</Table.CellHeader>}
-                    <Table.CellHeader>Appointment Time</Table.CellHeader>
-                    <Table.CellHeader></Table.CellHeader>
-                </Table.Row>
-                    {filteredVisitors.map((visitor, index)=>(
-                    <Table.Row onClick={()=>handleClick(visitor.visitorId)} className='tableRow' key={index}>
-                    <Table.Cell>{visitor.firstName}</Table.Cell>
-                    <Table.Cell>{visitor.surname}</Table.Cell>
-                    <Table.Cell>{visitor.company}</Table.Cell>
-                    {adminLevel==='Admin' && <Table.Cell>{visitor.employeeEmail}</Table.Cell>}
-                    <Table.Cell>{moment(visitor.appointment).format('llll')}</Table.Cell>
-                    <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</Button></Table.Cell>
-                    </Table.Row>))}
-                </Table>
+            <div align='center'>
+            <Table style={{width:'85%', justifyContent: 'center', margin:'40px 50px'}} >
+            <Table.Row>
+                <Table.CellHeader>First Name</Table.CellHeader>
+                <Table.CellHeader>Surname</Table.CellHeader>
+                <Table.CellHeader>Company</Table.CellHeader>
+                {adminLevel==='Admin' && <Table.CellHeader>Employee Email</Table.CellHeader>}
+                <Table.CellHeader>Appointment Time</Table.CellHeader>
+                <Table.CellHeader></Table.CellHeader>
+            </Table.Row>
+                {filteredVisitors.map((visitor, index)=>(
+                <Table.Row onClick={()=>handleClick(visitor.visitorId)} className='tableRow' key={index}>
+                <Table.Cell>{visitor.firstName}</Table.Cell>
+                <Table.Cell>{visitor.surname}</Table.Cell>
+                <Table.Cell>{visitor.company}</Table.Cell>
+                {adminLevel==='Admin' && <Table.Cell>{visitor.employeeEmail}</Table.Cell>}
+                <Table.Cell>{moment(visitor.appointment).format('llll')}</Table.Cell>
+                <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</Button></Table.Cell>
+                </Table.Row>))}
+            </Table>
             </div>
         </>
     )

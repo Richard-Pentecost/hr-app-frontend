@@ -8,6 +8,7 @@ import TokenManager from '../utils/token-manager';
 import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
 import LoadingBox from '@govuk-react/loading-box';
+import Button from '@govuk-react/button';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel}) => {
   const [users, setUsers] = useState([]);
@@ -106,7 +107,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
                 <Table.Cell>{user.email}</Table.Cell>
                 <Table.Cell>{user.role}</Table.Cell>
                 <Table.Cell>{user.location}</Table.Cell>
-                <Table.Cell><button onClick={(e)=>deleteHandler(e, user.userId)}>Delete</button></Table.Cell>
+                <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, user.userId)}>Delete</Button></Table.Cell>
               </Table.Row>))}
           </Table>
         </div>
