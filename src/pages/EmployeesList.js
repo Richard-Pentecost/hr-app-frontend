@@ -84,7 +84,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
         backgroundColorOpacity={0.85}
         spinnerColor={'#000'}
       >
-        <div className='employeeTable'>
+        <div align='center'>
           <EmployeeTable 
             users={filteredUsers} 
             handleClick={handleClick} 
