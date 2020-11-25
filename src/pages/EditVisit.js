@@ -7,17 +7,22 @@ import Form from '../components/Form';
 import TokenManager from '../utils/token-manager';
 import moment from 'moment';
 import '../style/CreateEmployee.scss';
+import LoadingBox from '@govuk-react/loading-box';
 
 const EditVisit = ({history,currentVisitId}) => {
     const [currentVisit, setCurrentVisit] = useState({});
+    const [loading, setLoading] = useState(false);
 
 	useEffect(() => {
 		const fetchUser = async () => {
 			try {
+                setLoading(true);
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
                 const response = await axios.get(`${URL}/visitor/${currentVisitId}`, axiosHeaders);
                 setCurrentVisit(response.data.visit);
+                setLoading(false);
 			} catch (error) {
+                setLoading(false);
 				console.log(error);
 			}
 		};
@@ -45,13 +50,14 @@ const EditVisit = ({history,currentVisitId}) => {
     const handleSubmit = async (event) => {
         event.preventDefault();
         try {
+            setLoading(true);
             const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
             const response = await axios.put(`${URL}/visitor/${currentVisitId}`, currentVisit, axiosHeaders );
             setCurrentVisit(response.data.visit);
-
+            setLoading(false);
             history.push('/view-visit');
-            
         } catch (error) {
+            setLoading(false);
             console.log(error.response);
         }
     }
@@ -75,6 +81,14 @@ const EditVisit = ({history,currentVisitId}) => {
             <div className='headingContainer'>
                 <Heading>Edit Visit</Heading>
             </div>
+            <LoadingBox
+                loading={loading}
+                backgroundColor={'#fff'}
+                timeIn={800}
+                timeOut={200}
+                backgroundColorOpacity={0.85}
+                spinnerColor={'#000'}
+            >
             <div className='formContainer'>
                 <Form 
                     formArr={formArr}
@@ -83,6 +97,7 @@ const EditVisit = ({history,currentVisitId}) => {
                     btnText='Save'
                 />
             </div>
+            </LoadingBox>
         </>
     );
 }

@@ -11,12 +11,14 @@ import SearchBox from '@govuk-react/search-box'
 import GridRow from '@govuk-react/grid-row';
 import GridCol from '@govuk-react/grid-col';
 import '../style/CreateEmployee.scss';
+import LoadingBox from '@govuk-react/loading-box';
 
 const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
     const [visitors, setVisitors] = useState([]);
     const [filteredVisitors, setFilteredVisitors] = useState([]);
     const [searchField, setSearchField] = useState('');
     const [deleteFlag, setDeleteFlag] = useState(false);
+    const [loading, setLoading] = useState(false);
     
     const handleClick = (id) => {
         setCurrentVisitId(id);
@@ -34,15 +36,17 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
             const response = await axios.delete(`${URL}/visitor/${id}`);
             console.log(response);
             setDeleteFlag(!deleteFlag)
-          
+            setLoading(false);
         } catch (error) {
             console.log(error);
+            setLoading(false);
         }
     };
 
     useEffect(() => {
         const fetchVisitsList = async () => {
             try {
+                setLoading(true);
                 const axiosHeaders = {
                     headers: {
                         Authorization: 'Bearer ' + TokenManager.getToken(),
@@ -53,7 +57,9 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                 const response = await axios.get(`${URL}/visitor`, axiosHeaders);
                 console.log(response);
                 setVisitors(response.data.visitors);
+                setLoading(false);
             } catch (error) {
+                setLoading(false);
                 console.log(error);
             }
 
@@ -91,27 +97,36 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     </GridRow>
                 </Heading>
             </div>
-            <div align='center'>
-            <Table style={{width:'85%', justifyContent: 'center', margin:'40px 50px'}} >
-            <Table.Row>
-                <Table.CellHeader>First Name</Table.CellHeader>
-                <Table.CellHeader>Surname</Table.CellHeader>
-                <Table.CellHeader>Company</Table.CellHeader>
-                {adminLevel==='Admin' && <Table.CellHeader>Employee Email</Table.CellHeader>}
-                <Table.CellHeader>Appointment Time</Table.CellHeader>
-                <Table.CellHeader></Table.CellHeader>
-            </Table.Row>
-                {filteredVisitors.map((visitor, index)=>(
-                <Table.Row onClick={()=>handleClick(visitor.visitorId)} className='tableRow' key={index}>
-                <Table.Cell>{visitor.firstName}</Table.Cell>
-                <Table.Cell>{visitor.surname}</Table.Cell>
-                <Table.Cell>{visitor.company}</Table.Cell>
-                {adminLevel==='Admin' && <Table.Cell>{visitor.employeeEmail}</Table.Cell>}
-                <Table.Cell>{moment(visitor.appointment).format('llll')}</Table.Cell>
-                <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</Button></Table.Cell>
-                </Table.Row>))}
-            </Table>
-            </div>
+            <LoadingBox
+                loading={loading}
+                backgroundColor={'#fff'}
+                timeIn={800}
+                timeOut={200}
+                backgroundColorOpacity={0.85}
+                spinnerColor={'#000'}
+            >
+                <div align='center'>
+                <Table style={{width:'85%', justifyContent: 'center', margin:'40px 50px'}} >
+                <Table.Row>
+                    <Table.CellHeader>First Name</Table.CellHeader>
+                    <Table.CellHeader>Surname</Table.CellHeader>
+                    <Table.CellHeader>Company</Table.CellHeader>
+                    {adminLevel==='Admin' && <Table.CellHeader>Employee Email</Table.CellHeader>}
+                    <Table.CellHeader>Appointment Time</Table.CellHeader>
+                    <Table.CellHeader></Table.CellHeader>
+                </Table.Row>
+                    {filteredVisitors.map((visitor, index)=>(
+                    <Table.Row onClick={()=>handleClick(visitor.visitorId)} className='tableRow' key={index}>
+                    <Table.Cell>{visitor.firstName}</Table.Cell>
+                    <Table.Cell>{visitor.surname}</Table.Cell>
+                    <Table.Cell>{visitor.company}</Table.Cell>
+                    {adminLevel==='Admin' && <Table.Cell>{visitor.employeeEmail}</Table.Cell>}
+                    <Table.Cell>{moment(visitor.appointment).format('llll')}</Table.Cell>
+                    <Table.Cell><Button buttonColour='#357ebd' buttonHoverColour='#78aace' onClick={(e)=>deleteHandler(e, visitor.visitorId)}>Delete</Button></Table.Cell>
+                    </Table.Row>))}
+                </Table>
+                </div>
+            </LoadingBox>
         </>
     )
 }
