@@ -10,16 +10,33 @@ import LoadingWrapper from '../components/LoadingWrapper';
 import EmployeeTable from '../components/EmployeeTable';
 import SearchBar from '../components/SearchBar';
 
-const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel}) => {
+const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel, setUser}) => {
   const [users, setUsers] = useState([]);
   const [deleteFlag, setDeleteFlag] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState([]);
   const [searchField, setSearchField] = useState('');
   const [loading, setLoading] = useState(false);
   
+  useEffect(() => {
+    const fetchUser = async () => {
+        try {
+            setLoading(true);
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            const decodedToken = TokenManager.getTokenPayload();
+            const id = decodedToken.unique_name;
+            const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
+            setUser(response.data.user);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    };
+    fetchUser();
+}, [setUser]);
+
   const handleClick = (id) => {
-    setCurrentEmployeeId(id);
-    history.push('./view-employee');
+    history.push(`./view-employee/${id}`);
   };
 
   const deleteHandler = async (e, id) => {
@@ -27,8 +44,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
     try {
       setLoading(true)
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken(), adminLevel }};
-      const response = await axios.delete(`${URL}/user/${id}`, axiosHeaders);
-      console.log(response);
+      await axios.delete(`${URL}/user/${id}`, axiosHeaders);
       setDeleteFlag(!deleteFlag)
       setLoading(false);
     } catch (error) {
@@ -55,9 +71,11 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
         setLoading(false);
 				console.log(error);
 			}
-		};
-		fetchAllUsers();
-    }, [deleteFlag, adminLevel, email]);
+    };
+    if (adminLevel && email) {
+      fetchAllUsers();
+    }
+  }, [deleteFlag, adminLevel, email]);
 
     useEffect(() => {
       const filtered = users.filter(user => {
@@ -77,14 +95,16 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
       </div>
       
       <LoadingWrapper loading={loading}>
-        <div align='center'>
-          <EmployeeTable 
-            users={filteredUsers} 
-            handleClick={handleClick} 
-            deleteHandler={deleteHandler} 
-            adminLevel={adminLevel}
-          />
-        </div>
+        { users && (
+          <div align='center'>
+            <EmployeeTable 
+              users={filteredUsers} 
+              handleClick={handleClick} 
+              deleteHandler={deleteHandler} 
+              adminLevel={adminLevel}
+            />
+          </div>
+        )}
       </LoadingWrapper>
     </>
   );

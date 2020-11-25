@@ -11,7 +11,7 @@ const LoadingWrapper = ({ children, loading }) => {
             backgroundColorOpacity={0.85}
             spinnerColor={'#000'}
         >
-          {children}
+            {children}
         </LoadingBox>
     )
 };

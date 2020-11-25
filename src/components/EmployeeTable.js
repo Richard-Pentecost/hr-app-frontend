@@ -3,6 +3,7 @@ import Table from '@govuk-react/table';
 import Button from '@govuk-react/button';
     
 const EmployeeTable = ({users, handleClick, deleteHandler, adminLevel}) => {
+
     return (
         <Table style={{width:'85%', justifyContent: 'center', margin:'40px 50px'}}>
           <Table.Row>

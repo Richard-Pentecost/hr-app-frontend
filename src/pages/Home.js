@@ -17,7 +17,6 @@ const Home = ({user, setUser}) => {
 				setLoading(true);
 				const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
 				const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
-				console.log(response.data.user);
 				setUser(response.data.user);
 				setLoading(false);
 			} catch (error) {
@@ -26,7 +25,6 @@ const Home = ({user, setUser}) => {
 			}
 		}
 		fetchUser();
-
 	}, [setUser]);
 
 	let userInfo = null;
@@ -46,7 +44,7 @@ const Home = ({user, setUser}) => {
 			<LoadingWrapper loading={loading}>
 				<div className='userInfo'>
 					{userInfo}
-					<Card user={user} link='/edit-information' />
+					{user && <Card user={user} link='/edit-information' />}
 				</div>
 			</LoadingWrapper>
 		</>

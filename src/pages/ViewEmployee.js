@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Card from '../components/Card';
 import axios from 'axios';
+import { withRouter } from 'react-router';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
@@ -8,16 +9,18 @@ import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import LoadingWrapper from '../components/LoadingWrapper';
 
-const ViewEmployee = ({currentEmployeeId}) => {
+const ViewEmployee = ({ match }) => {
 		const [currentEmployee, setCurrentEmployee] = useState('');
 		const [loading, setLoading] = useState(false);
-
+		const [employeeId, setEmployeeId] = useState('');
+	
 	useEffect(() => {
+		setEmployeeId(match.params.userId);
 		const fetchUser = async () => {
 			try {
 				setLoading(true);
 				const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-				const response = await axios.get(`${URL}/user/${currentEmployeeId}`, axiosHeaders);
+				const response = await axios.get(`${URL}/user/${employeeId}`, axiosHeaders);
 				setCurrentEmployee(response.data.user);
 				setLoading(false);
 			} catch (error) {
@@ -25,8 +28,10 @@ const ViewEmployee = ({currentEmployeeId}) => {
 				console.log(error);
 			}
 		}
-		fetchUser();
-	}, [setCurrentEmployee, currentEmployeeId]);
+		if (employeeId) {
+			fetchUser();
+		}
+	}, [setCurrentEmployee, match.params.userId, employeeId]);
 
 	return (
 		<>
@@ -36,11 +41,11 @@ const ViewEmployee = ({currentEmployeeId}) => {
 			</div>
 			<LoadingWrapper loading={loading}>
 				<div className='userInfo'>
-					<Card user={currentEmployee} link='/edit-employee' />
+					<Card user={currentEmployee} link={`/view-employee/${employeeId}/edit-employee`} />
 				</div>
 			</LoadingWrapper>
 		</>
 	)
 }
 
-export default ViewEmployee;
+export default withRouter(ViewEmployee);
