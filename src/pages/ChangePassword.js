@@ -37,36 +37,36 @@ const ChangePassword = ({history, user, setUser}) => {
         };
         fetchUser();
     }, [setUser]);
-    
 
     const handleInputChange = event => {
-          setPassword({
-              ...password,
-              [event.target.name]: event.target.value}
-          );
+        if (errorMessage) {
+            setErrorMessage('');
+        }
+        setPassword({
+            ...password,
+            [event.target.name]: event.target.value}
+        );
     }
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (password.newPassword !== password.confirmNewPassword) {
-          setErrorMessage('Your passwords do not match');
-          return;
-        }
-        console.log('Backend to be done to allow request to work');
+            setErrorMessage('Your passwords do not match');
+            return;
+        };
 
-        // try {
-        //     setLoading(true);
-        //     const { confirmNewPassword, ...updateObj } = password;
-        //     const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-        //     await axios.put(`${URL}/user/${user.userId}/password`, axiosHeaders, updateObj);
-        //     setLoading(false);
-        //     history.push('/home');
-        // } catch (error) {
-        //     setLoading(false);
-        //     console.log(error.response);
-        // }
-      
+        try {
+            setLoading(true);
+            const { confirmNewPassword, ...updateObj } = password;
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            await axios.put(`${URL}/user/${user.userId}/password`, updateObj, axiosHeaders);
+            setLoading(false);
+            history.push('/home');
+        } catch (error) {
+            setLoading(false);
+            console.log(error.response);
+        }
     }
 
     
