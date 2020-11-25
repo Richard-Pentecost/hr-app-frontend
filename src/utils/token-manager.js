@@ -1,6 +1,7 @@
 import decode from 'jwt-decode';
 import moment from 'moment';
 
+
 const setToken = token => {
   window.localStorage.setItem('apiToken', token);
 };
@@ -21,4 +22,5 @@ const removeToken = () => {
   window.localStorage.removeItem('apiToken');
 };
 
-export default { setToken, getToken, getTokenPayload, isTokenValid, removeToken };
+const TokenManager = { setToken, getToken, getTokenPayload, isTokenValid, removeToken }
+export default TokenManager;

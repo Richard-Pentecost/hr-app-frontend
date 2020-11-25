@@ -23,7 +23,6 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
 
   const deleteHandler = async (e, id) => {
     e.stopPropagation();
-    console.log(currentEmployeeId);
     try {
       setLoading(true)
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken(), adminLevel }};

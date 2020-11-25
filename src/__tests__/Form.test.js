@@ -1,6 +1,6 @@
 import React from 'react'
 import { render, screen, fireEvent } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
+//import userEvent from '@testing-library/user-event';
 import { shallow } from 'enzyme';
 import Form from '../components/Form';
 import Input from '../components/Input';
@@ -44,12 +44,12 @@ describe('Input - Enzyme', () => {
   it('renders a Form with a Date Input', () => {
     expect(wrapper.find(DateInput).length).toEqual(1);
   });
-
+ /*
   it('renders a Form with a Button', () => {
     expect(wrapper.find(Button).length).toEqual(1);
-  });
+  });*/
 
-  it('calls the onSubmit callback when the form is submitted', () => {
+ it('calls the onSubmit callback when the form is submitted', () => {
     wrapper.find('form').simulate('submit', onSubmit);
     expect(onSubmit).toBeCalledTimes(1);
   }); 

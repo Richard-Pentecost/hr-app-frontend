@@ -33,6 +33,7 @@ const Login = ({ setToken }) => {
         try {
             setLoading(true);
             const response = await axios.post(`${URL}/login/authenticate`, loginData);
+            console.log(response)
             TokenManager.setToken(response.data.token);
             const token = TokenManager.getTokenPayload();
             setToken(token);

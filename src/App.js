@@ -7,6 +7,10 @@ import ViewEmployee from './pages/ViewEmployee';
 import EditEmployee from './pages/EditEmployee';
 import EmployeesList from './pages/EmployeesList';
 import CreateEmployee from './pages/CreateEmployee';
+import VisitsList from './pages/VisitsList';
+import ViewVisit from './pages/ViewVisit';
+import CreateVisit from './pages/CreateVisit';
+import EditVisit from './pages/EditVisit';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
 import ChangePassword from './pages/ChangePassword';
@@ -20,8 +24,8 @@ const App = () => {
 	const [token, setToken] = useState(TokenManager.isTokenValid() ? TokenManager.getTokenPayload() : null);
 	const [user, setUser] = useState({firstName:'', surname:'', role:'', email:'', telephone:'', doB:'', address:'', nexOfKin:'', adminLevel:'', location:''})
 	const [currentEmployeeId, setCurrentEmployeeId] = useState('');
-
-
+	const [currentVisitId, setCurrentVisitId] = useState('');
+	
 	const isLoggedIn = () => {
     return Boolean(token) && TokenManager.isTokenValid();
 	}
@@ -98,6 +102,43 @@ const App = () => {
 							authenticate={isLoggedIn}
 							currentEmployeeId = {currentEmployeeId}
 						/> 
+
+						<AuthRoute
+							exact
+							path='/visits-list'
+							component={VisitsList}
+							authenticate={isLoggedIn}
+							adminLevel={user.adminLevel} 
+							email={user.email} 
+							setCurrentVisitId={setCurrentVisitId}
+						/>
+
+						<AuthRoute
+							exact
+							path='/view-visit'
+							component={ViewVisit}
+							authenticate={isLoggedIn}
+							adminLevel={user.adminLevel} 
+							email={user.email} 
+							currentVisitId = {currentVisitId}
+						/>
+
+						<AuthRoute
+							exact
+							path='/edit-visit'
+							component={EditVisit}
+							authenticate={isLoggedIn}
+							currentVisitId = {currentVisitId}
+						/>
+
+						<AuthRoute
+							exact
+							path='/create-visit'
+							component={CreateVisit}
+							authenticate={isLoggedIn}
+							currentVisitId = {currentVisitId}
+							setCurrentVisitId={setCurrentVisitId}
+            />
 
 						<AuthRoute 
 							exact

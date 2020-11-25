@@ -31,6 +31,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
     
 
     const handleInputChange = event => {
+        console.log(event);
         if (event.target === undefined) {
             setCurrentEmployee({
                 ...currentEmployee,
@@ -47,6 +48,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
 
     
     const handleSubmit = async (event) => {
+
         event.preventDefault();
         try {
             setLoading(true);
