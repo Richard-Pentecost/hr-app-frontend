@@ -1,7 +1,7 @@
 import React, { useEffect , useState } from 'react';
 import Card from '../components/Card';
 import axios from 'axios';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
@@ -43,19 +43,12 @@ const Home = ({user, setUser}) => {
 
 	return (
 		<>
-			<LoadingBox
-				loading={loading}
-				backgroundColor={'#fff'}
-				timeIn={800}
-				timeOut={200}
-				backgroundColorOpacity={0.85}
-				spinnerColor={'#000'}
-			>
+			<LoadingWrapper loading={loading}>
 				<div className='userInfo'>
 					{userInfo}
 					<Card user={user} link='/edit-information' />
 				</div>
-			</LoadingBox>
+			</LoadingWrapper>
 		</>
 	)
 }

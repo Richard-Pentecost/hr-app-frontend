@@ -2,18 +2,17 @@ import React, { useEffect, useState } from 'react';
 import { URL } from '../utils/Constants';
 import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import Heading from '../components/Heading';
 import Form from '../components/Form';
 import TokenManager from '../utils/token-manager';
 import { withRouter } from 'react-router';
-
 import '../style/CreateEmployee.scss';
 
 const initialState = {
-  oldPassword: '',
-  newPassword: '',
-  confirmNewPassword: '',
+    oldPassword: '',
+    newPassword: '',
+    confirmNewPassword: '',
 };
 
 const ChangePassword = ({history, user, setUser}) => {
@@ -84,14 +83,7 @@ const ChangePassword = ({history, user, setUser}) => {
             <div className='headingContainer'>
                 <Heading>Change Password</Heading>
             </div>
-            <LoadingBox
-              loading={loading}
-              backgroundColor={'#fff'}
-              timeIn={800}
-              timeOut={200}
-              backgroundColorOpacity={0.85}
-              spinnerColor={'#000'}
-            >
+            <LoadingWrapper loading={loading}>
                 <div className='formContainer'>
                     {formArr &&
                         <Form 
@@ -103,7 +95,7 @@ const ChangePassword = ({history, user, setUser}) => {
                     }       
                 </div>
                 <div>{errorMessage && <h1>{errorMessage}</h1>}</div>
-            </LoadingBox>
+            </LoadingWrapper>
         </>
 
     );

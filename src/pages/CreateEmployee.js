@@ -6,7 +6,7 @@ import '../style/CreateEmployee.scss';
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import axios from 'axios';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import { withRouter } from 'react-router';
 
 const initialState = {
@@ -80,14 +80,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
       <div className='headingContainer'>
         <Heading>Create Employee</Heading>
       </div>
-      <LoadingBox
-        loading={loading}
-        backgroundColor={'#fff'}
-        timeIn={800}
-        timeOut={200}
-        backgroundColorOpacity={0.85}
-        spinnerColor={'#000'}
-      >
+      <LoadingWrapper loading={loading}>
         <div className='formContainer'>
           <Form 
             formArr={formArr}
@@ -96,7 +89,7 @@ const CreateEmployee = ({history, setCurrentEmployeeId}) => {
             btnText='Save'
           />
         </div>
-      </LoadingBox>
+      </LoadingWrapper>
     </>
   )
 }

@@ -6,7 +6,7 @@ import Heading from '../components/Heading';
 import Form from '../components/Form';
 import TokenManager from '../utils/token-manager';
 import { withRouter } from 'react-router';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import '../style/CreateEmployee.scss';
 
 const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
@@ -84,14 +84,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
             <div className='headingContainer'>
                 <Heading>Edit Employee</Heading>
             </div>
-            <LoadingBox
-                loading={loading}
-                backgroundColor={'#fff'}
-                timeIn={800}
-                timeOut={200}
-                backgroundColorOpacity={0.85}
-                spinnerColor={'#000'}
-            >
+            <LoadingWrapper loading={loading}>
                 <div className='formContainer'>
                     <Form 
                         formArr={formArr}
@@ -100,7 +93,7 @@ const EditEmployee = ({history, isLoggedIn, currentEmployeeId}) => {
                         btnText='Save'
                     />
                 </div>
-            </LoadingBox>
+            </LoadingWrapper>
         </>
     );
 }

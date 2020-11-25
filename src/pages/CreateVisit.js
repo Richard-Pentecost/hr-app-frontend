@@ -6,7 +6,7 @@ import '../style/CreateEmployee.scss';
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import axios from 'axios';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 
 const initialState = {
   firstName: '',
@@ -75,23 +75,16 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
       <div className='headingContainer'>
         <Heading>Create Visit</Heading>
       </div>
-      <LoadingBox
-        loading={loading}
-        backgroundColor={'#fff'}
-        timeIn={800}
-        timeOut={200}
-        backgroundColorOpacity={0.85}
-        spinnerColor={'#000'}
-      >
-      <div className='formContainer'>
-        <Form 
-          formArr={formArr}
-          handleInputChange={handleInputChange}
-          handleSubmit={handleSubmit}
-          btnText='Save'
-        />
-      </div>
-      </LoadingBox>
+      <LoadingWrapper loading={loading}>
+        <div className='formContainer'>
+          <Form 
+            formArr={formArr}
+            handleInputChange={handleInputChange}
+            handleSubmit={handleSubmit}
+            btnText='Save'
+          />
+        </div>
+      </LoadingWrapper>
     </>
   )
 }

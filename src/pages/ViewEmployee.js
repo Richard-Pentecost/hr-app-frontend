@@ -6,7 +6,7 @@ import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 
 const ViewEmployee = ({currentEmployeeId}) => {
 		const [currentEmployee, setCurrentEmployee] = useState('');
@@ -34,18 +34,11 @@ const ViewEmployee = ({currentEmployeeId}) => {
 			<div className='headingContainer'>
 					<Heading>Employee Information</Heading>
 			</div>
-			<LoadingBox
-				loading={loading}
-				backgroundColor={'#fff'}
-				timeIn={800}
-				timeOut={200}
-				backgroundColorOpacity={0.85}
-				spinnerColor={'#000'}
-			>
+			<LoadingWrapper loading={loading}>
 				<div className='userInfo'>
 					<Card user={currentEmployee} link='/edit-employee' />
 				</div>
-			</LoadingBox>
+			</LoadingWrapper>
 		</>
 	)
 }

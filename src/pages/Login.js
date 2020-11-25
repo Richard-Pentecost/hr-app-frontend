@@ -4,7 +4,7 @@ import { URL } from '../utils/Constants';
 import Form from '../components/Form';
 import Heading from '../components/Heading';
 import TokenManager from '../utils/token-manager';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import '../style/Login.scss';
 
 const Login = ({ setToken }) => {
@@ -54,14 +54,7 @@ const Login = ({ setToken }) => {
     ];
     return (
         <div className='loginPage'>
-            <LoadingBox
-                loading={loading}
-                backgroundColor={'#fff'}
-                timeIn={800}
-                timeOut={200}
-                backgroundColorOpacity={0.85}
-                spinnerColor={'#000'}
-            >
+            <LoadingWrapper loading={loading}>
                 <Heading>Login</Heading>
                 <div className='loginContainer'>
                     <Form 
@@ -72,7 +65,7 @@ const Login = ({ setToken }) => {
                     />
                     {errorMessage && <div className='errorMessage'>{errorMessage}</div>}
                 </div>
-            </LoadingBox>
+            </LoadingWrapper>
         </div>
     )
 }

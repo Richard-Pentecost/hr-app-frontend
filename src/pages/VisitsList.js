@@ -5,7 +5,7 @@ import TokenManager from '../utils/token-manager';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import '../style/CreateEmployee.scss';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import SearchBar from '../components/SearchBar';
 import VisitTable from '../components/VisitTable';
 
@@ -76,14 +76,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                     <SearchBar setSearchField={setSearchField} placeholder="Search Visits" heading='View Visits' />
                 </Heading>
             </div>
-            <LoadingBox
-                loading={loading}
-                backgroundColor={'#fff'}
-                timeIn={800}
-                timeOut={200}
-                backgroundColorOpacity={0.85}
-                spinnerColor={'#000'}
-            >
+            <LoadingWrapper loading={loading}>
                 <div align='center'>
                     <VisitTable 
                         visitors={filteredVisitors}
@@ -92,7 +85,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                         adminLevel={adminLevel}
                     />
                 </div>
-            </LoadingBox>
+            </LoadingWrapper>
         </>
     )
 }

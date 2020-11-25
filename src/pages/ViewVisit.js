@@ -6,7 +6,7 @@ import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import axios from 'axios';
 import InfoCard from '../components/InfoCard';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 
 const ViewVisit = ({currentVisitId}) => {
     const [currentVisit, setCurrentVisit] = useState('');
@@ -50,18 +50,11 @@ const ViewVisit = ({currentVisitId}) => {
             <div className='headingContainer'>
                 <Heading>Visit Information</Heading>
             </div>
-            <LoadingBox
-				loading={loading}
-				backgroundColor={'#fff'}
-				timeIn={800}
-				timeOut={200}
-				backgroundColorOpacity={0.85}
-				spinnerColor={'#000'}
-			>
-            <div className='userInfo'>
-                <InfoCard infoArray={infoArray} link='/edit-visit' />
-            </div>
-            </LoadingBox>
+            <LoadingWrapper loading={loading}>
+                <div className='userInfo'>
+                    <InfoCard infoArray={infoArray} link='/edit-visit' />
+                </div>
+            </LoadingWrapper>
 		</>
     )
 }

@@ -6,7 +6,7 @@ import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import EmployeeTable from '../components/EmployeeTable';
 import SearchBar from '../components/SearchBar';
 
@@ -76,14 +76,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
         </Heading>  
       </div>
       
-      <LoadingBox
-        loading={loading}
-        backgroundColor={'#fff'}
-        timeIn={800}
-        timeOut={200}
-        backgroundColorOpacity={0.85}
-        spinnerColor={'#000'}
-      >
+      <LoadingWrapper loading={loading}>
         <div align='center'>
           <EmployeeTable 
             users={filteredUsers} 
@@ -92,7 +85,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
             adminLevel={adminLevel}
           />
         </div>
-      </LoadingBox>
+      </LoadingWrapper>
     </>
   );
 };

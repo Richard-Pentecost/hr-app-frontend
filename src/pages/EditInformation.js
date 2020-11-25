@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { URL } from '../utils/Constants';
 import axios from 'axios';
 import BreadcrumbBar from '../components/BreadcrumbBar';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import Heading from '../components/Heading';
 import Form from '../components/Form';
 import TokenManager from '../utils/token-manager';
@@ -80,14 +80,7 @@ const EditInformation = ({history, user, setUser}) => {
             <div className='headingContainer'>
                 <Heading>Edit Information</Heading>
             </div>
-            <LoadingBox
-				loading={loading}
-				backgroundColor={'#fff'}
-				timeIn={800}
-				timeOut={200}
-				backgroundColorOpacity={0.85}
-				spinnerColor={'#000'}
-			>
+            <LoadingWrapper loading={loading}>
                 <div className='formContainer'>
                     {formArr &&
                         <Form 
@@ -98,7 +91,7 @@ const EditInformation = ({history, user, setUser}) => {
                         />
                     }       
                 </div>
-            </LoadingBox>
+            </LoadingWrapper>
         </>
 
     );
