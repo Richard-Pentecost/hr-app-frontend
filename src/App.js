@@ -13,6 +13,7 @@ import CreateVisit from './pages/CreateVisit';
 import EditVisit from './pages/EditVisit';
 import Navbar from './components/Navbar';
 import AuthRoute from './components/AuthRoute';
+import ChangePassword from './pages/ChangePassword';
 import { ThemeProvider } from '@material-ui/core/styles';
 import TokenManager from './utils/token-manager';
 import theme from "./resources/theme";
@@ -137,6 +138,15 @@ const App = () => {
 							authenticate={isLoggedIn}
 							currentVisitId = {currentVisitId}
 							setCurrentVisitId={setCurrentVisitId}
+            />
+
+						<AuthRoute 
+							exact
+							path="/change-password"
+							component={ChangePassword}
+							user={user} 
+							setUser={setUser}
+							authenticate={isLoggedIn}
 						/>
 					</Switch>
 				</div>
