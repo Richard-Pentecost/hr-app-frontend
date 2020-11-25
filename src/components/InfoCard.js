@@ -4,7 +4,7 @@ import '../style/Card.scss';
 import CreateIcon from '@material-ui/icons/Create';
 
 const InfoCard = ({infoArray, link}) => {
-    //console.log(user.firstName);
+ 
     return (
         <div className='card'>
             <div className='cardHeader'>
@@ -23,7 +23,6 @@ const InfoCard = ({infoArray, link}) => {
                  <span className='cardInformation__info'>{input.info}</span>
              </div>
             ))}
-          
         </div>
     );
 };
