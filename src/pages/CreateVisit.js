@@ -15,7 +15,7 @@ const initialState = {
   telephone: '',
   employeeEmail: '',
   company: '',
-  appointment: '',
+  appointment: new Date().now,
 
 };
 
@@ -41,10 +41,9 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
   const handleSubmit = async event => {
     event.preventDefault();
     try {
-
       const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
       const response = await axios.post(`${URL}/visitor`, newVisit, axiosHeaders);
-      setCurrentVisitId(response.data.visitor.visitorId);
+      setCurrentVisitId(response.data.visit.visitorId);
       setNewVisit({initialState});
       history.push('/view-visit');
     } catch (error) {

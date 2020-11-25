@@ -5,7 +5,7 @@ import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import Form from '../components/Form';
 import TokenManager from '../utils/token-manager';
-
+import moment from 'moment';
 import '../style/CreateEmployee.scss';
 
 const EditVisit = ({history,currentVisitId}) => {
@@ -66,7 +66,7 @@ const EditVisit = ({history,currentVisitId}) => {
             { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
             { type: 'email', value: email, name: 'email', label: 'Email' },
             { type: 'email', value: employeeEmail, name: 'employeeEmail', label: 'Employee Email' },
-            { type: 'dateTime', value: appointment, name: 'appointment', label: 'Appointment' },
+            { type: 'dateTime', value: moment(appointment).format('llll'), name: 'appointment', label: 'Appointment' },
         ];
 
     return (
