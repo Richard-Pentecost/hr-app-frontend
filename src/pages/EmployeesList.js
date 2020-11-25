@@ -1,13 +1,13 @@
 import React, { useEffect, useState} from 'react';
 import axios from 'axios';
 import { withRouter } from 'react-router-dom';
-import Table from '@govuk-react/table';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import '../style/EmployeesList.scss';
 import Heading from '../components/Heading';
 import LoadingBox from '@govuk-react/loading-box';
+import EmployeeTable from '../components/EmployeeTable';
 
 const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel}) => {
   const [users, setUsers] = useState([]);
@@ -90,7 +90,13 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
         spinnerColor={'#000'}
       >
         <div className='employeeTable'>
-          <Table>
+          <EmployeeTable 
+            users={filteredUsers} 
+            handleClick={handleClick} 
+            deleteHandler={deleteHandler} 
+            adminLevel={adminLevel}
+          />
+          {/* <Table>
             <Table.Row>
               <Table.CellHeader>First Name</Table.CellHeader>
               <Table.CellHeader>Surname</Table.CellHeader>
@@ -108,7 +114,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
                 <Table.Cell>{user.location}</Table.Cell>
                 <Table.Cell><button onClick={(e)=>deleteHandler(e, user.userId)}>Delete</button></Table.Cell>
               </Table.Row>))}
-          </Table>
+              </Table> */}
         </div>
       </LoadingBox>
     </>
