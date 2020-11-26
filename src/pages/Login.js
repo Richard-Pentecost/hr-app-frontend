@@ -33,14 +33,12 @@ const Login = ({ setToken }) => {
         try {
             setLoading(true);
             const response = await axios.post(`${URL}/login/authenticate`, loginData);
-            console.log(response)
             TokenManager.setToken(response.data.token);
             const token = TokenManager.getTokenPayload();
             setToken(token);
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            console.log(error);
             const { data } = error.response
             let errorMessage;
             data.message ? errorMessage = data.message : errorMessage = data.title;

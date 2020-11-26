@@ -51,7 +51,7 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
       history.push('/view-visit');
     } catch (error) {
         setLoading(false);
-        console.log(error);
+        //console.log(error.response);
     }
     
   }

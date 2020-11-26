@@ -25,7 +25,7 @@ const EditEmployee = ({history, match, isLoggedIn}) => {
                 setLoading(false);
 			} catch (error) {
                 setLoading(false);
-				console.log(error);
+				//console.log(error.response);
 			}
         };
         if (employeeId) {
@@ -35,7 +35,6 @@ const EditEmployee = ({history, match, isLoggedIn}) => {
     
 
     const handleInputChange = event => {
-        console.log(event);
         if (event.target === undefined) {
             setCurrentEmployee({
                 ...currentEmployee,
@@ -63,7 +62,7 @@ const EditEmployee = ({history, match, isLoggedIn}) => {
             history.push(`/view-employee/${employeeId}`);
         } catch (error) {
             setLoading(false);
-            console.log(error.response);
+            //console.log(error.response);
         }
     }
 

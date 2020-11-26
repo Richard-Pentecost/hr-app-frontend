@@ -28,7 +28,7 @@ const ViewVisit = ({match}) => {
                 setLoading(false);
             } catch(error){
                 setLoading(false);
-				console.log(error);
+				// console.log(error.response);
             }
         }
         if (visitId) {
@@ -52,7 +52,7 @@ const ViewVisit = ({match}) => {
             setSignInButtonClicked(!signInButtonClicked);
 
         } catch (error) {
-            console.log(error);
+            // console.log(error.response);
         }
     }
     
