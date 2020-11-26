@@ -41,8 +41,6 @@ const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmploye
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            console.log(error.response);
-            console.log(error.response.status)
             let errorMessage;
             const { data, status } = error.response;
             data.message ? errorMessage = data.message : errorMessage = data.title;

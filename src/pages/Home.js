@@ -47,12 +47,12 @@ const Home = ({user, setUser}) => {
 	if (errorMessage) return <ErrorPage errorMessage={errorMessage} />
 	return (
 		<>
-				<LoadingWrapper loading={loading}>
-					<div className='userInfo'>
-						{userInfo}
-						{user && <Card user={user} link='/edit-information' />}
-					</div>
-				</LoadingWrapper>
+			<LoadingWrapper loading={loading}>
+				<div className='userInfo'>
+					{userInfo}
+					{user && <Card user={user} link='/edit-information' />}
+				</div>
+			</LoadingWrapper>
 		</>
 	)
 }

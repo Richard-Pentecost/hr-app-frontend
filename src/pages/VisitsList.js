@@ -28,7 +28,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId, setUser}) =>
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                console.log(error.response);
+                // console.log(error.response);
             }
         };
         fetchUser();
@@ -46,7 +46,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId, setUser}) =>
             setDeleteFlag(!deleteFlag)
             setLoading(false);
         } catch (error) {
-            console.log(error);
+            // console.log(error);
             setLoading(false);
         }
     };
@@ -67,7 +67,7 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId, setUser}) =>
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                console.log(error.response);
+                // console.log(error.response);
             }
 
         }

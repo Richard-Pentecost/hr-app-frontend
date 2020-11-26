@@ -61,7 +61,7 @@ const EditVisit = ({history, match}) => {
             history.push(`/view-visit/${visitId}`);
         } catch (error) {
             setLoading(false);
-            console.log(error.response);
+            //console.log(error.response);
         }
     }
 
