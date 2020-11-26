@@ -2,12 +2,14 @@ import React, { useEffect , useState } from 'react';
 import Card from '../components/Card';
 import axios from 'axios';
 import LoadingWrapper from '../components/LoadingWrapper';
+import ErrorPage from '../pages/ErrorPage';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 
 const Home = ({user, setUser}) => {
 	const [loading, setLoading] = useState(false);
+	const [errorMessage, setErrorMessage] = useState('');
 
 	useEffect(() => {
 		const fetchUser = async () => {
@@ -16,12 +18,14 @@ const Home = ({user, setUser}) => {
 			try {
 				setLoading(true);
 				const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-				const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
+				// const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
+				const response = await axios.get(`${URL}/user/111`, axiosHeaders);
 				setUser(response.data.user);
 				setLoading(false);
 			} catch (error) {
 				setLoading(false);
-				console.log(error);
+				setErrorMessage(error.response);
+				console.log(error.response)
 			}
 		}
 		fetchUser();
@@ -39,14 +43,20 @@ const Home = ({user, setUser}) => {
 		);
 	};
 
+	// let showError;
+	// if (errorMessage) {
+	// 	console.log(errorMessage);
+	// 	showError = <ErrorPage errorMessage={errorMessage} />
+	// }
+	if (errorMessage) return <ErrorPage errorMessage={errorMessage} />
 	return (
 		<>
-			<LoadingWrapper loading={loading}>
-				<div className='userInfo'>
-					{userInfo}
-					{user && <Card user={user} link='/edit-information' />}
-				</div>
-			</LoadingWrapper>
+				<LoadingWrapper loading={loading}>
+					<div className='userInfo'>
+						{userInfo}
+						{user && <Card user={user} link='/edit-information' />}
+					</div>
+				</LoadingWrapper>
 		</>
 	)
 }
