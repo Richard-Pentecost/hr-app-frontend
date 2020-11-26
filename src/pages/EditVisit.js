@@ -9,25 +9,29 @@ import moment from 'moment';
 import '../style/CreateEmployee.scss';
 import LoadingWrapper from '../components/LoadingWrapper';
 
-const EditVisit = ({history,currentVisitId}) => {
+const EditVisit = ({history, match}) => {
     const [currentVisit, setCurrentVisit] = useState({});
     const [loading, setLoading] = useState(false);
+    const [visitId, setVisitId] = useState('');
 
 	useEffect(() => {
+        setVisitId(match.params.visitId);
 		const fetchUser = async () => {
 			try {
                 setLoading(true);
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-                const response = await axios.get(`${URL}/visitor/${currentVisitId}`, axiosHeaders);
+                const response = await axios.get(`${URL}/visitor/${visitId}`, axiosHeaders);
                 setCurrentVisit(response.data.visit);
                 setLoading(false);
 			} catch (error) {
                 setLoading(false);
 				console.log(error);
 			}
-		};
-		fetchUser();
-    }, [setCurrentVisit, currentVisitId]);
+        };
+        if (visitId) {
+            fetchUser();
+        }
+    }, [setCurrentVisit, visitId, match.params.visitId]);
     
 
     const handleInputChange = event => {
@@ -43,7 +47,6 @@ const EditVisit = ({history,currentVisitId}) => {
                 [event.target.name]: event.target.value}
             );
         }
-        
     }
 
     
@@ -52,10 +55,10 @@ const EditVisit = ({history,currentVisitId}) => {
         try {
             setLoading(true);
             const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-            const response = await axios.put(`${URL}/visitor/${currentVisitId}`, currentVisit, axiosHeaders );
+            const response = await axios.put(`${URL}/visitor/${visitId}`, currentVisit, axiosHeaders );
             setCurrentVisit(response.data.visit);
             setLoading(false);
-            history.push('/view-visit');
+            history.push(`/view-visit/${visitId}`);
         } catch (error) {
             setLoading(false);
             console.log(error.response);
@@ -77,7 +80,7 @@ const EditVisit = ({history,currentVisitId}) => {
 
     return (
         <>
-            <BreadcrumbBar page='Edit Visit' prevPages={[ {name:'Visit Information', link: '/view-visit'} ]}/>
+            <BreadcrumbBar page='Edit Visit' prevPages={[ {name:'Visit Information', link:`/view-visit/${visitId}`} ]}/>
             <div className='headingContainer'>
                 <Heading>Edit Visit</Heading>
             </div>

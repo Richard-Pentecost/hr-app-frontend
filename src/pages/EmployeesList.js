@@ -75,7 +75,7 @@ const EmployeesList = ({history, email, adminLevel, setUser, userId}) => {
     if (adminLevel && email) {
       fetchAllUsers();
     }
-  }, [deleteFlag, adminLevel, email]);
+  }, [deleteFlag, adminLevel, email, userId]);
 
     useEffect(() => {
       const filtered = users.filter(user => {

@@ -91,10 +91,10 @@ const ChangePassword = ({history, user, setUser}) => {
                             handleInputChange={handleInputChange}
                             handleSubmit={handleSubmit}
                             btnText='Save'
+                            errorMessage={errorMessage}
                         />
                     }       
                 </div>
-                <div>{errorMessage && <h1>{errorMessage}</h1>}</div>
             </LoadingWrapper>
         </>
 

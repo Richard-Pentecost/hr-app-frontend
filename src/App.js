@@ -121,10 +121,9 @@ const App = () => {
 
 					<AuthRoute
 						exact
-						path='/edit-visit'
+						path='/view-visit/:visitId/edit-visit'
 						component={EditVisit}
 						authenticate={isLoggedIn}
-						currentVisitId = {currentVisitId}
 					/>
 
 					<AuthRoute
