@@ -61,7 +61,7 @@ const Form = ({ formArr, handleInputChange, handleSubmit, btnText }) => {
           {form}
         </div>
         <div className='form__button'>
-        <Button buttonColour='#357ebd' buttonHoverColour='#78aace'>{btnText}</Button>
+          <Button buttonColour='#357ebd' buttonHoverColour='#78aace'>{btnText}</Button>
         </div>
       </form>
     </div>
