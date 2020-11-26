@@ -18,14 +18,15 @@ const Home = ({user, setUser}) => {
 			try {
 				setLoading(true);
 				const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-				// const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
-				const response = await axios.get(`${URL}/user/111`, axiosHeaders);
+				const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
 				setUser(response.data.user);
 				setLoading(false);
 			} catch (error) {
 				setLoading(false);
-				setErrorMessage(error.response);
-				console.log(error.response)
+				let errorMessage;
+				const { data, status } = error.response;
+				data.message ? errorMessage = data.message : errorMessage = data.title;
+				setErrorMessage({message: errorMessage, status: status});
 			}
 		}
 		fetchUser();
@@ -43,11 +44,6 @@ const Home = ({user, setUser}) => {
 		);
 	};
 
-	// let showError;
-	// if (errorMessage) {
-	// 	console.log(errorMessage);
-	// 	showError = <ErrorPage errorMessage={errorMessage} />
-	// }
 	if (errorMessage) return <ErrorPage errorMessage={errorMessage} />
 	return (
 		<>

@@ -1,0 +1,24 @@
+@import './variables.scss';
+
+.errorContainer {
+  width: 50%;
+  margin: 50px auto;
+  display: flex;
+  flex-direction: column;
+
+  &__div {
+    text-align: center;
+    font-size: 50px;
+    font-weight: bold;
+  }
+
+  &__text {
+    text-align: center;
+    font-size: 30px;
+    font-weight: bold;
+  }
+}
+
+.btnContainer {
+    text-align: center;
+}
