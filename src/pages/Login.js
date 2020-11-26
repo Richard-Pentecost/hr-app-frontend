@@ -52,18 +52,20 @@ const Login = ({ setToken }) => {
         { type: 'text', value: email, name: 'email', label: 'Email' },
         { type: 'password', value: password, name: 'password', label: 'Password' },
     ];
+
     return (
         <div className='loginPage'>
             <LoadingWrapper loading={loading}>
-                <Heading>Login</Heading>
+            <Heading>Login</Heading>
                 <div className='loginContainer'>
                     <Form 
                         formArr={formArr}
                         handleInputChange={inputChangeHandler}
                         handleSubmit={submitHandler}
+                        errorMessage={errorMessage}
                         btnText='Login'
                     />
-                    {errorMessage && <div className='errorMessage'>{errorMessage}</div>}
+                    
                 </div>
             </LoadingWrapper>
         </div>

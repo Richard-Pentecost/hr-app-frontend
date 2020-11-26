@@ -4,9 +4,10 @@ import Button from '@govuk-react/button';
 import Select from './Select';
 import DateInput from './DateInput';
 import DateTimeInput from './DateTimeInput';
+import ErrorText from '@govuk-react/error-text';
 import '../style/Form.scss';
 
-const Form = ({ formArr, handleInputChange, handleSubmit, btnText }) => {
+const Form = ({ formArr, handleInputChange, handleSubmit, btnText, errorMessage }) => {
 
   const form = formArr.map(input => {
     switch(input.type) {
@@ -60,6 +61,7 @@ const Form = ({ formArr, handleInputChange, handleSubmit, btnText }) => {
         <div className='form__inputs'>
           {form}
         </div>
+        <ErrorText style={{fontSize:'18px', textAlign: 'right'}}>{errorMessage}&nbsp;</ErrorText>
         <div className='form__button'>
           <Button buttonColour='#357ebd' buttonHoverColour='#78aace'>{btnText}</Button>
         </div>
