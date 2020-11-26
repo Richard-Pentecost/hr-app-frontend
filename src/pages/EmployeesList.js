@@ -10,7 +10,7 @@ import LoadingWrapper from '../components/LoadingWrapper';
 import EmployeeTable from '../components/EmployeeTable';
 import SearchBar from '../components/SearchBar';
 
-const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel, setUser, userId}) => {
+const EmployeesList = ({history, email, adminLevel, setUser, userId}) => {
   const [users, setUsers] = useState([]);
   const [deleteFlag, setDeleteFlag] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState([]);

@@ -106,17 +106,17 @@ const App = () => {
 						authenticate={isLoggedIn}
 						adminLevel={user.adminLevel} 
 						email={user.email} 
+						setUser={setUser}
 						setCurrentVisitId={setCurrentVisitId}
 					/>
 
 					<AuthRoute
 						exact
-						path='/view-visit'
+						path='/view-visit/:visitId'
 						component={ViewVisit}
 						authenticate={isLoggedIn}
 						adminLevel={user.adminLevel} 
 						email={user.email} 
-						currentVisitId = {currentVisitId}
 					/>
 
 					<AuthRoute

@@ -25,7 +25,6 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
   const [loading, setLoading] = useState(false);
   
   const handleInputChange = event => {
-      console.log(event);
     if (event.target === undefined) {
       setNewVisit({
           ...newVisit,

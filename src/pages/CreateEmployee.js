@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Heading from '../components/Heading';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Form from '../components/Form';
@@ -25,6 +25,24 @@ const initialState = {
 const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmployeeId}) => {
   const [newUser, setNewUser] = useState(initialState);
   const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchUser = async () => {
+        try {
+            setLoading(true);
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            const decodedToken = TokenManager.getTokenPayload();
+            const id = decodedToken.unique_name;
+            const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
+            setUser(response.data.user);
+            setLoading(false);
+        } catch (error) {
+            setLoading(false);
+            console.log(error);
+        }
+    };
+    fetchUser();
+  }, [setUser]);
 
   const handleInputChange = event => {
     if (event.target === undefined) {

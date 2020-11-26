@@ -9,16 +9,34 @@ import LoadingWrapper from '../components/LoadingWrapper';
 import SearchBar from '../components/SearchBar';
 import VisitTable from '../components/VisitTable';
 
-const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
+const VisitsList = ({history, adminLevel, email, setCurrentVisitId, setUser}) => {
     const [visitors, setVisitors] = useState([]);
     const [filteredVisitors, setFilteredVisitors] = useState([]);
     const [searchField, setSearchField] = useState('');
     const [deleteFlag, setDeleteFlag] = useState(false);
     const [loading, setLoading] = useState(false);
-    
+
+    useEffect(() => {
+        const fetchUser = async () => {
+            try {
+                setLoading(true);
+                const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+                const decodedToken = TokenManager.getTokenPayload();
+                const id = decodedToken.unique_name;
+                const response = await axios.get(`${URL}/user/${id}`, axiosHeaders);
+                setUser(response.data.user);
+                setLoading(false);
+            } catch (error) {
+                setLoading(false);
+                console.log(error.response);
+            }
+        };
+        fetchUser();
+    }, [setUser]);
+
     const handleClick = (id) => {
         setCurrentVisitId(id);
-        history.push('./view-visit');
+        history.push(`./view-visit/${id}`);
     };
     
     const deleteHandler = async (e, id) => {
@@ -49,11 +67,13 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId}) => {
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                console.log(error);
+                console.log(error.response);
             }
 
         }
-        fetchVisitsList();
+        if (adminLevel && email) {
+            fetchVisitsList();
+        }
 
     },[deleteFlag, adminLevel, email])
 

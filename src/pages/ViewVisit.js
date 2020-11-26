@@ -11,17 +11,19 @@ import LoadingBox from '@govuk-react/loading-box';
 import GridRow from '@govuk-react/grid-row';
 import GridCol from '@govuk-react/grid-col';
 
-const ViewVisit = ({currentVisitId}) => {
+const ViewVisit = ({match}) => {
     const [currentVisit, setCurrentVisit] = useState('');
     const [loading, setLoading] = useState(false);
     const [signInButtonClicked, setSignInButtonClicked] = useState(false);
+    const [visitId, setVisitId] = useState('');
     
     useEffect(()=>{
+        setVisitId(match.params.visitId);
         const fetchVisit = async()=>{
             try {
                 setLoading(true);
                 const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
-                const response = await axios.get(`${URL}/visitor/${currentVisitId}`, axiosHeaders);
+                const response = await axios.get(`${URL}/visitor/${visitId}`, axiosHeaders);
                 setCurrentVisit(response.data.visit);
                 setLoading(false);
             } catch(error){
@@ -29,25 +31,25 @@ const ViewVisit = ({currentVisitId}) => {
 				console.log(error);
             }
         }
-        fetchVisit();
-    },[currentVisitId, signInButtonClicked])
+        if (visitId) {
+            fetchVisit();
+        }
+    },[visitId, signInButtonClicked, match.params.visitId]);
 
     const signInHandler = async (event) =>{
         event.preventDefault();
         
         try {
-            let visitObj = {visitorId: currentVisitId};
+            let visitObj = {visitorId: visitId};
             const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
             if (!currentVisit.signInFlag) {
-              
                 visitObj = {...visitObj, signInFlag: true, signOutFlag: false, signIn: moment(new Date().now).format()};
 
             } else {
                 visitObj = {...visitObj, signInFlag: true, signOutFlag: true, signOut: moment(new Date().now).format()};
             }
-            await axios.put(`${URL}/visitor/${currentVisitId}`, visitObj, axiosHeaders); 
+            await axios.put(`${URL}/visitor/${visitId}`, visitObj, axiosHeaders); 
             setSignInButtonClicked(!signInButtonClicked);
-            //setCurrentVisit()
 
         } catch (error) {
             console.log(error);
@@ -55,7 +57,6 @@ const ViewVisit = ({currentVisitId}) => {
     }
     
     const { firstName, surname, company , role, telephone, email, employeeEmail, appointment } = currentVisit;
-   
     const infoArray = [
         { label: 'First Name', info: firstName },
         { label: 'Surname', info: surname },
