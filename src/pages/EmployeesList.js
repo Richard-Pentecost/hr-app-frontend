@@ -10,7 +10,7 @@ import LoadingWrapper from '../components/LoadingWrapper';
 import EmployeeTable from '../components/EmployeeTable';
 import SearchBar from '../components/SearchBar';
 
-const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel, setUser}) => {
+const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email, adminLevel, setUser, userId}) => {
   const [users, setUsers] = useState([]);
   const [deleteFlag, setDeleteFlag] = useState(false);
   const [filteredUsers, setFilteredUsers] = useState([]);
@@ -65,7 +65,7 @@ const EmployeesList = ({history, setCurrentEmployeeId, currentEmployeeId, email,
           },
         };
         const response = await axios.get(`${URL}/user`, axiosHeaders);
-        setUsers(response.data.users);
+        setUsers(response.data.users.filter(currentUser=>currentUser.userId!==userId));
         setLoading(false);
 			} catch (error) {
         setLoading(false);
