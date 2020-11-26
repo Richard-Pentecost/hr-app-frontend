@@ -28,8 +28,10 @@ const EditInformation = ({history, user, setUser}) => {
                 console.log(error);
             }
         };
-        fetchUser();
-    }, [setUser]);
+        if (user.firstName === '') {
+            fetchUser();
+        }
+    }, [setUser, user]);
     
 
     const handleInputChange = event => {
