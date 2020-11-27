@@ -30,14 +30,14 @@ const Card = ({user, link}) => {
                 <label className='cardInformation__label'>Role: </label>
                 <span className='cardInformation__info'>{user.role}</span>
             </div>
-            <div className='cardInformation'>
+            {/* <div className='cardInformation'>
                 <label className='cardInformation__label'>Email Address: </label>
                 <span className='cardInformation__info'>{user.email}</span>
             </div>
             <div className='cardInformation'>
                 <label className='cardInformation__label'>Telephone Number: </label>
                 <span className='cardInformation__info'>{user.telephone}</span>
-            </div>
+            </div> */}
             <div className='cardInformation'>
                 <label className='cardInformation__label'>Date of Birth: </label>
                 <span className='cardInformation__info'>{moment(user.doB).format('Do MMM YYYY')}</span>
@@ -58,10 +58,10 @@ const Card = ({user, link}) => {
                 <label className='cardInformation__label'>Location: </label>
                 <span className='cardInformation__info'>{user.location}</span>
             </div>
-            <div className='cardInformation'>
+            {/* <div className='cardInformation'>
                 <label className='cardInformation__label'>Address:</label>
                 <span className='cardInformation__info'>{user.address}</span>
-            </div>
+            </div> */}
         </div>
     );
 };

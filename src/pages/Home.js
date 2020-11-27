@@ -1,11 +1,15 @@
 import React, { useEffect , useState } from 'react';
 import Card from '../components/Card';
+import ContactCard from '../components/ContactCard';
 import axios from 'axios';
 import LoadingWrapper from '../components/LoadingWrapper';
 import ErrorPage from '../pages/ErrorPage';
 import "../style/Home.scss";
 import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
+import GridRow from '@govuk-react/grid-row';
+import GridCol from '@govuk-react/grid-col';
+import QuickLinksCard from '../components/QuickLinksCard';
 
 const Home = ({user, setUser}) => {
 	const [loading, setLoading] = useState(false);
@@ -50,7 +54,17 @@ const Home = ({user, setUser}) => {
 			<LoadingWrapper loading={loading}>
 				<div className='userInfo'>
 					{userInfo}
-					{user && <Card user={user} link='/edit-information' />}
+					<GridRow>
+						<GridCol>
+							{user && <Card user={user} link='/edit-information' />}
+						</GridCol>
+						<GridCol>
+							{user && <ContactCard user={user} link='/edit-information' />}
+						</GridCol>
+                        <GridCol setWidth="one-quarter">
+							<QuickLinksCard adminLevel={user.adminLevel}/>
+						</GridCol>
+					</GridRow>
 				</div>
 			</LoadingWrapper>
 		</>

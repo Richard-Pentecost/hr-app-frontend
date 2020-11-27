@@ -1,0 +1,23 @@
+@import './variables.scss';
+.quickLinkList {
+    font-size: 18px;
+
+    &__item {
+        padding: 5px 10px;
+        transition: 0.2s background-color linear;
+        cursor: pointer;
+        color: black;
+        text-decoration: none;
+    
+        &:hover {
+            color: $color-white;
+            background-color: $color-blue-2;
+        }
+    }
+
+    &__link {
+        text-decoration: none;
+        color: inherit;
+        display: block;
+    }
+}
