@@ -42,7 +42,8 @@ const VisitsList = ({history, adminLevel, email, setCurrentVisitId, setUser}) =>
     const deleteHandler = async (e, id) => {
         e.stopPropagation();
         try {
-            await axios.delete(`${URL}/visitor/${id}`);
+            const axiosHeaders = { headers: { Authorization: 'Bearer ' + TokenManager.getToken() }};
+            await axios.delete(`${URL}/visitor/${id}`, axiosHeaders);
             setDeleteFlag(!deleteFlag)
             setLoading(false);
         } catch (error) {
