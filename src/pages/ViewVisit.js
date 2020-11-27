@@ -7,7 +7,7 @@ import Heading from '../components/Heading';
 import SignInCard from '../components/SignInCard';
 import axios from 'axios';
 import InfoCard from '../components/InfoCard';
-import LoadingBox from '@govuk-react/loading-box';
+import LoadingWrapper from '../components/LoadingWrapper';
 import GridRow from '@govuk-react/grid-row';
 import GridCol from '@govuk-react/grid-col';
 
@@ -74,27 +74,18 @@ const ViewVisit = ({match}) => {
             <div className='headingContainer'>
                 <Heading>Visit Information</Heading>
             </div>
-            <LoadingBox
-				loading={loading}
-				backgroundColor={'#fff'}
-				timeIn={800}
-				timeOut={200}
-				backgroundColorOpacity={0.85}
-				spinnerColor={'#000'}
-			>
-            <div className='userInfo'>
-                <GridRow>
-                    <GridCol>
-                        <InfoCard infoArray={infoArray} link='/edit-visit' />
-                    </GridCol>
-                    <GridCol>
-                        <SignInCard signInHandler={signInHandler} currentVisit={currentVisit}/>
-                    </GridCol>
-                </GridRow>
-              
-            </div>
-  
-            </LoadingBox>
+            <LoadingWrapper loading={loading}>
+                <div className='userInfo'>
+                    <GridRow>
+                        <GridCol>
+                            <InfoCard infoArray={infoArray} link='/edit-visit' />
+                        </GridCol>
+                        <GridCol>
+                            <SignInCard signInHandler={signInHandler} currentVisit={currentVisit}/>
+                        </GridCol>
+                    </GridRow>
+                </div>
+            </LoadingWrapper>
 		</>
     )
 }
