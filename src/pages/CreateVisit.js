@@ -20,10 +20,10 @@ const initialState = {
 
 };
 
-const CreateVisit = ({history, setCurrentVisitId}) => {
+const CreateVisit = ({history, currentVisitId, setCurrentVisitId}) => {
   const [newVisit, setNewVisit] = useState(initialState)
   const [loading, setLoading] = useState(false);
-  
+
   const handleInputChange = event => {
     if (event.target === undefined) {
       setNewVisit({
@@ -48,7 +48,7 @@ const CreateVisit = ({history, setCurrentVisitId}) => {
       setCurrentVisitId(response.data.visit.visitorId);
       setNewVisit({initialState});
       setLoading(false);
-      history.push('/view-visit');
+      history.push(`/view-visit/${currentVisitId}`);
     } catch (error) {
         setLoading(false);
         //console.log(error.response);

@@ -5,6 +5,7 @@ import BreadcrumbBar from '../components/BreadcrumbBar';
 import LoadingWrapper from '../components/LoadingWrapper';
 import Heading from '../components/Heading';
 import Form from '../components/Form';
+import ErrorPage from './ErrorPage';
 import TokenManager from '../utils/token-manager';
 import { withRouter } from 'react-router';
 import '../style/CreateEmployee.scss';
@@ -18,6 +19,7 @@ const initialState = {
 const ChangePassword = ({history, user, setUser}) => {
     const [password, setPassword] = useState(initialState);
     const [loading, setLoading] = useState(false);
+    const [formErrorMessage, setFormErrorMessage] = useState('');
     const [errorMessage, setErrorMessage] = useState('');
 
 	useEffect(() => {
@@ -32,7 +34,10 @@ const ChangePassword = ({history, user, setUser}) => {
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                //console.log(error.response);
+                let errorMessage;
+                const { data, status } = error.response;
+                data.message ? errorMessage = data.message : errorMessage = data.title;
+                setErrorMessage({message: errorMessage, status: status});
             }
         };
         fetchUser();
@@ -52,7 +57,7 @@ const ChangePassword = ({history, user, setUser}) => {
         event.preventDefault();
 
         if (password.newPassword !== password.confirmNewPassword) {
-            setErrorMessage('Your passwords do not match');
+            setFormErrorMessage('Your passwords do not match');
             return;
         };
 
@@ -65,7 +70,7 @@ const ChangePassword = ({history, user, setUser}) => {
             history.push('/home');
         } catch (error) {
             setLoading(false);
-            //console.log(error.response);
+            setFormErrorMessage(error.response.data.message);
         }
     }
 
@@ -77,6 +82,7 @@ const ChangePassword = ({history, user, setUser}) => {
         { type: 'password', value: confirmNewPassword, name: 'confirmNewPassword', label: 'Confirm New Password' },
     ];
 
+    if (errorMessage) return <ErrorPage errorMessage={errorMessage} />
     return (
         <>
             <BreadcrumbBar page='Change Password' />
@@ -91,7 +97,7 @@ const ChangePassword = ({history, user, setUser}) => {
                             handleInputChange={handleInputChange}
                             handleSubmit={handleSubmit}
                             btnText='Save'
-                            errorMessage={errorMessage}
+                            errorMessage={formErrorMessage}
                         />
                     }       
                 </div>
