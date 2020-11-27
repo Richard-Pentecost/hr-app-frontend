@@ -53,8 +53,10 @@ const Login = ({ setToken }) => {
 
     return (
         <div className='loginPage'>
+            <div className='loginHeadingContainer'>
+                <Heading>Login</Heading>
+            </div>
             <LoadingWrapper loading={loading}>
-            <Heading>Login</Heading>
                 <div className='loginContainer'>
                     <Form 
                         formArr={formArr}

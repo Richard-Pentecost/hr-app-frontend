@@ -1,6 +1,4 @@
 import React from 'react';
-import UnorderedList from '@govuk-react/unordered-list';
-import ListItem from '@govuk-react/list-item';
 import { Link } from 'react-router-dom';
 import '../style/QuickLinksCard.scss';
 const QuickLinksCard = ({adminLevel}) =>{

@@ -1,7 +1,6 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import '../style/Card.scss';
-import moment from 'moment';
 import CreateIcon from '@material-ui/icons/Create';
 
 const ContactCard = ({user, link}) => {

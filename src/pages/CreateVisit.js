@@ -7,6 +7,7 @@ import { URL } from '../utils/Constants';
 import TokenManager from '../utils/token-manager';
 import axios from 'axios';
 import LoadingWrapper from '../components/LoadingWrapper';
+import moment from 'moment';
 
 const initialState = {
   firstName: '',
@@ -48,7 +49,7 @@ const CreateVisit = ({history, currentVisitId, setCurrentVisitId}) => {
       setCurrentVisitId(response.data.visit.visitorId);
       setNewVisit({initialState});
       setLoading(false);
-      history.push(`/view-visit/${currentVisitId}`);
+      history.push(`/view-visit/${response.data.visit.visitorId}`);
     } catch (error) {
         setLoading(false);
         //console.log(error.response);
@@ -65,7 +66,7 @@ const CreateVisit = ({history, currentVisitId, setCurrentVisitId}) => {
     { type: 'text', value: telephone, name: 'telephone', label: 'Telephone' },
     { type: 'email', value: email, name: 'email', label: 'Email' },
     { type: 'email', value: employeeEmail, name: 'employeeEmail', label: 'Employee Email' },
-    { type: 'dateTime', value: appointment, name: 'appointment', label: 'Appointment' }
+    { type: 'dateTime', value: moment(appointment).format('llll'), name: 'appointment', label: 'Appointment' }
 ];
 
   return (
