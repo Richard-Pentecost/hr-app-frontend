@@ -8,6 +8,7 @@ import TokenManager from '../utils/token-manager';
 import axios from 'axios';
 import LoadingWrapper from '../components/LoadingWrapper';
 import { withRouter } from 'react-router';
+import ErrorPage from '../pages/ErrorPage';
 
 const initialState = {
   firstName: '',
@@ -25,6 +26,8 @@ const initialState = {
 const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmployeeId}) => {
   const [newUser, setNewUser] = useState(initialState);
   const [loading, setLoading] = useState(false);
+  const [formErrorMessage, setFormErrorMessage] = useState('');
+  const [errorMessage, setErrorMessage] = useState('');
 
   useEffect(() => {
     const fetchUser = async () => {
@@ -38,13 +41,19 @@ const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmploye
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            console.log(error);
+            let errorMessage;
+            const { data, status } = error.response;
+            data.message ? errorMessage = data.message : errorMessage = data.title;
+            setErrorMessage({message: errorMessage, status: status});
         }
     };
     fetchUser();
   }, [setUser]);
 
   const handleInputChange = event => {
+    if (formErrorMessage) {
+      setFormErrorMessage('');
+    }
     if (event.target === undefined) {
       setNewUser({
           ...newUser,
@@ -60,6 +69,11 @@ const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmploye
 
   const handleSubmit = async event => {
     event.preventDefault();
+
+    if (newUser.password !== newUser.confirmPassword) {
+      setFormErrorMessage('Your passwords do not match');
+      return;
+    };
     try {
       setLoading(true);
       const {confirmPassword, ...userObj}  = newUser;
@@ -75,7 +89,7 @@ const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmploye
       history.push(`/view-employee/${response.data.user.userId}`);
     } catch (error) {
         setLoading(false);
-        console.log(error);
+        setFormErrorMessage(error.response.data.message)
     }
   }
 
@@ -91,9 +105,9 @@ const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmploye
     { type: 'text', value: location, name: 'location', label: 'Location' },
     { type: 'password', value: password, name: 'password', label: 'Password' },
     { type: 'password', value: confirmPassword, name: 'confirmPassword', label: 'Confirm Password' },
-
   ];
 
+  if (errorMessage) return <ErrorPage errorMessage={errorMessage} />
   return (
     <>
       <BreadcrumbBar page='Create Employee' />
@@ -107,6 +121,7 @@ const CreateEmployee = ({history, setUser, creatorsAdminLevel, setCurrentEmploye
             handleInputChange={handleInputChange}
             handleSubmit={handleSubmit}
             btnText='Save'
+            errorMessage={formErrorMessage}
           />
         </div>
       </LoadingWrapper>

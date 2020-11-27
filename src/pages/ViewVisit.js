@@ -28,13 +28,13 @@ const ViewVisit = ({match}) => {
                 setLoading(false);
             } catch(error){
                 setLoading(false);
-				console.log(error);
+				// console.log(error.response);
             }
         }
         if (visitId) {
             fetchVisit();
         }
-    },[visitId, signInButtonClicked, match.params.visitId]);
+    }, [visitId, signInButtonClicked, match.params.visitId]);
 
     const signInHandler = async (event) =>{
         event.preventDefault();
@@ -52,7 +52,7 @@ const ViewVisit = ({match}) => {
             setSignInButtonClicked(!signInButtonClicked);
 
         } catch (error) {
-            console.log(error);
+            // console.log(error.response);
         }
     }
     
@@ -78,7 +78,7 @@ const ViewVisit = ({match}) => {
                 <div className='userInfo'>
                     <GridRow>
                         <GridCol>
-                            <InfoCard infoArray={infoArray} link='/edit-visit' />
+                            <InfoCard infoArray={infoArray} link={`/view-visit/${visitId}/edit-visit`} />
                         </GridCol>
                         <GridCol>
                             <SignInCard signInHandler={signInHandler} currentVisit={currentVisit}/>

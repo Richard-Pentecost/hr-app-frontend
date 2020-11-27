@@ -29,7 +29,7 @@ const EmployeesList = ({history, email, adminLevel, setUser, userId}) => {
             setLoading(false);
         } catch (error) {
             setLoading(false);
-            console.log(error);
+            //console.log(error.response);
         }
     };
     fetchUser();
@@ -49,7 +49,7 @@ const EmployeesList = ({history, email, adminLevel, setUser, userId}) => {
       setLoading(false);
     } catch (error) {
       setLoading(false);
-      console.log(error);
+      // console.log(error.response);
     }
   };
 
@@ -69,13 +69,13 @@ const EmployeesList = ({history, email, adminLevel, setUser, userId}) => {
         setLoading(false);
 			} catch (error) {
         setLoading(false);
-				console.log(error);
+				// console.log(error.response);
 			}
     };
     if (adminLevel && email) {
       fetchAllUsers();
     }
-  }, [deleteFlag, adminLevel, email]);
+  }, [deleteFlag, adminLevel, email, userId]);
 
     useEffect(() => {
       const filtered = users.filter(user => {

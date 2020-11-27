@@ -8,11 +8,13 @@ import TokenManager from '../utils/token-manager';
 import BreadcrumbBar from '../components/BreadcrumbBar';
 import Heading from '../components/Heading';
 import LoadingWrapper from '../components/LoadingWrapper';
+import ErrorPage from '../pages/ErrorPage';
 
 const ViewEmployee = ({ match }) => {
 		const [currentEmployee, setCurrentEmployee] = useState('');
 		const [loading, setLoading] = useState(false);
 		const [employeeId, setEmployeeId] = useState('');
+		const [errorMessage, setErrorMessage] = useState('');
 	
 	useEffect(() => {
 		setEmployeeId(match.params.userId);
@@ -25,7 +27,10 @@ const ViewEmployee = ({ match }) => {
 				setLoading(false);
 			} catch (error) {
 				setLoading(false);
-				console.log(error);
+				let errorMessage;
+				const { data, status } = error.response;
+				data.message ? errorMessage = data.message : errorMessage = data.title;
+				setErrorMessage({message: errorMessage, status: status});
 			}
 		}
 		if (employeeId) {
@@ -33,6 +38,7 @@ const ViewEmployee = ({ match }) => {
 		}
 	}, [setCurrentEmployee, match.params.userId, employeeId]);
 
+	if (errorMessage) return <ErrorPage errorMessage={errorMessage} />
 	return (
 		<>
 			<BreadcrumbBar page = 'Employee Information' prevPages = {[{name:'View Employees', link: '/employees-list'}]} />

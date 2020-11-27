@@ -32,7 +32,7 @@ const ChangePassword = ({history, user, setUser}) => {
                 setLoading(false);
             } catch (error) {
                 setLoading(false);
-                console.log(error);
+                //console.log(error.response);
             }
         };
         fetchUser();
@@ -65,7 +65,7 @@ const ChangePassword = ({history, user, setUser}) => {
             history.push('/home');
         } catch (error) {
             setLoading(false);
-            console.log(error.response);
+            //console.log(error.response);
         }
     }
 
@@ -91,10 +91,10 @@ const ChangePassword = ({history, user, setUser}) => {
                             handleInputChange={handleInputChange}
                             handleSubmit={handleSubmit}
                             btnText='Save'
+                            errorMessage={errorMessage}
                         />
                     }       
                 </div>
-                <div>{errorMessage && <h1>{errorMessage}</h1>}</div>
             </LoadingWrapper>
         </>
 
