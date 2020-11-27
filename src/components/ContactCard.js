@@ -11,9 +11,7 @@ const ContactCard = ({user, link}) => {
             <div className='cardHeader'>
                 <h2 className='cardHeader__header'>
                     Contact Information
-                    <Link 
-                        to= {link}
-                    >
+                    <Link to= {link}>
                         <span className='cardHeader__icon'><CreateIcon /></span>
                     </Link>
                 </h2>
