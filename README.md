@@ -71,4 +71,4 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/t
 
 ### Application
 
-The application has been deployed on heroku at: [https://hr-app-frontend.herokuapp.com/] (https://hr-app-frontend.herokuapp.com/).
+The application has been deployed on heroku at: https://hr-app-frontend.herokuapp.com/.
